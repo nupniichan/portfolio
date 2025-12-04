@@ -75,6 +75,41 @@ export function initThemeSwitch() {
     });
   }
   
+  async function loadParticlesJS() {
+    return new Promise((resolve, reject) => {
+      if (typeof particlesJS !== 'undefined') {
+        resolve();
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('Failed to load particles.js'));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function initializeParticles() {
+    if (typeof particlesJS === 'undefined') {
+      await loadParticlesJS();
+    }
+    
+    if (window.pJSDom && window.pJSDom[0]) {
+      return;
+    }
+    
+    const { initParticles } = await import('./particles-config.js');
+    initParticles();
+    
+    let retries = 0;
+    while (retries < 20 && (!window.pJSDom || !window.pJSDom[0])) {
+      await new Promise(resolve => setTimeout(resolve, 50));
+      retries++;
+    }
+  }
+
   // Function called to switch theme and store in sessionStorage
   async function switchTheme(e) {
     e.preventDefault();
@@ -115,9 +150,15 @@ export function initThemeSwitch() {
         
         bgLoadPromise.catch(() => {});
       } else {
-        // Dark mode transitions faster because no large background image
+        // Dark mode - ensure particles is loaded and initialized
         document.documentElement.setAttribute('data-theme', 'dark');
         sessionStorage.setItem('theme', 'dark');
+        
+        // Initialize particles if not already initialized
+        await initializeParticles();
+        
+        // Wait a bit for particles to be ready
+        await new Promise(resolve => setTimeout(resolve, 100));
         
         if (window.pJSDom && window.pJSDom[0]) {
           window.pJSDom[0].pJS.particles.move.enable = true;
