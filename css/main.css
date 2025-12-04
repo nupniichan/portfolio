@@ -1,13 +1,7 @@
 /*
   Main CSS File
-  - Import necessary fonts and styles
   - Define global variables and styles
 */
-
-/* Import necessary fonts and styles */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
-@import 'animations.css';
-@import 'responsive.css';
 
 /* Define global variables and styles */
 * {

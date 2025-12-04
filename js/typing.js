@@ -34,7 +34,7 @@ function type() {
   if (!isTyping || !typingElement) return;
   const currentText = texts[textIndex];
   if (charIndex < currentText.length) {
-    typingElement.textContent += currentText.charAt(charIndex);
+    typingElement.textContent = currentText.substring(0, charIndex + 1);
     charIndex++;
     setTimeout(type, 100);
   } else {

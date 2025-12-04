@@ -7,20 +7,36 @@
     <title>Trang chủ - nupniichan</title>
     <link rel="icon" type="image/x-icon" href="Assets/Image/Avatar/favicon.png">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="Assets/Image/Avatar/avatar2.png" as="image">
-    <link rel="preload" href="Assets/Image/Avatar/Avatar.gif" as="image">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Critical Resources Preload - LCP Elements -->
+    <link rel="preload" href="Assets/Image/Avatar/Avatar.gif" as="image" fetchpriority="high">
+    <link rel="preload" href="Assets/Image/Avatar/avatar2.png" as="image" fetchpriority="high">
     <link rel="preload" href="css/main.css" as="style">
     <link rel="preload" href="css/home.css" as="style">
-    <link rel="preload" href="js/main.js" as="script">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"></noscript>
 
-    <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/home.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/animations.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/responsive.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/animations.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
     
     <script src="js/sw-register.js"></script>
 </head>
@@ -48,7 +64,7 @@
                 <li><a href="pages/about.html"><i class="fas fa-user"></i> Giới thiệu</a></li>
                 <li><a href="pages/skills.html"><i class="fas fa-code"></i> Kỹ năng</a></li>
                 <li><a href="pages/projects.html"><i class="fas fa-project-diagram"></i> Dự án</a></li>
-                <li><a href="pages/education.html"><i class="fas fa-graduation-cap"></i> Học vấn</a></li>
+                <li><a href="pages/education.html"><i class="fas fa-graduation-cap"></i> Học vấn & Công Việc</a></li>
                 <li><a href="pages/contact.html"><i class="fas fa-envelope"></i> Liên hệ</a></li>
             </ul>
         </nav>
@@ -92,7 +108,7 @@
 
     <main>
         <div class="avatarContainer" id="avatarContainer">
-            <img class="avatar" src="Assets/Image/Avatar/Avatar.gif" alt="click here" />
+            <img class="avatar" src="Assets/Image/Avatar/Avatar.gif" alt="click here" loading="eager" fetchpriority="high" width="225" height="225" />
         </div>
         <div class="greetings">
             <div>Quốc Bảo</div>

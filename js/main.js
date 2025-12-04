@@ -8,19 +8,56 @@
 import { initSidebar, highlightActiveSection } from './sidebar.js';
 import { initThemeSwitch } from './theme.js';
 import { initModal } from './modal.js';
-import { optimizeAvatarGif } from './optimize-images.js';
 import { initPersistentAudio } from './persistent-audio.js';
 
 // Initialize reset functions
 const resetFunctions = {}; 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // Optimize avatar GIF
-  optimizeAvatarGif();
+function hideLoadingOverlay() {
+  const loadingOverlay = document.querySelector('.loading-overlay');
+  if (loadingOverlay && !loadingOverlay.classList.contains('hide')) {
+    loadingOverlay.classList.add('hide');
+  }
   
-  // Initialize sidebar
+  const mainContent = document.querySelector('main');
+  if (mainContent) {
+    mainContent.style.opacity = '1';
+  }
+}
+
+function waitForCriticalImages() {
+  const criticalImages = Array.from(document.querySelectorAll('img.critical'));
+  const lcpImage = document.querySelector('.avatar');
+  
+  const imageSet = new Set(criticalImages);
+  if (lcpImage) {
+    imageSet.add(lcpImage);
+  }
+  const imagesToWait = Array.from(imageSet);
+  
+  if (imagesToWait.length === 0) return Promise.resolve();
+  
+  return Promise.all(
+    imagesToWait.map(img => {
+      if (img.complete) return Promise.resolve();
+      
+      return new Promise((resolve) => {
+        const timeout = setTimeout(() => resolve(), 1500);
+        img.onload = () => {
+          clearTimeout(timeout);
+          resolve();
+        };
+        img.onerror = () => {
+          clearTimeout(timeout);
+          resolve();
+        };
+      });
+    })
+  );
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
   initSidebar();
-  // Initialize persistent audio player with sessionStorage
   initPersistentAudio();
   highlightActiveSection();
   initThemeSwitch();
@@ -29,8 +66,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loadingOverlay = document.querySelector('.loading-overlay');
   const hasVisitedBefore = sessionStorage.getItem('hasVisited');
   
+  const criticalImagesLoaded = waitForCriticalImages();
+  
+  criticalImagesLoaded.then(() => {
+    setTimeout(() => {
+      if (!hasVisitedBefore) {
+        setTimeout(hideLoadingOverlay, 800);
+      } else {
+        hideLoadingOverlay();
+      }
+    }, 100);
+  });
+  
+  // Load features in parallel but don't block LCP
   const [criticalFeaturesResults] = await Promise.all([
-
     Promise.all([
       import('./social-links.js').then(({ initSocialLinks, resetLinksAnimation }) => {
         initSocialLinks();
@@ -45,63 +94,69 @@ document.addEventListener('DOMContentLoaded', async () => {
         return { resetTyping };
       })
     ]),
-
-    Promise.all([
-      ...Array.from(document.querySelectorAll('img.critical')).map(img => {
-        return new Promise((resolve) => {
-          if (img.complete) {
-            resolve();
-          } else {
-            img.onload = () => resolve();
-            img.onerror = () => resolve();
-          }
-        });
-      }),
-      ...Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(link => {
-        return new Promise((resolve) => {
-          if (link.sheet) {
-            resolve();
-          } else {
-            link.onload = () => resolve();
-            link.onerror = () => resolve();
-          }
-        });
-      }),
-      !hasVisitedBefore ? new Promise(resolve => setTimeout(resolve, 1500)) : Promise.resolve()
-    ])
+    criticalImagesLoaded
   ]);
 
   if (!hasVisitedBefore) {
     sessionStorage.setItem('hasVisited', 'true');
   }
   
-  // Hide loading overlay sau khi tất cả tài nguyên quan trọng và features đã load xong
-  loadingOverlay.classList.add('hide');
-  
-  const mainContent = document.querySelector('main');
-  if (mainContent) {
-    mainContent.style.opacity = '1';
-  }
+  // Loading overlay is now hidden in criticalImagesLoaded promise above
 
-  // Load remaining non-critical features
-  loadRemainingFeatures();
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      loadRemainingFeatures();
+    }, { timeout: 2000 });
+  } else {
+    setTimeout(() => {
+      loadRemainingFeatures();
+    }, 100);
+  }
 });
 
 // Function to load remaining non-critical features
 async function loadRemainingFeatures() {
-  const [
-    { initParticles },
-    { initAvatarEffect },
-    { initImageOptimization }
-  ] = await Promise.all([
-    import('./particles-config.js'),
-    import('./avatar.js'),
-    import('./optimize-images.js')
-  ]);
+  try {
+    const [
+      { initParticles },
+      { initAvatarEffect },
+      { initImageOptimization }
+    ] = await Promise.all([
+      import('./particles-config.js'),
+      import('./avatar.js'),
+      import('./optimize-images.js')
+    ]);
 
-  initImageOptimization();
-  initParticles();
-  initAvatarEffect();
+    initImageOptimization();
+    
+    const currentTheme = sessionStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      if (typeof particlesJS === 'undefined') {
+        await loadParticlesJS();
+      }
+      initParticles();
+    }
+    
+    initAvatarEffect();
+  } catch (error) {
+    console.error('Error loading non-critical features:', error);
+  }
+}
+
+function loadParticlesJS() {
+  return new Promise((resolve, reject) => {
+    if (typeof particlesJS !== 'undefined') {
+      resolve();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load particles.js'));
+    document.head.appendChild(script);
+  });
 }
 
 window.addEventListener('themeChanged', (event) => {

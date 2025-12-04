@@ -37,13 +37,39 @@ export function initSidebar() {
   }
 
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        toggleSidebar(false);
+  const sidebarLinksArray = Array.from(sidebarLinks);
+  
+  const handleLinkClick = (e) => {
+    const href = e.currentTarget.getAttribute('href');
+    
+    if (window.innerWidth <= 768) {
+      toggleSidebar(false);
+    }
+    
+    if (href && href.includes('#') && !href.startsWith('#')) {
+      const [pagePath, anchor] = href.split('#');
+      if (window.location.pathname.endsWith(pagePath)) {
+        e.preventDefault();
+        const targetElement = document.querySelector(`#${anchor}`);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50,
+            behavior: 'smooth'
+          });
+        }
       }
-    });
-  });
+    }
+    
+    const activeLink = e.currentTarget;
+    for (let i = 0; i < sidebarLinksArray.length; i++) {
+      sidebarLinksArray[i].classList.remove('active');
+    }
+    activeLink.classList.add('active');
+  };
+  
+  for (let i = 0; i < sidebarLinksArray.length; i++) {
+    sidebarLinksArray[i].addEventListener('click', handleLinkClick);
+  }
 
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -78,30 +104,6 @@ export function initSidebar() {
     }
   });
 
-  if (sidebarLinks.length > 0) {
-    sidebarLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        
-        if (href.includes('#') && !href.startsWith('#')) {
-          const [pagePath, anchor] = href.split('#');
-          if (window.location.pathname.endsWith(pagePath)) {
-            e.preventDefault();
-            const targetElement = document.querySelector(`#${anchor}`);
-            if (targetElement) {
-              window.scrollTo({
-                top: targetElement.offsetTop - 50,
-                behavior: 'smooth'
-              });
-            }
-          }
-        }
-        
-        sidebarLinks.forEach(link => link.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-  }
 }
 
 // Function to initialize audio player
@@ -173,23 +175,61 @@ export function initAudioPlayer() {
 // Function to highlight active section
 export function highlightActiveSection() {
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+  const sections = document.querySelectorAll('.section');
   
-  window.addEventListener('scroll', function() {
+  if (sections.length === 0 || sidebarLinks.length === 0) return;
+  
+  const sidebarLinksArray = Array.from(sidebarLinks);
+  const sectionsArray = Array.from(sections);
+  const linkMap = new Map();
+  
+  for (let i = 0; i < sidebarLinksArray.length; i++) {
+    const href = sidebarLinksArray[i].getAttribute('href');
+    if (href && href.startsWith('#')) {
+      linkMap.set(href.substring(1), sidebarLinksArray[i]);
+    }
+  }
+  
+  let ticking = false;
+  let lastActiveLink = null;
+  
+  function updateActiveSection() {
     const scrollPosition = window.scrollY;
+    let foundActive = false;
     
-    document.querySelectorAll('.section').forEach(section => {
+    for (let i = 0; i < sectionsArray.length; i++) {
+      const section = sectionsArray[i];
       const sectionTop = section.offsetTop - 100;
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute('id');
       
       if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        sidebarLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + sectionId) {
-            link.classList.add('active');
-          }
-        });
+        if (lastActiveLink) {
+          lastActiveLink.classList.remove('active');
+        }
+        
+        const activeLink = linkMap.get(sectionId);
+        if (activeLink) {
+          activeLink.classList.add('active');
+          lastActiveLink = activeLink;
+        }
+        foundActive = true;
+        break;
       }
-    });
-  });
+    }
+    
+    if (!foundActive && lastActiveLink) {
+      lastActiveLink.classList.remove('active');
+      lastActiveLink = null;
+    }
+    
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateActiveSection);
+      ticking = true;
+    }
+  }, { passive: true });
 } 

@@ -5,6 +5,11 @@
 
 // Refer to https://github.com/VincentGarreau/particles.js/ to change the particles effect if u want
 export function initParticles() {
+  if (typeof particlesJS === 'undefined') {
+    console.warn('particles.js is not loaded yet');
+    return;
+  }
+  
   particlesJS('particles-js',
     {
       "particles": {

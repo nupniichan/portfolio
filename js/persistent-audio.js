@@ -17,8 +17,9 @@ export function initPersistentAudio() {
   loadAudioState();
   
   window.addEventListener('beforeunload', saveAudioState);
+  window.addEventListener('pagehide', saveAudioState);
   
-  setInterval(saveAudioState, 1000);
+  setInterval(saveAudioState, 2000);
 }
 
 function setupAudioElements() {
