@@ -132,3 +132,16 @@ html, body {
 .floating-container {
   animation: floating 6s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-slide-up,
+  .floating-container {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .background-video {
+    display: none !important;
+  }
+}
