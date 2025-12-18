@@ -17,36 +17,39 @@
    const [text, setText] = useState("");
    const [isDeleting, setIsDeleting] = useState(false);
 
-   useEffect(() => {
-     const fullText = MESSAGES[messageIndex];
+  useEffect(() => {
+    const fullText = MESSAGES[messageIndex];
 
-     if (!isDeleting && text === fullText) {
-       const pauseTimeout = setTimeout(() => {
-         setIsDeleting(true);
-       }, PAUSE_AFTER_TYPED);
-       return () => clearTimeout(pauseTimeout);
-     }
+    if (!isDeleting && text === fullText) {
+      const pauseTimeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, PAUSE_AFTER_TYPED);
+      return () => clearTimeout(pauseTimeout);
+    }
 
-     if (isDeleting && text === "") {
-       setIsDeleting(false);
-       setMessageIndex((prev) => (prev + 1) % MESSAGES.length);
-       return;
-     }
+    if (isDeleting && text === "") {
+      // Use setTimeout to avoid synchronous state updates
+      setTimeout(() => {
+        setIsDeleting(false);
+        setMessageIndex((prev) => (prev + 1) % MESSAGES.length);
+      }, 0);
+      return;
+    }
 
-     const timer = setTimeout(
-       () => {
-         setText((prev) => {
-           if (isDeleting) {
-             return prev.slice(0, -1);
-           }
-           return fullText.slice(0, prev.length + 1);
-         });
-       },
-       isDeleting ? ERASING_SPEED : TYPING_SPEED,
-     );
+    const timer = setTimeout(
+      () => {
+        setText((prev) => {
+          if (isDeleting) {
+            return prev.slice(0, -1);
+          }
+          return fullText.slice(0, prev.length + 1);
+        });
+      },
+      isDeleting ? ERASING_SPEED : TYPING_SPEED,
+    );
 
-     return () => clearTimeout(timer);
-   }, [text, isDeleting, messageIndex]);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, messageIndex]);
 
    return (
      <div className="text-center text-lg sm:text-xl md:text-2xl font-bold text-white text-stroke">

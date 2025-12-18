@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans } from "next/font/google";
-import ClientAudioPlayer from "./components/ClientAudioPlayer";
+import { ThemeLanguageProvider } from "./components/ThemeLanguageProvider";
+import LayoutContent from "./components/LayoutContent";
 
 const notoSans = Noto_Sans({
   subsets: ["latin", "vietnamese"],
@@ -21,20 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${notoSans.className} min-h-screen flex flex-col`}>
-        <div className="relative flex-1 overflow-hidden">
-          <video
-            className="background-video absolute inset-0 h-full w-full object-cover"
-            src="/Images/Background/background.webm"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          <main className="relative z-10 flex-1">
-            {children}
-          </main>
-          <ClientAudioPlayer />
-        </div>
+        <ThemeLanguageProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </ThemeLanguageProvider>
       </body>
     </html>
   );
