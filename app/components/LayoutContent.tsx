@@ -31,7 +31,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
 
       <Header />
 
-      <main className="relative z-10 flex-1 flex flex-col justify-center pt-20">
+      <main className="relative z-10 flex-1 flex flex-col justify-center pt-10">
         {children}
       </main>
 

@@ -169,7 +169,7 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
         <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
           <button
             onClick={() => setIsExpanded(true)}
-            className="w-14 h-14 rounded-full bg-[#CCCCFF] hover:bg-[#BBBBFF] text-black shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 animate-in slide-in-from-bottom-4 flex items-center justify-center group"
+            className="w-8 h-8 rounded-full bg-[#CCCCFF] hover:bg-[#BBBBFF] text-black shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 animate-in slide-in-from-bottom-4 flex items-center justify-center group"
             title="Open Audio Player"
           >
             <Music className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
@@ -179,7 +179,7 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
 
       {isExpanded && (
         <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
-          <div className="bg-black/80 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-2xl animate-in slide-in-from-bottom-4 duration-500 max-w-xs">
+          <div className="bg-black/80 backdrop-blur-md border border-white/20 rounded-xl p-2 shadow-2xl animate-in slide-in-from-bottom-4 duration-500 max-w-[220px]">
             <button
               onClick={() => setIsExpanded(false)}
               className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#CCCCFF] text-black hover:bg-[#BBBBFF] transition-colors duration-200 text-xs font-bold flex items-center justify-center"
@@ -188,8 +188,8 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
               ×
             </button>
 
-            <div className="flex items-center gap-2 mb-3">
-              <div className="flex items-center gap-2 text-sm font-medium">
+            <div className="flex items-center gap-1 mb-1">
+              <div className="flex items-center gap-1 text-[10px] font-medium">
                 <span className="text-[#CCCCFF]">
                   {isPlaying ? 'Playing:' : 'Paused:'}
                 </span>
@@ -204,9 +204,9 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-3 mb-3">
+            <div className="flex items-center justify-between gap-1.5 mb-1">
               <div className="flex items-center gap-1">
-                <Volume2 className="w-4 h-4 text-[#CCCCFF]" />
+                <Volume2 className="w-2.5 h-2.5 text-[#CCCCFF]" />
                 <input
                   type="range"
                   min="0"
@@ -214,54 +214,54 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
                   step="0.1"
                   value={volume}
                   onChange={handleVolumeChange}
-                  className="slider w-16 h-1 bg-white/20 rounded-full appearance-none cursor-pointer"
+                  className="slider w-10 h-1 bg-white/20 rounded-full appearance-none cursor-pointer"
                   style={{
                     background: `linear-gradient(to right, #CCCCFF 0%, #CCCCFF ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`
                   }}
                 />
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5">
                 <button
                   onClick={handlePrevious}
-                  className="p-2 rounded-full bg-[#CCCCFF]/20 hover:bg-[#CCCCFF]/30 text-[#CCCCFF] transition-all duration-200 hover:scale-105 active:scale-95"
+                  className="p-1 rounded-full bg-[#CCCCFF]/20 hover:bg-[#CCCCFF]/30 text-[#CCCCFF] transition-all duration-200 hover:scale-105 active:scale-95"
                   title="Previous"
                 >
-                  <SkipBack className="w-4 h-4" />
+                  <SkipBack className="w-2.5 h-2.5" />
                 </button>
 
                 <button
                   onClick={togglePlay}
-                  className="p-3 rounded-full bg-[#CCCCFF] hover:bg-[#BBBBFF] text-black transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
+                  className="p-1.5 rounded-full bg-[#CCCCFF] hover:bg-[#BBBBFF] text-black transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
                   title={isPlaying ? 'Pause' : 'Play'}
                 >
-                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                  {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
                 </button>
 
                 <button
                   onClick={handleNext}
-                  className="p-2 rounded-full bg-[#CCCCFF]/20 hover:bg-[#CCCCFF]/30 text-[#CCCCFF] transition-all duration-200 hover:scale-105 active:scale-95"
+                  className="p-1 rounded-full bg-[#CCCCFF]/20 hover:bg-[#CCCCFF]/30 text-[#CCCCFF] transition-all duration-200 hover:scale-105 active:scale-95"
                   title="Next"
                 >
-                  <SkipForward className="w-4 h-4" />
+                  <SkipForward className="w-2.5 h-2.5" />
                 </button>
 
                 <button
                   onClick={() => setIsLooping(!isLooping)}
-                  className={`p-2 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 ${
+                  className={`p-1 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 ${
                     isLooping
                       ? 'bg-[#CCCCFF] text-black shadow-lg'
                       : 'bg-[#CCCCFF]/20 hover:bg-[#CCCCFF]/30 text-[#CCCCFF]'
                   }`}
                   title="Loop"
                 >
-                  <Repeat className="w-4 h-4" />
+                  <Repeat className="w-2.5 h-2.5" />
                 </button>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-white/70 min-w-[35px]">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[8px] text-white/70 min-w-[22px]">
                 {formatTime(currentTime)}
               </span>
               <input
@@ -270,12 +270,12 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
                 max={duration || 100}
                 value={currentTime}
                 onChange={handleProgressChange}
-                className="slider flex-1 h-2 bg-white/20 rounded-full appearance-none cursor-pointer"
+                className="slider flex-1 h-0.5 bg-white/20 rounded-full appearance-none cursor-pointer"
                 style={{
                   background: `linear-gradient(to right, #CCCCFF 0%, #CCCCFF ${(currentTime / (duration || 100)) * 100}%, rgba(255,255,255,0.2) ${(currentTime / (duration || 100)) * 100}%, rgba(255,255,255,0.2) 100%)`
                 }}
               />
-              <span className="text-xs text-white/70 min-w-[35px]">
+              <span className="text-[8px] text-white/70 min-w-[22px]">
                 {formatTime(duration)}
               </span>
             </div>

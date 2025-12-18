@@ -50,7 +50,7 @@
   }, [text, isDeleting, messageIndex, messages]);
 
    return (
-     <div className="text-center text-lg sm:text-xl md:text-2xl font-bold text-white text-stroke">
+     <div className="text-center text-xs sm:text-sm md:text-base font-bold text-white text-stroke">
        <span className="border-r-2 border-white pr-1">
          {text}
        </span>
