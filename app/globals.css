@@ -202,3 +202,19 @@ body {
     display: none !important;
   }
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #05050a;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #05050a;
+    border-radius: 10px;
+  }
+
+::-webkit-scrollbar-thumb {
+  background-color: #CCCCFF;
+  border-radius: 20px;
+  border: 3px solid #05050a;
+}
