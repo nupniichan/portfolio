@@ -3,7 +3,7 @@
     "home": {
       "greeting": "Hi, I'm Nguyen Phi Quoc Bao",
       "connect": "Connect with me ⸜(｡˃ ᵕ ˂ )⸝♡",
-      "status": "Online"
+      "status": "Active"
     },
     "navigation": {
       "home": "Home",
@@ -46,13 +46,14 @@
         "title": "Projects",
         "description": "This is the Projects page. You can showcase your personal and professional projects here."
       }
-    }
+    },
+    "loading": "Wait a sec ( •̀ ω •́ )✧"
   },
   "vi": {
     "home": {
-      "greeting": "Xin chào, mình là Nguyễn Phi Quốc Bảo",
+      "greeting": "Chào cậu, mình là Nguyễn Phi Quốc Bảo",
       "connect": "Kết nối với mình nhé ⸜(｡˃ ᵕ ˂ )⸝♡",
-      "status": "Đang online"
+      "status": "Đang hoạt động"
     },
     "navigation": {
       "home": "Trang chủ",
@@ -95,6 +96,7 @@
         "title": "Dự án",
         "description": "Đây là trang Dự án. Bạn có thể giới thiệu các dự án cá nhân và chuyên nghiệp ở đây."
       }
-    }
+    },
+    "loading": "Chờ xíu nghen ( •̀ ω •́ )✧"
   }
 }

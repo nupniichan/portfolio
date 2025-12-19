@@ -9,8 +9,10 @@ type ThemeLanguageContextValue = {
   theme: ThemeMode;
   language: LanguageCode;
   mounted: boolean;
+  isLoading: boolean;
   toggleTheme: () => void;
   toggleLanguage: () => void;
+  setIsLoading: (loading: boolean) => void;
 };
 
 const ThemeLanguageContext = createContext<ThemeLanguageContextValue | undefined>(
@@ -31,7 +33,7 @@ function getPreferredTheme(): ThemeMode {
 }
 
 function getPreferredLanguage(): LanguageCode {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "vi";
 
   const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY) as
     | LanguageCode
@@ -39,7 +41,7 @@ function getPreferredLanguage(): LanguageCode {
   if (stored === "en" || stored === "vi") return stored;
 
   const browserLang = window.navigator.language.toLowerCase();
-  return browserLang.startsWith("vi") ? "vi" : "en";
+  return browserLang.startsWith("en") ? "en" : "vi";
 }
 
 function applyThemeClass(theme: ThemeMode) {
@@ -53,12 +55,18 @@ function applyThemeClass(theme: ThemeMode) {
 export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<ThemeMode>("dark");
-  const [language, setLanguage] = useState<LanguageCode>("en");
+  const [language, setLanguage] = useState<LanguageCode>("vi");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
     setTheme(getPreferredTheme());
     setLanguage(getPreferredLanguage());
+    
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -80,7 +88,13 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
   }, [language, mounted]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setIsLoading(true);
+    setTimeout(() => {
+      setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000); // Overlay stays a bit after theme change
+    }, 500); // Theme change happens while overlay is fully visible
   };
 
   const toggleLanguage = () => {
@@ -91,8 +105,10 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
     theme,
     language,
     mounted,
+    isLoading,
     toggleTheme,
     toggleLanguage,
+    setIsLoading,
   };
 
   return (

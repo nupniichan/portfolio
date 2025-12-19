@@ -4,16 +4,19 @@ import { useThemeLanguage } from "./ThemeLanguageProvider";
 import ParticlesBackground from "./ParticlesBackground";
 import Header from "./Header";
 import ClientAudioPlayer from "./ClientAudioPlayer";
+import LoadingOverlay from "./LoadingOverlay";
 
 interface LayoutContentProps {
   children: React.ReactNode;
 }
 
 export default function LayoutContent({ children }: LayoutContentProps) {
-  const { theme, mounted } = useThemeLanguage();
+  const { theme, mounted, isLoading } = useThemeLanguage();
 
   return (
     <div className="relative flex-1 overflow-hidden">
+      <LoadingOverlay isVisible={isLoading} />
+      
       {mounted && theme === "light" && (
         <video
           className="background-video absolute inset-0 h-full w-full object-cover z-0"

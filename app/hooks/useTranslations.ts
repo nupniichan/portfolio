@@ -5,7 +5,7 @@ export function useTranslations() {
   const { language, mounted } = useThemeLanguage();
 
   const t = (key: string) => {
-    const currentLang = mounted ? language : "en";
+    const currentLang = mounted ? language : "vi";
     const keys = key.split('.');
     let value: any = translations[currentLang];
 
