@@ -8,6 +8,7 @@ export type LanguageCode = "en" | "vi";
 type ThemeLanguageContextValue = {
   theme: ThemeMode;
   language: LanguageCode;
+  mounted: boolean;
   toggleTheme: () => void;
   toggleLanguage: () => void;
 };
@@ -50,23 +51,33 @@ function applyThemeClass(theme: ThemeMode) {
 }
 
 export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeMode>(() => getPreferredTheme());
-  const [language, setLanguage] = useState<LanguageCode>(() => getPreferredLanguage());
+  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<ThemeMode>("dark");
+  const [language, setLanguage] = useState<LanguageCode>("en");
 
   useEffect(() => {
+    setMounted(true);
+    setTheme(getPreferredTheme());
+    setLanguage(getPreferredLanguage());
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     applyThemeClass(theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
     if (typeof window === "undefined") return;
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
     applyThemeClass(theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
     if (typeof window === "undefined") return;
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-  }, [language]);
+  }, [language, mounted]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -79,6 +90,7 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
   const value: ThemeLanguageContextValue = {
     theme,
     language,
+    mounted,
     toggleTheme,
     toggleLanguage,
   };

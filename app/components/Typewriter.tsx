@@ -26,7 +26,6 @@
     }
 
     if (isDeleting && text === "") {
-      // Use setTimeout to avoid synchronous state updates
       setTimeout(() => {
         setIsDeleting(false);
         setMessageIndex((prev) => (prev + 1) % messages.length);

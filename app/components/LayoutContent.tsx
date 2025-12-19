@@ -10,11 +10,11 @@ interface LayoutContentProps {
 }
 
 export default function LayoutContent({ children }: LayoutContentProps) {
-  const { theme } = useThemeLanguage();
+  const { theme, mounted } = useThemeLanguage();
 
   return (
     <div className="relative flex-1 overflow-hidden">
-      {theme === "light" && (
+      {mounted && theme === "light" && (
         <video
           className="background-video absolute inset-0 h-full w-full object-cover z-0"
           src="/Images/Background/background.webm"
@@ -25,7 +25,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
         />
       )}
 
-      {theme === "dark" && (
+      {mounted && theme === "dark" && (
         <ParticlesBackground theme={theme} />
       )}
 
