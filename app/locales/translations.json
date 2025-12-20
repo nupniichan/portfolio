@@ -37,7 +37,23 @@
       "about": {
         "title": "About me",
         "metaTitle": "About me - nupniichan",
-        "description": "This is the About me page. You can put your personal introduction, goals and story here."
+        "description": "This is the About me page. You can put your personal introduction, goals and story here.",
+        "header": "A little about me",
+        "headerEmoji": "ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧",
+        "profileName": "Nguyen Phi Quoc Bao",
+        "profileTitle": "nupniichan",
+        "introTitle": "Introduction",
+        "intro1": "I'm Nguyen Phi Quoc Bao, someone passionate about programming and design, especially creating unique software and applying AI technology to my projects.",
+        "intro2": "In my free time, I often look for something new to learn/explore to create what I like through programming, while improving my knowledge.",
+        "intro3": "Sometimes I also like to challenge myself by trying things beyond my current abilities and doing many things in parallel to learn more, from which I improve my problem-solving skills.",
+        "intro4": "I also like watching anime, listening to music, and playing light games. Do you want to join with me? (´• ω •)ﾉ",
+        "interestsTitle": "Interests",
+        "interests": {
+          "programming": "Programming",
+          "music": "Listening to music",
+          "anime": "Watching anime",
+          "gaming": "Gaming"
+        }
       },
       "contact": {
         "title": "Contact",
@@ -95,7 +111,23 @@
       "about": {
         "title": "Giới thiệu",
         "metaTitle": "Giới thiệu - nupniichan",
-        "description": "Đây là trang Giới thiệu. Bạn có thể đặt phần giới thiệu cá nhân, mục tiêu và câu chuyện của mình ở đây."
+        "description": "Đây là trang Giới thiệu. Bạn có thể đặt phần giới thiệu cá nhân, mục tiêu và câu chuyện của mình ở đây.",
+        "header": "Một chút về mình",
+        "headerEmoji": "ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧",
+        "profileName": "Nguyễn Phi Quốc Bảo",
+        "profileTitle": "nupniichan",
+        "introTitle": "Giới thiệu",
+        "intro1": "Mình là Nguyễn Phi Quốc Bảo, một người đam mê lập trình và thiết kế, đặc biệt là sáng tạo ra các phần mềm độc đáo và áp dụng công nghệ AI vào project của mình.",
+        "intro2": "Thời gian rảnh mình thường kiếm cái gì đó mới để học / tìm hiểu để có thể tạo những gì mình thích từ việc lập trình, đồng thời nâng cao kiến thức của bản thân.",
+        "intro3": "Đôi khi mình cũng thích tự làm khó bản thân bằng cách thử những thứ vượt ngoài khả năng hiện tại và làm nhiều việc song song để học được nhiều hơn, từ đó nâng cao kỹ năng giải quyết vấn đề. ",
+        "intro4": "Ngoài ra mình cũng thích xem anime, nghe nhạc và chơi các tựa game nhẹ đó. Bạn có muốn tham gia cùng mình không? (´• ω •)ﾉ",
+        "interestsTitle": "Sở thích",
+        "interests": {
+          "programming": "Lập trình",
+          "music": "Nghe nhạc",
+          "anime": "Xem anime",
+          "gaming": "Chơi game"
+        }
       },
       "contact": {
         "title": "Liên hệ",

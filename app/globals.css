@@ -39,6 +39,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --animate-spin-slow: spin 3s linear infinite;
 }
 
 html,
@@ -276,6 +277,37 @@ body {
   }
 }
 
-.animate-dot-bounce {
-  animation: dotBounce 1s infinite ease-in-out;
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-kaomoji {
+  display: inline-block;
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.about-header h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.about-header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ccccff, transparent);
+  transition: width 0.8s ease-in-out;
+}
+
+[data-aos].aos-animate .about-header h1::after {
+  width: 100px;
 }

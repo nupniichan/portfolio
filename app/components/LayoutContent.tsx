@@ -5,6 +5,7 @@ import ParticlesBackground from "./ParticlesBackground";
 import Header from "./Header";
 import ClientAudioPlayer from "./ClientAudioPlayer";
 import LoadingOverlay from "./LoadingOverlay";
+import AOSInit from "./AOSInit";
 
 interface LayoutContentProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
 
   return (
     <div className="relative flex-1 overflow-hidden">
+      <AOSInit />
       <LoadingOverlay isVisible={isLoading} />
       
       {mounted && theme === "light" && (
