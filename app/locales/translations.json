@@ -63,7 +63,74 @@
       "education": {
         "title": "Education & Work",
         "metaTitle": "Education & Work - nupniichan",
-        "description": "This is the Education & Work page. You can describe your education background and work experience here."
+        "description": "This is the Education & Work page. You can describe your education background and work experience here.",
+        "header": "Education & Work",
+        "headerEmoji": "୧⁠(⁠ ⁠°⁠ᗜ⁠°⁠ ⁠)⁠୨",
+        "timelineTitle": "My Journey",
+        "achievementsTitle": "Achievements",
+        "items": {
+          "work": {
+            "date": "Jul 2025 – Present",
+            "title": "Digital Transformation Intern",
+            "subtitle": "Schneider Electric Manufacturing Vietnam",
+            "description": "I am fortunate to have an internship at Schneider Electric as the main Full-stack Developer for the Global Supply Chain internal tool using ASP.NET MVC. Responsible for database design, SSO implementation for secure authentication, setup automatic email sending for users, building the Project Tracker system, and optimizing the system to ensure stability for domestic and regional users.",
+            "role": "Full-stack Developer"
+          },
+          "university": {
+            "date": "2022 - Jan 2026 (Expected)",
+            "title": "Software Engineering",
+            "subtitle": "HCMC University of Foreign Languages and Information Technology",
+            "description": "I am currently majoring in Software Engineering with a focus on Application Development and Software Engineering as well as team management skills. My current GPA is at 3.7 / 4.0",
+            "achievement1": "Academic result >= 3.5 each semester",
+            "achievement2": "Best Project Award"
+          },
+          "highschool": {
+            "date": "2019 - 2022",
+            "title": "High School Diploma",
+            "subtitle": "Nguyen Tat Thanh High School",
+            "description": "A school honored to be named after the beloved Uncle Ho – the great leader of the Vietnamese nation. I am proud to have studied and graduated from this school",
+            "achievement": "Excellent Student"
+          }
+        },
+        "certifications": {
+          "devops": {
+            "title": "DevOps for Freshers Certificate",
+            "issuer": "devopsedu.vn",
+            "date": "2024"
+          },
+          "csharp": {
+            "title": "C# Basic Certificate",
+            "issuer": "HackerRank",
+            "date": "2023"
+          },
+          "problem_solving": {
+            "title": "4★ Problem Solving",
+            "issuer": "HackerRank",
+            "date": "2023"
+          },
+          "kubernetes": {
+            "title": "Kubernetes in Practice",
+            "issuer": "devopsedu.vn",
+            "date": "Learning..."
+          }
+        },
+        "futureLearning": {
+          "title": "Future Learning",
+          "items": {
+            "ai": {
+              "title": "AI & Machine Learning",
+              "subtitle": "Exploring Neural Networks"
+            },
+            "cloud": {
+              "title": "Cloud Architecture",
+              "subtitle": "AWS / Azure Ecosystem"
+            },
+            "system": {
+              "title": "System Design",
+              "subtitle": "Scalable Microservices"
+            }
+          }
+        }
       },
       "projects": {
         "title": "Projects",
@@ -179,7 +246,74 @@
       "education": {
         "title": "Học vấn & Công việc",
         "metaTitle": "Học vấn & Công việc - nupniichan",
-        "description": "Đây là trang Học vấn & Công việc. Bạn có thể mô tả nền tảng học vấn và kinh nghiệm làm việc ở đây."
+        "description": "Đây là trang Học vấn & Công việc. Bạn có thể mô tả nền tảng học vấn và kinh nghiệm làm việc ở đây.",
+        "header": "Quá trình học tập của mình",
+        "headerEmoji": "୧⁠(⁠ ⁠°⁠ᗜ⁠°⁠ ⁠)⁠୨",
+        "timelineTitle": "Hành trình của mình",
+        "achievementsTitle": "Thành tựu",
+        "items": {
+          "work": {
+            "date": "Tháng 7 2025 – Hiện tại",
+            "title": "Thực tập sinh Chuyển đổi số",
+            "subtitle": "Schneider Electric Manufacturing Vietnam",
+            "description": "Mình may mắn có được công việc thực tập tại Schneider Electric với vai trò Full-stack Developer chính cho công cụ nội bộ Global Supply Chain sử dụng ASP.NET MVC. Chịu trách nhiệm thiết kế database, triển khai SSO cho xác thực bảo mật, setup tự động gửi mail cho người dùng, xây dựng hệ thống Project Tracker và tối ưu hóa hệ để đảm bảo tính ổn định cho người dùng trong nước và khu vực.",
+            "role": "Full-stack Developer"
+          },
+          "university": {
+            "date": "2022 - Tháng 1 2026 ( Dự kiến )",
+            "title": "Công nghệ phần mềm",
+            "subtitle": "Trường Đại học Ngoại ngữ – Tin học TP.HCM",
+            "description": "Hiện tại mình đang học chuyên ngành Công nghệ phần mềm với trọng tâm về Phát triển ứng dụng và Kỹ thuật phần mềm cũng như các kỹ năng quản lý nhóm. GPA hiện tại của mình ở mức 3.7 / 4.0",
+            "achievement1": "Kết quả học tập >= 3.5 mỗi kỳ",
+            "achievement2": "Dự án xuất sắc nhất"
+          },
+          "highschool": {
+            "date": "2019 - 2022",
+            "title": "Bằng tốt nghiệp THPT",
+            "subtitle": "Trường THPT Nguyễn Tất Thành",
+            "description": "Một ngôi trường vinh dự mang tên Bác Hồ kính yêu – vị lãnh tụ vĩ đại của dân tộc Việt Nam. Mình tự hào khi được học và tốt nghiệp tại ngôi trường này",
+            "achievement": "Học sinh giỏi"
+          }
+        },
+        "certifications": {
+          "devops": {
+            "title": "Chứng chỉ DevOps cho người mới bắt đầu",
+            "issuer": "devopsedu.vn",
+            "date": "2024"
+          },
+          "csharp": {
+            "title": "Chứng chỉ C# cơ bản",
+            "issuer": "HackerRank",
+            "date": "2023"
+          },
+          "problem_solving": {
+            "title": "4★ Giải quyết vấn đề",
+            "issuer": "HackerRank",
+            "date": "2023"
+          },
+          "kubernetes": {
+            "title": "Kubernetes thực tế",
+            "issuer": "devopsedu.vn",
+            "date": "Đang học..."
+          }
+        },
+        "futureLearning": {
+          "title": "Dự định học tập",
+          "items": {
+            "ai": {
+              "title": "AI & Machine Learning",
+              "subtitle": "Khám phá Neural Networks"
+            },
+            "cloud": {
+              "title": "Kiến trúc Cloud",
+              "subtitle": "Hệ sinh thái AWS / Azure"
+            },
+            "system": {
+              "title": "Thiết kế hệ thống",
+              "subtitle": "Microservices quy mô lớn"
+            }
+          }
+        }
       },
       "projects": {
         "title": "Dự án",
