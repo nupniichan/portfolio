@@ -122,7 +122,26 @@
       "contact": {
         "title": "Contact",
         "metaTitle": "Contact - nupniichan",
-        "description": "This is the Contact page. You can put your contact information or a contact form here."
+        "description": "This is the Contact page. You can put your contact information or a contact form here.",
+        "header": "Contact",
+        "headerEmoji": "ヽ(・∀・)ﾉ",
+        "welcomeText": "Thank you for visiting my website. If you want to contact me, please use the information below!",
+        "email": {
+          "title": "Email",
+          "address": "bao96065@gmail.com",
+          "action": "Send me an email"
+        },
+        "telegram": {
+          "title": "Telegram / Zalo",
+          "description": "Connect with me via QR code",
+          "telegramButton": "Telegram",
+          "zaloButton": "Zalo"
+        },
+        "home": {
+          "title": "Back to Home",
+          "description": "See more information about my social media pages",
+          "action": "Go to Home"
+        }
       },
       "education": {
         "title": "Education & Work",
@@ -373,7 +392,26 @@
       "contact": {
         "title": "Liên hệ",
         "metaTitle": "Liên hệ - nupniichan",
-        "description": "Đây là trang Liên hệ. Bạn có thể đặt thông tin liên hệ hoặc biểu mẫu liên hệ ở đây."
+        "description": "Đây là trang Liên hệ. Bạn có thể đặt thông tin liên hệ hoặc biểu mẫu liên hệ ở đây.",
+        "header": "Liên Hệ",
+        "headerEmoji": "ヽ(・∀・)ﾉ",
+        "welcomeText": "Cảm ơn bạn đã ghé thăm trang web của mình. Nếu bạn muốn liên hệ, hãy sử dụng các thông tin bên dưới nhé!",
+        "email": {
+          "title": "Email",
+          "address": "bao96065@gmail.com",
+          "action": "Gửi email cho mình"
+        },
+        "telegram": {
+          "title": "Telegram / Zalo",
+          "description": "Kết nối với mình qua mã QR",
+          "telegramButton": "Telegram",
+          "zaloButton": "Zalo"
+        },
+        "home": {
+          "title": "Quay về trang chủ",
+          "description": "Xem thêm thông tin về các trang mạng xã hội của mình",
+          "action": "Về trang chủ"
+        }
       },
       "education": {
         "title": "Học vấn & Công việc",
