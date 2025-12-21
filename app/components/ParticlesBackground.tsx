@@ -17,7 +17,7 @@ export default function ParticlesBackground({ theme }: ParticlesBackgroundProps)
   useEffect(() => {
     const loadParticlesJS = () => {
       return new Promise<void>((resolve) => {
-        if (window.particlesJS) {
+        if (typeof window.particlesJS !== 'undefined') {
           resolve();
           return;
         }
@@ -33,7 +33,7 @@ export default function ParticlesBackground({ theme }: ParticlesBackgroundProps)
     const initParticles = async () => {
       await loadParticlesJS();
 
-      if (window.particlesJS) {
+      if (typeof window.particlesJS !== 'undefined') {
         window.particlesJS('particles-js', {
           particles: {
             number: {
