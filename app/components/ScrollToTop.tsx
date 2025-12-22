@@ -4,22 +4,20 @@ import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollToTop() {
-  const [shouldShow, setShouldShow] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setShouldShow(true);
-        setTimeout(() => setIsVisible(true), 10);
-      } else {
-        setIsVisible(false);
-        setTimeout(() => setShouldShow(false), 300);
-      }
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 200;
+      setIsVisible(scrolled);
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -28,10 +26,6 @@ export default function ScrollToTop() {
       behavior: "smooth",
     });
   };
-
-  if (!shouldShow) {
-    return null;
-  }
 
   return (
     <button
