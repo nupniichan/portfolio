@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <MetadataUpdater pageKey="home" />
-      <div className="flex h-screen items-center justify-center p-2 sm:p-3 md:p-4 lg:p-6">
+      <div className="flex h-screen items-center justify-center p-2 sm:p-3 md:p-4 lg:p-6 -mt-12 sm:mt-0">
       <div 
         className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] floating-container max-sm:animate-none relative group overflow-hidden md:mt-4"
         data-aos="fade-up"
