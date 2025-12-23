@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "../hooks/useTranslations";
 import MetadataUpdater from "../components/MetadataUpdater";
 import React from "react";
 import CardParticles from "../components/CardParticles";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import {
   MessageSquare,
   ShoppingCart,
@@ -16,31 +20,27 @@ import {
   Box,
   X,
   ExternalLink,
-  Code2
 } from "lucide-react";
 
 export default function ProjectsPage() {
   const { t } = useTranslations();
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [readmeContent, setReadmeContent] = useState<string>("");
+  const [isLoadingReadme, setIsLoadingReadme] = useState(false);
+  const [readmeError, setReadmeError] = useState<string | null>(null);
 
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
       setSelectedProject(null);
       setIsClosing(false);
+      setReadmeContent("");
+      setReadmeError(null);
     }, 300);
   };
 
-  const getProjectData = (key: ProjectKey) => {
-    return {
-      title: t(`pages.projects.items.${key}.title`),
-      description: t(`pages.projects.items.${key}.description`),
-      tags: t(`pages.projects.items.${key}.tags`) as string[]
-    };
-  };
-
-  type ProjectKey = "chinokafuu" | "website-ban-linh-kien" | "cs-anilist" | "cs-owm" | "csteam-works" | "profile-page";
+  type ProjectKey = "chinokafuu" | "website-ban-linh-kien" | "cs-anilist" | "cs-owm" | "csteam-works" | "portfolio";
 
   const projects: { key: ProjectKey; icon: React.JSX.Element; github: string; nuget?: string }[] = [
     {
@@ -72,11 +72,61 @@ export default function ProjectsPage() {
       nuget: "https://www.nuget.org/packages/csteam-works"
     },
     {
-      key: "profile-page",
+      key: "portfolio",
       icon: <IdCard size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/profile-page"
+      github: "https://github.com/nupniichan/portfolio"
     }
   ];
+
+  const fetchReadme = async (githubUrl: string) => {
+    setIsLoadingReadme(true);
+    setReadmeError(null);
+    try {
+      const match = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+      if (!match) {
+        throw new Error("Invalid GitHub URL");
+      }
+      const [, owner, repo] = match;
+      
+      const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`;
+      const response = await fetch(readmeUrl);
+      
+      if (!response.ok) {
+        const readmeUrlMaster = `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`;
+        const responseMaster = await fetch(readmeUrlMaster);
+        if (!responseMaster.ok) {
+          throw new Error("README not found");
+        }
+        const text = await responseMaster.text();
+        setReadmeContent(text);
+      } else {
+        const text = await response.text();
+        setReadmeContent(text);
+      }
+    } catch (error) {
+      setReadmeError("Unable to load README from GitHub");
+      setReadmeContent("");
+    } finally {
+      setIsLoadingReadme(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedProject) {
+      const project = projects.find(p => p.key === selectedProject);
+      if (project?.github) {
+        fetchReadme(project.github);
+      }
+    }
+  }, [selectedProject]);
+
+  const getProjectData = (key: ProjectKey) => {
+    return {
+      title: t(`pages.projects.items.${key}.title`),
+      description: t(`pages.projects.items.${key}.description`),
+      tags: t(`pages.projects.items.${key}.tags`) as string[]
+    };
+  };
 
   const activeProject = projects.find(p => p.key === selectedProject);
 
@@ -193,7 +243,7 @@ export default function ProjectsPage() {
           onClick={handleClose}
         >
           <div 
-            className={`w-full max-w-2xl bg-[#0a0a0f] border border-white/10 relative overflow-hidden ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}`}
+            className={`w-full max-w-2xl max-h-[85vh] bg-[#0a0a0f] border border-white/10 relative overflow-hidden flex flex-col ${isClosing ? 'animate-slide-down' : 'animate-slide-up'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30"></div>
@@ -211,7 +261,7 @@ export default function ProjectsPage() {
               <X size={24} />
             </button>
 
-            <div className="p-6 md:p-10">
+            <div className="p-6 md:p-10 overflow-y-auto flex-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-4 bg-[#CCCCFF]/10 border border-[#CCCCFF]/20 shadow-[0_0_15px_rgba(204,204,255,0.1)]">
                   {activeProject.icon}
@@ -236,12 +286,57 @@ export default function ProjectsPage() {
                     <span className="w-4 h-px bg-[#CCCCFF]/50"></span>
                     {t('pages.projects.details.description')}
                   </h3>
-                  <p className="text-gray-300 text-sm md:text-base leading-relaxed text-justify italic">
-                    {getProjectData(activeProject.key as ProjectKey).description}
-                  </p>
+                  {isLoadingReadme ? (
+                    <div className="flex items-center justify-center py-8">
+                      <div className="text-gray-400 text-sm">Loading README...</div>
+                    </div>
+                  ) : readmeError ? (
+                    <div className="text-gray-400 text-sm italic">
+                      {readmeError}
+                    </div>
+                  ) : readmeContent ? (
+                    <div className="prose prose-invert prose-sm max-w-none text-gray-300 markdown-content max-h-[50vh] overflow-y-auto pr-2">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                        components={{
+                          h1: ({node, ...props}) => <h1 className="text-xl font-bold text-white mb-4 mt-6 first:mt-0" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-white mb-3 mt-5" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-base font-bold text-white mb-2 mt-4" {...props} />,
+                          p: ({node, ...props}) => <p className="text-gray-300 mb-3 leading-relaxed" {...props} />,
+                          ul: ({node, ...props}) => <ul className="list-disc list-inside mb-3 text-gray-300 space-y-1" {...props} />,
+                          ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-3 text-gray-300 space-y-1" {...props} />,
+                          li: ({node, ...props}) => <li className="ml-4" {...props} />,
+                          code: ({node, inline, className, children, ...props}: any) => {
+                            if (inline) {
+                              return <code className="bg-white/10 px-1.5 py-0.5 rounded text-[#CCCCFF] text-xs" {...props}>{children}</code>;
+                            }
+                            return <code className="text-xs text-gray-300 font-mono" {...props}>{children}</code>;
+                          },
+                          pre: ({node, children, ...props}: any) => {
+                            return (
+                              <pre className="bg-white/5 p-3 rounded mb-3 overflow-x-auto border border-white/10" {...props}>
+                                {children}
+                              </pre>
+                            );
+                          },
+                          a: ({node, ...props}: any) => <a className="text-[#CCCCFF] hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                          blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-[#CCCCFF]/30 pl-4 italic text-gray-400 mb-3" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-bold text-white" {...props} />,
+                          em: ({node, ...props}) => <em className="italic" {...props} />,
+                        }}
+                      >
+                        {readmeContent}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-gray-300 text-sm md:text-base leading-relaxed text-justify italic">
+                      {getProjectData(activeProject.key as ProjectKey).description}
+                    </p>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {activeProject.github && (
                     <a 
                       href={activeProject.github}
@@ -283,6 +378,3 @@ export default function ProjectsPage() {
     </>
   );
 }
-
-
-
