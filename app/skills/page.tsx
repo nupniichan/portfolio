@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { withBasePath } from "../utils/paths";
 
 export default function SkillsPage() {
   const { t } = useTranslations();
@@ -73,14 +74,14 @@ export default function SkillsPage() {
       level: 99.9, 
       description: t('pages.skills.languages.vietnamese.description'), 
       badges: [t('pages.skills.languages.vietnamese.badge1'), t('pages.skills.languages.vietnamese.badge2')],
-      flag: "/Images/CountryFlag/Flag_of_VietNam.png" 
+      flag: withBasePath("/Images/CountryFlag/Flag_of_VietNam.png") 
     },
     { 
       name: t('pages.skills.languages.english.name'), 
       level: 75, 
       description: t('pages.skills.languages.english.description'), 
       badges: [t('pages.skills.languages.english.badge1'), t('pages.skills.languages.english.badge2')],
-      flag: "/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.png" 
+      flag: withBasePath("/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.png") 
     },
   ];
 
