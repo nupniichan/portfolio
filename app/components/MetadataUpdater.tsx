@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useThemeLanguage } from "./ThemeLanguageProvider";
 import { useTranslations } from "../hooks/useTranslations";
 
@@ -11,6 +11,7 @@ interface MetadataUpdaterProps {
 export default function MetadataUpdater({ pageKey }: MetadataUpdaterProps) {
   const { language, mounted } = useThemeLanguage();
   const { t } = useTranslations();
+  const prevValuesRef = useRef<{ pageKey: string; language: string; title: string; description: string } | null>(null);
 
   useEffect(() => {
     if (!mounted) return;
@@ -23,14 +24,30 @@ export default function MetadataUpdater({ pageKey }: MetadataUpdaterProps) {
     const title = t(metaTitleKey);
     const description = t(descriptionKey);
 
-    document.title = title;
+    const prevValues = prevValuesRef.current;
+    if (prevValues && 
+        prevValues.pageKey === pageKey && 
+        prevValues.language === language &&
+        prevValues.title === title && 
+        prevValues.description === description) {
+      return;
+    }
+
+    prevValuesRef.current = { pageKey, language, title, description };
+
+    if (document.title !== title) {
+      document.title = title;
+    }
+
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement("meta");
       metaDescription.setAttribute("name", "description");
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute("content", description);
+    if (metaDescription.getAttribute("content") !== description) {
+      metaDescription.setAttribute("content", description);
+    }
 
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (!ogTitle) {
@@ -38,7 +55,9 @@ export default function MetadataUpdater({ pageKey }: MetadataUpdaterProps) {
       ogTitle.setAttribute("property", "og:title");
       document.head.appendChild(ogTitle);
     }
-    ogTitle.setAttribute("content", title);
+    if (ogTitle.getAttribute("content") !== title) {
+      ogTitle.setAttribute("content", title);
+    }
 
     let ogDescription = document.querySelector('meta[property="og:description"]');
     if (!ogDescription) {
@@ -46,11 +65,15 @@ export default function MetadataUpdater({ pageKey }: MetadataUpdaterProps) {
       ogDescription.setAttribute("property", "og:description");
       document.head.appendChild(ogDescription);
     }
-    ogDescription.setAttribute("content", description);
+    if (ogDescription.getAttribute("content") !== description) {
+      ogDescription.setAttribute("content", description);
+    }
 
-    document.documentElement.setAttribute("lang", language);
+    const currentLang = document.documentElement.getAttribute("lang");
+    if (currentLang !== language) {
+      document.documentElement.setAttribute("lang", language);
+    }
   }, [language, mounted, pageKey, t]);
 
   return null;
 }
-

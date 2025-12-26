@@ -6,6 +6,7 @@ import { useThemeLanguage } from "./ThemeLanguageProvider";
 import { NAV_ITEMS, getNavLabels } from "../config/navigation";
 import { useTranslations } from "../hooks/useTranslations";
 import { Home, User, Code, FolderKanban, GraduationCap, Mail, Sun, Moon, Globe } from "lucide-react";
+import { useCallback, useMemo } from "react";
 
 const navIcons = {
   home: Home,
@@ -21,14 +22,36 @@ export default function Header() {
   const router = useRouter();
   const { theme, language, toggleTheme, toggleLanguage } = useThemeLanguage();
   const { t } = useTranslations();
-  const navLabels = getNavLabels(language);
+  const navLabels = useMemo(() => getNavLabels(language), [language]);
 
-  const handleNav = (href: string) => (e: React.MouseEvent) => {
+  const normalizePath = useCallback((path: string) => {
+    // Remove basePath if exists for comparison
+    const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+    if (basePath && path.startsWith(basePath)) {
+      return path.slice(basePath.length) || '/';
+    }
+    return path || '/';
+  }, []);
+
+  const normalizedPathname = useMemo(() => normalizePath(pathname), [pathname, normalizePath]);
+
+  const handleNav = useCallback((href: string) => (e: React.MouseEvent) => {
+    const normalizedHref = normalizePath(href);
+    
+    const isActive = normalizedHref === "/" 
+      ? normalizedPathname === "/" || normalizedPathname === ""
+      : normalizedPathname.startsWith(normalizedHref);
+    
+    if (isActive) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
     e.preventDefault();
-    const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
-    if (isActive) return;
+    e.stopPropagation();
+    
     router.push(href);
-  };
+  }, [normalizedPathname, router, normalizePath]);
 
   return (
     <>
@@ -37,10 +60,10 @@ export default function Header() {
           <div className="flex flex-col items-center gap-2">
             <nav className="flex flex-col items-center gap-1.5 relative">
               {NAV_ITEMS.map((item) => {
-                const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(item.href);
+                const normalizedHref = normalizePath(item.href);
+                const isActive = normalizedHref === "/" 
+                  ? normalizedPathname === "/" || normalizedPathname === ""
+                  : normalizedPathname.startsWith(normalizedHref);
                 const Icon = navIcons[item.key as keyof typeof navIcons];
 
                 return (
@@ -63,8 +86,18 @@ export default function Header() {
                 className="absolute inset-x-0 rounded-full bg-linear-to-br from-orange-400/10 to-[#CCCCFF]/10 border border-[#CCCCFF]/20 shadow-[0_0_10px_rgba(251,146,60,0.1)] transition-all duration-300 ease-out -z-10"
                 style={{
                   height: '2.5rem',
-                  top: `${NAV_ITEMS.findIndex(item => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)) * 2.875}rem`,
-                  opacity: NAV_ITEMS.findIndex(item => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)) !== -1 ? 1 : 0
+                  top: `${NAV_ITEMS.findIndex(item => {
+                    const normalizedHref = normalizePath(item.href);
+                    return normalizedHref === "/" 
+                      ? normalizedPathname === "/" || normalizedPathname === ""
+                      : normalizedPathname.startsWith(normalizedHref);
+                  }) * 2.875}rem`,
+                  opacity: NAV_ITEMS.findIndex(item => {
+                    const normalizedHref = normalizePath(item.href);
+                    return normalizedHref === "/" 
+                      ? normalizedPathname === "/" || normalizedPathname === ""
+                      : normalizedPathname.startsWith(normalizedHref);
+                  }) !== -1 ? 1 : 0
                 }}
               />
             </nav>
@@ -99,10 +132,10 @@ export default function Header() {
         <header className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-2.5 py-1.5 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 animate-header-slide hover:bg-black/50 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] z-40">
           <nav className="flex items-center gap-1 relative">
             {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+              const normalizedHref = normalizePath(item.href);
+              const isActive = normalizedHref === "/" 
+                ? normalizedPathname === "/" || normalizedPathname === ""
+                : normalizedPathname.startsWith(normalizedHref);
               const Icon = navIcons[item.key as keyof typeof navIcons];
 
               return (
@@ -125,8 +158,18 @@ export default function Header() {
               className="absolute inset-y-0 rounded-full bg-linear-to-r from-orange-400/10 to-[#CCCCFF]/10 border border-[#CCCCFF]/20 shadow-[0_0_10px_rgba(251,146,60,0.1)] transition-all duration-300 ease-out -z-10"
               style={{
                 width: '2rem',
-                left: `${NAV_ITEMS.findIndex(item => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)) * 2.25}rem`,
-                opacity: NAV_ITEMS.findIndex(item => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)) !== -1 ? 1 : 0
+                left: `${NAV_ITEMS.findIndex(item => {
+                  const normalizedHref = normalizePath(item.href);
+                  return normalizedHref === "/" 
+                    ? normalizedPathname === "/" || normalizedPathname === ""
+                    : normalizedPathname.startsWith(normalizedHref);
+                }) * 2.25}rem`,
+                opacity: NAV_ITEMS.findIndex(item => {
+                  const normalizedHref = normalizePath(item.href);
+                  return normalizedHref === "/" 
+                    ? normalizedPathname === "/" || normalizedPathname === ""
+                    : normalizedPathname.startsWith(normalizedHref);
+                }) !== -1 ? 1 : 0
               }}
             />
           </nav>
@@ -160,3 +203,4 @@ export default function Header() {
     </>
   );
 }
+
