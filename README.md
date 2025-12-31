@@ -271,19 +271,17 @@ portfolio/
 
 ## Important Notes
 
-### ⚠️ Development Workflow
+### Development Workflow
 
 **Always create a new branch** before making changes:
 - If you forked: Work on your fork and create branches as needed
 - If you cloned: Create a new branch (e.g., `develop` or `feature/customization`) before making any changes
 
-**Never work directly on the main/master branch** unless you are the original repository owner.
+**Never work directly on the main/master branch** unless you want to host on your own page.
 
-### 📝 License
+### License
 
-Please check the license file in this repository. If you use this portfolio, make sure to:
-- Follow the license terms
-- Respect the original author's work
+Please check the MIT license file [here](https://github.com/nupniichan/portfolio/blob/main/LICENSE)
 
 ## Troubleshooting
 

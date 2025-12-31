@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useThemeLanguage } from "./ThemeLanguageProvider";
 import { NAV_ITEMS, getNavLabels } from "../config/navigation";
 import { useTranslations } from "../hooks/useTranslations";
@@ -19,13 +19,11 @@ const navIcons = {
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
   const { theme, language, toggleTheme, toggleLanguage } = useThemeLanguage();
   const { t } = useTranslations();
   const navLabels = useMemo(() => getNavLabels(language), [language]);
 
   const normalizePath = useCallback((path: string) => {
-    // Remove basePath if exists for comparison
     const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
     if (basePath && path.startsWith(basePath)) {
       return path.slice(basePath.length) || '/';
@@ -44,14 +42,8 @@ export default function Header() {
     
     if (isActive) {
       e.preventDefault();
-      e.stopPropagation();
-      return;
     }
-    e.preventDefault();
-    e.stopPropagation();
-    
-    router.push(href);
-  }, [normalizedPathname, router, normalizePath]);
+  }, [normalizedPathname, normalizePath]);
 
   return (
     <>
@@ -203,4 +195,3 @@ export default function Header() {
     </>
   );
 }
-
