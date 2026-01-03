@@ -30,7 +30,7 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
 
   const tracks = [
     {
-      title: "Encore Dnace - MIMI",
+      title: "Encore Dance - MIMI",
       src: withBasePath("/Musics/Encore dance - MIMI.mp3")
     },
     {
