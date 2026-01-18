@@ -13,7 +13,7 @@ import {
   MessageSquare,
   ShoppingCart,
   Tv,
-  CloudSun,
+  Sparkles,
   Gamepad2,
   IdCard,
   Github,
@@ -40,13 +40,18 @@ export default function ProjectsPage() {
     }, 300);
   };
 
-  type ProjectKey = "chinokafuu" | "website-ban-linh-kien" | "cs-anilist" | "cs-owm" | "csteam-works" | "portfolio";
+  type ProjectKey = "chinokafuu-discord-bot" | "website-ban-linh-kien" | "cs-anilist" | "chinokafuu" | "csteam-works" | "portfolio";
 
   const projects: { key: ProjectKey; icon: React.JSX.Element; github: string; nuget?: string }[] = [
     {
-      key: "chinokafuu",
+      key: "chinokafuu-discord-bot",
       icon: <MessageSquare size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/chinokafuu"
+      github: "https://github.com/nupniichan/ChinoKafuu-Discord"
+    },
+    {
+      key: "chinokafuu",
+      icon: <Sparkles size={18} className="text-[#CCCCFF]" />,
+      github: "https://github.com/nupniichan/Chino-Kafuu"
     },
     {
       key: "website-ban-linh-kien",
@@ -58,12 +63,6 @@ export default function ProjectsPage() {
       icon: <Tv size={18} className="text-[#CCCCFF]" />,
       github: "https://github.com/nupniichan/cs-anilist",
       nuget: "https://www.nuget.org/packages/cs-anilist"
-    },
-    {
-      key: "cs-owm",
-      icon: <CloudSun size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/cs-owm",
-      nuget: "https://www.nuget.org/packages/cs-owm"
     },
     {
       key: "csteam-works",

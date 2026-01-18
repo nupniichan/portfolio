@@ -32,10 +32,9 @@ export default function SkillsPage() {
       title: t('pages.skills.categories.frontend'),
       Icon: Layout,
       skills: [
-        { name: "HTML5 & CSS3", level: 80 },
+        { name: "HTML5 & CSS3", level: 75 },
         { name: "JavaScript", level: 50 },
-        { name: "React.js / Next.js", level: 50 },
-        { name: "Tailwind CSS", level: 85 },
+        { name: "React.js / Next.js", level: 50 }
       ]
     },
     {
@@ -43,7 +42,7 @@ export default function SkillsPage() {
       title: t('pages.skills.categories.backend'),
       Icon: Server,
       skills: [
-        { name: "C#", level: 90 },
+        { name: "C#", level: 92 },
         { name: "Node.js", level: 55 },
         { name: "Python", level: 70 },
       ]

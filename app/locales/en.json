@@ -124,7 +124,7 @@
       "header": "My Projects",
       "headerEmoji": "(っ ᵔ◡ᵔ)っ",
       "items": {
-        "chinokafuu": {
+        "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
           "description": "A cute employee at CafeDeNup discord server developed by using C# and Python",
           "tags": ["C#", "Python", "Discord", ".NET"]
@@ -139,10 +139,10 @@
           "description": "A C# wrapper for the AniList API, helping you get anime and manga information from Anilist for use in .NET applications.",
           "tags": ["C#", "API", ".NET", "Library"]
         },
-        "cs-owm": {
-          "title": "CS-OWM",
-          "description": "A C# wrapper for the OpenWeatherMap API, providing easy access to real-time weather data in .NET applications.",
-          "tags": ["C#", "API", "Weather", "Library"]
+        "chinokafuu": {
+          "title": "Chino Kafuu",
+          "description": "An LLM-powered real-time AI character system inspired by Neuro-sama, focused on personality consistency, emotion, voice, and VTuber-style interaction using local/OpenRouter LLMs.",
+          "tags": ["Python", "AI", "LLM", "STT/TTS","RVC"]
         },
         "csteam-works": {
           "title": "CSteam-Works",
@@ -174,7 +174,7 @@
       "description": "Details about my educational background and work experience",
       "items": {
         "work": {
-          "date": "Jul 2025 – Present",
+          "date": "Jul 2025 – Jun 2026",
           "title": "Digital Transformation Intern",
           "subtitle": "Schneider Electric Manufacturing Vietnam",
           "description": "I am fortunate to have an internship at Schneider Electric as the main Full-stack Developer for the Global Supply Chain internal tool using ASP.NET MVC. Responsible for database design, SSO implementation for secure authentication, setup automatic email sending for users, building the Project Tracker system, and optimizing the system to ensure stability for domestic and regional users.",
@@ -212,9 +212,9 @@
           "issuer": "HackerRank",
           "date": "2023"
         },
-        "kubernetes": {
-          "title": "Kubernetes in Practice",
-          "issuer": "devopsedu.vn",
+        "SAAC03": {
+          "title": "Solution Architecture Associate",
+          "issuer": "AWS",
           "date": "Learning..."
         },
         "leetcode": {

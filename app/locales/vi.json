@@ -125,7 +125,7 @@
       "header": "Dự án của mình",
       "headerEmoji": "(っ ᵔ◡ᵔ)っ",
       "items": {
-        "chinokafuu": {
+        "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
           "description": "Nhân viên dễ thương tại server discord CafeDeNup của mình được phát triển bằng C# và Python.",
           "tags": ["C#", "Python", "Discord", ".NET"]
@@ -140,10 +140,10 @@
           "description": "Một wrapper C# cho API AniList, giúp bạn lấy thông tin anime và manga từ Anilist và sử dụng trong các ứng dụng .NET.",
           "tags": ["C#", "API", ".NET", "Library"]
         },
-        "cs-owm": {
-          "title": "CS-OWM",
-          "description": "Một wrapper C# cho API OpenWeatherMap, cung cấp dễ dàng truy cập dữ liệu thời tiết ( realtime ) trong các ứng dụng .NET.",
-          "tags": ["C#", "API", "Weather", "Library"]
+        "chinokafuu": {
+          "title": "Chino Kafuu",
+          "description": "Dự án mình muốn làm từ rất lâu, lấy cảm hứng từ Neuro-sama. Bạn có thể trò chuyện real-time với Chino Kafuu, và mình muốn để Chino có thể tương tác với mình thông qua Discord, API, VTuber,...",
+          "tags": ["Python", "AI", "LLM", "STT/TTS", "RVC" ]
         },
         "csteam-works": {
           "title": "CSteam-Works",
@@ -175,14 +175,14 @@
       "description": "Thông tin chi tiết về quá trình học tập và làm việc của mình",
       "items": {
         "work": {
-          "date": "Tháng 7 2025 – Hiện tại",
-          "title": "Thực tập sinh Chuyển đổi số",
+          "date": "Tháng 7 2025 – Tháng 1 2026",
+          "title": "Digital Transformation Intern",
           "subtitle": "Schneider Electric Manufacturing Vietnam",
           "description": "Mình may mắn có được công việc thực tập tại Schneider Electric với vai trò Full-stack Developer chính cho công cụ nội bộ Global Supply Chain sử dụng ASP.NET MVC. Chịu trách nhiệm thiết kế database, triển khai SSO cho xác thực bảo mật, setup tự động gửi mail cho người dùng, xây dựng hệ thống Project Tracker và tối ưu hóa hệ để đảm bảo tính ổn định cho người dùng trong nước và khu vực.",
           "role": "Full-stack Developer"
         },
         "university": {
-          "date": "2022 - Tháng 1 2026 ( Dự kiến )",
+          "date": "2022 - Tháng 3 2026",
           "title": "Công nghệ phần mềm",
           "subtitle": "Trường Đại học Ngoại ngữ – Tin học TP.HCM",
           "description": "Hiện tại mình đang học chuyên ngành Công nghệ phần mềm với trọng tâm về Phát triển ứng dụng và Kỹ thuật phần mềm cũng như các kỹ năng quản lý nhóm. GPA hiện tại của mình ở mức 3.7 / 4.0",
@@ -213,9 +213,9 @@
           "issuer": "HackerRank",
           "date": "2023"
         },
-        "kubernetes": {
-          "title": "Kubernetes thực tế",
-          "issuer": "devopsedu.vn",
+        "SAAC03": {
+          "title": "Solution Architecture Associate",
+          "issuer": "AWS",
           "date": "Đang học..."
         },
         "leetcode": {

@@ -70,7 +70,7 @@ export default function EducationWorkPage() {
     { key: "devops", icon: <Cpu size={16} /> },
     { key: "csharp", icon: <Award size={16} /> },
     { key: "problem_solving", icon: <Star size={16} /> },
-    { key: "kubernetes", icon: <Sparkles size={16} /> },
+    { key: "SAAC03", icon: <Sparkles size={16} /> },
     { key: "leetcode", icon: <Code size={16} /> }
   ];
 
