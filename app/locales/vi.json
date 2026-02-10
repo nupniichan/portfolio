@@ -78,7 +78,7 @@
           "items": ["Git", "Docker", "Visual Studio", "VS Code", "Postman", "Jira"]
         },
         "cloud": {
-          "title": "Cloud & Dịch vụ",
+          "title": "Cloud & Services",
           "items": ["Azure", "AWS", "RESTful API", "SSO", "Email Services"]
         },
         "devops": {
@@ -113,7 +113,7 @@
         "title": "Dự định học tập",
         "items": [
           { "title": "AI & Machine Learning", "description": "Học và khám phá cách tạo ra AI" },
-          { "title": "Cloud Architecture", "description": "Hệ sinh thái AWS / Azure" },
+          { "title": "Cloud Architecture", "description": "Thuộc hệ sinh thái AWS / Azure" },
           { "title": "DevOps", "description": "DevOps Tools & CI/CD" }
         ]
       }
@@ -175,19 +175,18 @@
       "description": "Thông tin chi tiết về quá trình học tập và làm việc của mình",
       "items": {
         "work": {
-          "date": "Tháng 7 2025 – Tháng 1 2026",
+          "date": "Tháng 7/2025 – Tháng 1/2026",
           "title": "Digital Transformation Intern",
           "subtitle": "Schneider Electric Manufacturing Vietnam",
           "description": "Mình may mắn có được công việc thực tập tại Schneider Electric với vai trò Full-stack Developer chính cho công cụ nội bộ Global Supply Chain sử dụng ASP.NET MVC. Chịu trách nhiệm thiết kế database, triển khai SSO cho xác thực bảo mật, setup tự động gửi mail cho người dùng, xây dựng hệ thống Project Tracker và tối ưu hóa hệ để đảm bảo tính ổn định cho người dùng trong nước và khu vực.",
           "role": "Full-stack Developer"
         },
         "university": {
-          "date": "2022 - Tháng 3 2026",
+          "date": "2022 - Tháng 3/2026",
           "title": "Công nghệ phần mềm",
           "subtitle": "Trường Đại học Ngoại ngữ – Tin học TP.HCM",
-          "description": "Hiện tại mình đang học chuyên ngành Công nghệ phần mềm với trọng tâm về Phát triển ứng dụng và Kỹ thuật phần mềm cũng như các kỹ năng quản lý nhóm. GPA hiện tại của mình ở mức 3.7 / 4.0",
-          "achievement1": "Kết quả học tập >= 3.5 mỗi kỳ",
-          "achievement2": "Dự án xuất sắc nhất"
+          "description": "Mình hiện đang theo học ngành Công nghệ phần mềm với chuyên ngành về Phát triển phần mềm / Kỹ thuật phần mềm cũng như các kỹ năng khác. Mình sẽ tốt nghiệp vào tháng 3 năm 2026.",
+          "achievement1": "Sinh viên xuất sắc với GPA 3.7/4.0"
         },
         "highschool": {
           "date": "2019 - 2022",
@@ -236,8 +235,8 @@
             "subtitle": "Hệ sinh thái thuộc AWS / Azure"
           },
           "system": {
-            "title": "Thiết kế hệ thống",
-            "subtitle": "Học về các hệ thống có khả năng mở rộng"
+            "title": "System Design",
+            "subtitle": "Thiết kế hệ thống quy mô lớn"
           }
         }
       }
