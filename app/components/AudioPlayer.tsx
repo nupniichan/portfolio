@@ -42,8 +42,8 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
       src: withBasePath("/Musics/Sunlight through the trees.mp3")
     },
     {
-      title: "yuuyake - Inusuku",
-      src: withBasePath("/Musics/yuuyake.mp3")
+      title: "Blue Archive Ost 298 - You're My Princess.mp3",
+      src: withBasePath("/Musics/Blue Archive Ost 298 - You're My Princess.mp3")
     },
   ];
 
