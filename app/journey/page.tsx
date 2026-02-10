@@ -207,9 +207,6 @@ export default function EducationWorkPage() {
                                 <span className="px-2 py-1 bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 text-[10px] text-[#CCCCFF] rounded-none uppercase font-bold tracking-wider">
                                   {t('pages.journey.items.university.achievement1')}
                                 </span>
-                                <span className="px-2 py-1 bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 text-[10px] text-[#CCCCFF] rounded-none uppercase font-bold tracking-wider">
-                                  {t('pages.journey.items.university.achievement2')}
-                                </span>
                               </>
                             )}
                             {item.key === 'highschool' && (
