@@ -91,14 +91,15 @@ export default function AboutMePage() {
                         <div className="absolute inset-4 rounded-full bg-[#CCCCFF]/10 blur-xl animate-pulse"></div>
                         
                         <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden p-1 border border-white/10 bg-[#CCCCFF] z-10 flex items-center justify-center">
-                          <Image
-                            src={withBasePath("/Images/Avatar/avatar2.png")}
-                            alt="Profile Picture"
-                            fill
-                            className="rounded-full object-cover p-1"
-                            priority
-                          />
-                        </div>
+                        <Image
+                          src={withBasePath("/Images/Avatar/avatar2.png")}
+                          alt="Profile Picture"
+                          fill
+                          sizes="(max-width: 768px) 96px, 112px"
+                          className="rounded-full object-cover p-1"
+                          priority
+                        />
+                      </div>
 
                         <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
                           <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#CCCCFF] rotate-45 shadow-[0_0_10px_#CCCCFF]"></div>

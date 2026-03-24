@@ -101,14 +101,16 @@ export default function Home() {
               <div className="absolute inset-0 rounded-full bg-[#CCCCFF]/10 blur-xl animate-pulse"></div>
               
               <Image
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 object-cover transition-all duration-300 relative z-10 border-2 border-white/10"
+                className="rounded-full w-24 sm:w-40 md:w-40 lg:w-48 xl:w-56 object-cover transition-all duration-300 relative z-10 border-2 border-white/10"
                 src={avatarPath}
                 alt="Avatar"
                 width={224}
                 height={224}
+                sizes="(max-width: 640px) 96px,
+                      (max-width: 768px) 160px,
+                      (max-width: 1024px) 192px,
+                      224px"
                 priority
-                fetchPriority="high"
-                loading="eager"
               />
             </div>
             
