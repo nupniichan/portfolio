@@ -236,11 +236,11 @@
           },
           "cloud": {
             "title": "Cloud Architecture",
-            "subtitle": "AWS / Azure Ecosystem"
+            "subtitle": "Deploying systems on cloud"
           },
           "system": {
-            "title": "System Design",
-            "subtitle": "Learning about scalable systems"
+            "title": "System Architecture",
+            "subtitle": "Designing large-scale systems"
           }
         }
       }

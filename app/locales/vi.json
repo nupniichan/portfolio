@@ -237,10 +237,10 @@
           },
           "cloud": {
             "title": "Cloud Architecture",
-            "subtitle": "Hệ sinh thái thuộc AWS / Azure"
+            "subtitle": "Triển khai hệ thống trên cloud"
           },
           "system": {
-            "title": "System Design",
+            "title": "System Architecture",
             "subtitle": "Thiết kế hệ thống quy mô lớn"
           }
         }
