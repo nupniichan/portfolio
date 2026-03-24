@@ -199,27 +199,32 @@
         "devops": {
           "title": "DevOps for Freshers Certificate",
           "issuer": "devopsedu.vn",
-          "date": "2024"
+          "date": "2024",
+          "url": "https://devopsedu.vn/certificate/?cert_hash=2a72e77c5823fec0"
         },
         "csharp": {
           "title": "C# Basic Certificate",
           "issuer": "HackerRank",
-          "date": "2023"
+          "date": "2023",
+          "url": "https://www.hackerrank.com/profile/nuponiibaka_com"
         },
         "problem_solving": {
           "title": "4★ Problem Solving",
           "issuer": "HackerRank",
-          "date": "2023"
+          "date": "2023",
+          "url": "https://www.hackerrank.com/profile/nuponiibaka_com"
         },
         "SAAC03": {
           "title": "Solution Architecture Associate",
           "issuer": "AWS",
-          "date": "2026"
+          "date": "2026",
+          "url": "https://www.credly.com/badges/dc541591-2c82-4929-8f27-a6d8debc7fbf/public_url"
         },
         "leetcode": {
           "title": "DSA Leetcode",
           "issuer": "Data Structures & Algorithms",
-          "date": "Solving..."
+          "date": "Solving...",
+          "url": "https://leetcode.com/nupniichan"
         }
       },
       "futureLearning": {

@@ -241,33 +241,42 @@ export default function EducationWorkPage() {
                     </div>
 
                     <div className="space-y-3 md:space-y-4">
-                      {certifications.map((cert, index) => (
-                        <div 
-                          key={cert.key}
-                          className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group"
-                          data-aos="fade-up"
-                          data-aos-delay={index * 100}
-                        >
-                          <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover:scale-110 transition-transform duration-300">
-                            <div className="scale-75 sm:scale-100">
-                              {cert.icon}
+                      {certifications.map((cert, index) => {
+                        const certUrl = t(`pages.journey.certifications.${cert.key}.url`);
+                        const hasUrl = typeof certUrl === "string" && /^https?:\/\//.test(certUrl);
+                        const Wrapper = hasUrl ? "a" : "div";
+
+                        return (
+                          <Wrapper
+                            key={cert.key}
+                            className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group"
+                            data-aos="fade-up"
+                            data-aos-delay={index * 100}
+                            href={hasUrl ? certUrl : undefined}
+                            target={hasUrl ? "_blank" : undefined}
+                            rel={hasUrl ? "noopener noreferrer" : undefined}
+                          >
+                            <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover:scale-110 transition-transform duration-300">
+                              <div className="scale-75 sm:scale-100">
+                                {cert.icon}
+                              </div>
                             </div>
-                          </div>
-                          <div>
-                            <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors leading-tight">
-                              {t(`pages.journey.certifications.${cert.key}.title`)}
-                            </h4>
-                            <div className="flex flex-col gap-0.5">
-                              <span className="text-[9px] text-gray-400 uppercase tracking-wider">
-                                {t(`pages.journey.certifications.${cert.key}.issuer`)}
-                              </span>
-                              <span className="text-[9px] text-[#CCCCFF]/60 font-medium">
-                                {t(`pages.journey.certifications.${cert.key}.date`)}
-                              </span>
+                            <div>
+                              <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors leading-tight">
+                                {t(`pages.journey.certifications.${cert.key}.title`)}
+                              </h4>
+                              <div className="flex flex-col gap-0.5">
+                                <span className="text-[9px] text-gray-400 uppercase tracking-wider">
+                                  {t(`pages.journey.certifications.${cert.key}.issuer`)}
+                                </span>
+                                <span className="text-[9px] text-[#CCCCFF]/60 font-medium">
+                                  {t(`pages.journey.certifications.${cert.key}.date`)}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
+                          </Wrapper>
+                        );
+                      })}
                     </div>
 
                     <div className="mt-8 pt-4 border-t border-white/5 flex justify-center italic opacity-30 select-none">
