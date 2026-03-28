@@ -63,21 +63,12 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
     setTheme(preferredTheme);
     setLanguage(preferredLanguage);
     
-    const hasLoadedBefore = typeof window !== "undefined" && 
-      window.sessionStorage.getItem("portfolio-initial-load") === "true";
-    
-    if (hasLoadedBefore) {
+    // Luôn hiển thị loading khi load/reload trang
+    setIsLoading(true);
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    } else {
-      // First load, show loading overlay
-      if (typeof window !== "undefined") {
-        window.sessionStorage.setItem("portfolio-initial-load", "true");
-      }
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

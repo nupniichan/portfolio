@@ -53,6 +53,32 @@
   }
 }
 
+@keyframes cloud-move {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(110vw);
+  }
+}
+
+.animate-cloud-1 {
+  animation: cloud-move 30s linear infinite;
+  left: 0;
+}
+
+.animate-cloud-2 {
+  animation: cloud-move 45s linear infinite;
+  animation-delay: -15s;
+  left: 0;
+}
+
+.animate-cloud-3 {
+  animation: cloud-move 38s linear infinite;
+  animation-delay: -25s;
+  left: 0;
+}
+
 @keyframes spin-reverse {
   from {
     transform: rotate(360deg);
