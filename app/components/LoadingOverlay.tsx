@@ -22,9 +22,9 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
     }
   }, [isVisible]);
 
-  if (!shouldRender || !mounted) return null;
+  if (!shouldRender) return null;
 
-  const isDark = theme === "dark";
+  const isDark = mounted ? theme === "dark" : false;
 
   return (
     <div
