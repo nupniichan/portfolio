@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #05050a;
-  --foreground: #f5f5f5;
-  --header-bg: rgba(0, 0, 0, 0.5);
-  --header-border: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(0, 0, 0, 0.08);
+  --background: #0a0a14;
+  --foreground: #e2e8f0;
+  --header-bg: rgba(10, 10, 20, 0.8);
+  --header-border: rgba(204, 204, 255, 0.08);
+  --card-bg: rgba(75, 75, 124, 0.12);
   --card-backdrop: blur(16px);
   --card-border-radius: 8px;
   --card-padding: 0.85rem;
-  --card-box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.3);
+  --card-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 :root.theme-light {
@@ -25,15 +25,15 @@
 }
 
 :root.theme-dark {
-  --background: #05050a;
-  --foreground: #f5f5f5;
-  --header-bg: rgba(0, 0, 0, 0.5);
-  --header-border: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(0, 0, 0, 0.08);
+  --background: #0a0a14;
+  --foreground: #e2e8f0;
+  --header-bg: rgba(10, 10, 20, 0.8);
+  --header-border: rgba(204, 204, 255, 0.08);
+  --card-bg: rgba(75, 75, 124, 0.12);
   --card-backdrop: blur(16px);
   --card-border-radius: 8px;
   --card-padding: 0.85rem;
-  --card-box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.3);
+  --card-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 .preloader-bg-light {
@@ -363,7 +363,7 @@ body {
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   box-shadow: var(--card-box-shadow);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--header-border);
 }
 
 @keyframes headerSlideDown {
@@ -402,18 +402,18 @@ body {
 
 ::-webkit-scrollbar {
   width: 12px;
-  background-color: #05050a;
+  background-color: #0a0a14;
 }
 
 ::-webkit-scrollbar-track {
-  background: #05050a;
+  background: #0a0a14;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #CCCCFF;
+  background-color: #4b4b7c;
   border-radius: 20px;
-  border: 3px solid #05050a;
+  border: 3px solid #0a0a14;
 }
 
 @keyframes scroll-text {

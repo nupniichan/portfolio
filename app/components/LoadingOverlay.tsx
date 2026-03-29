@@ -44,7 +44,7 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
       <div className="absolute inset-0 bg-[#b3bdf2] pointer-events-none" />
 
       <div className="preloader-bg-light absolute inset-0 bg-gradient-to-b from-[#a1b0ff] via-[#b3bdf2] to-[#e0d6ff] pointer-events-none" />
-      <div className="preloader-bg-dark absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#4b4b7c] to-[#ccccff] pointer-events-none" />
+      <div className="preloader-bg-dark absolute inset-0 bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#4b4b7c] pointer-events-none" />
       <div className="preloader-stars absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[15%] left-[20%] w-1 h-1 bg-white rounded-full animate-pulse opacity-70"></div>
         <div className="absolute top-[25%] left-[80%] w-1.5 h-1.5 bg-white rounded-full animate-pulse opacity-50" style={{ animationDuration: '3s' }}></div>
