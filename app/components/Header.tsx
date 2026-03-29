@@ -101,7 +101,7 @@ export default function Header() {
                 className="relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 text-gray-200/80 hover:text-white hover:bg-white/5"
                 title={t(`header.theme.${theme}`)}
               >
-                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                {theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
               </button>
 
               <button
@@ -175,7 +175,7 @@ export default function Header() {
               className="relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200 text-gray-400 hover:text-white hover:bg-white/5 hover:scale-110 hover:-translate-y-0.5 active:scale-90"
               title={t(`header.theme.${theme}`)}
             >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              {theme === "dark" ? <Moon size={16} /> : <Sun size={16} />}
             </button>
 
             <button
