@@ -62,19 +62,13 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
     const preferredLanguage = getPreferredLanguage();
     setTheme(preferredTheme);
     setLanguage(preferredLanguage);
-    
-    // Luôn hiển thị loading khi load/reload trang
+
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    applyThemeClass(theme);
-  }, [theme, mounted]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -127,4 +121,3 @@ export function useThemeLanguage() {
   }
   return ctx;
 }
-

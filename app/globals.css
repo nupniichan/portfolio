@@ -36,6 +36,143 @@
   --card-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
+.preloader-bg-light {
+  opacity: 1;
+}
+
+.preloader-bg-dark {
+  opacity: 0;
+}
+
+.preloader-stars {
+  opacity: 0;
+}
+
+.preloader-rays {
+  opacity: 0.15;
+}
+
+.preloader-clouds {
+  opacity: 1;
+}
+
+.preloader-glow-1 {
+  opacity: 0.6;
+  filter: blur(40px);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
+}
+
+.preloader-glow-2 {
+  opacity: 0.6;
+  filter: blur(50px);
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.8);
+}
+
+.preloader-sun {
+  opacity: 1;
+  rotate: 0deg;
+  scale: 1;
+  translate: 0 0;
+}
+
+.preloader-moon {
+  opacity: 0;
+  rotate: -180deg;
+  scale: 0.5;
+  translate: 0 -2.5rem;
+}
+
+.preloader-text {
+  color: #4b4b7c;
+  font-weight: 600;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+}
+
+html.theme-dark .preloader-bg-light {
+  opacity: 0;
+}
+
+html.theme-dark .preloader-bg-dark {
+  opacity: 1;
+}
+
+html.theme-dark .preloader-stars {
+  opacity: 1;
+}
+
+html.theme-dark .preloader-rays {
+  opacity: 0;
+}
+
+html.theme-dark .preloader-clouds {
+  opacity: 0;
+}
+
+html.theme-dark .preloader-glow-1 {
+  opacity: 0.2;
+  filter: blur(40px);
+  box-shadow: none;
+}
+
+html.theme-dark .preloader-glow-2 {
+  opacity: 0.2;
+  filter: blur(64px);
+  box-shadow: none;
+}
+
+html.theme-dark .preloader-sun {
+  opacity: 0;
+  rotate: 90deg;
+  scale: 0.5;
+  translate: 0 2.5rem;
+}
+
+html.theme-dark .preloader-moon {
+  opacity: 1;
+  rotate: -25deg;
+  scale: 1;
+  translate: 0 0;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+html.theme-dark .preloader-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+}
+
+html[data-transitions-ready] .preloader-bg-light,
+html[data-transitions-ready] .preloader-bg-dark,
+html[data-transitions-ready] .preloader-stars,
+html[data-transitions-ready] .preloader-rays,
+html[data-transitions-ready] .preloader-clouds {
+  transition: opacity 500ms ease-in-out;
+}
+
+html[data-transitions-ready] .preloader-glow-1,
+html[data-transitions-ready] .preloader-glow-2 {
+  transition: all 500ms;
+}
+
+html[data-transitions-ready] .preloader-sun,
+html[data-transitions-ready] .preloader-moon {
+  transition: all 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html[data-transitions-ready] .preloader-text {
+  transition: color 500ms, font-weight 500ms, filter 500ms;
+}
+
+.timeline-icon {
+  left: -37.5px !important;
+}
+
+@media (min-width: 640px) {
+  .timeline-icon {
+    left: -47.16px !important;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -44,9 +181,12 @@
   --animate-dot-bounce: dot-bounce 1s ease-in-out infinite;
 
   @keyframes dot-bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-10px);
     }
@@ -57,6 +197,7 @@
   0% {
     transform: translateX(-200px);
   }
+
   100% {
     transform: translateX(110vw);
   }
@@ -83,6 +224,7 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
@@ -158,6 +300,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -173,6 +316,7 @@ body {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -187,11 +331,13 @@ body {
 }
 
 @keyframes breathing {
+
   0%,
   100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 0.8;
@@ -199,10 +345,12 @@ body {
 }
 
 @keyframes floating {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-5px);
   }
@@ -223,6 +371,7 @@ body {
     opacity: 0;
     transform: translateY(-4px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -237,6 +386,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .animate-fade-in-up,
   .animate-slide-up,
   .floating-container,
@@ -251,14 +401,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
-    background-color: #05050a;
-  }
+  width: 12px;
+  background-color: #05050a;
+}
 
-  ::-webkit-scrollbar-track {
-    background: #05050a;
-    border-radius: 10px;
-  }
+::-webkit-scrollbar-track {
+  background: #05050a;
+  border-radius: 10px;
+}
 
 ::-webkit-scrollbar-thumb {
   background-color: #CCCCFF;
@@ -270,6 +420,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(calc(-50% - 0.5rem));
   }
@@ -289,6 +440,7 @@ body {
     opacity: 0;
     transform: translateY(20px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -300,6 +452,7 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateY(20px) scale(0.9);
@@ -315,9 +468,12 @@ body {
 }
 
 @keyframes bounce-subtle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-3px);
   }
@@ -329,13 +485,23 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slideDown {
@@ -343,6 +509,7 @@ body {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
@@ -403,31 +570,28 @@ body {
 }
 
 @keyframes particle-gentle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.3;
   }
+
   25% {
-    transform: translate(
-      calc(var(--particle-x, 0) * 0.5px),
-      calc(var(--particle-y, 0) * 0.5px)
-    ) scale(1.1);
+    transform: translate(calc(var(--particle-x, 0) * 0.5px),
+        calc(var(--particle-y, 0) * 0.5px)) scale(1.1);
     opacity: 0.5;
   }
+
   50% {
-    transform: translate(
-      calc(var(--particle-x, 0) * 1px),
-      calc(var(--particle-y, 0) * 1px)
-    ) scale(0.95);
+    transform: translate(calc(var(--particle-x, 0) * 1px),
+        calc(var(--particle-y, 0) * 1px)) scale(0.95);
     opacity: 0.4;
   }
+
   75% {
-    transform: translate(
-      calc(var(--particle-x, 0) * 0.7px),
-      calc(var(--particle-y, 0) * 0.7px)
-    ) scale(1.05);
+    transform: translate(calc(var(--particle-x, 0) * 0.7px),
+        calc(var(--particle-y, 0) * 0.7px)) scale(1.05);
     opacity: 0.45;
   }
 }
-
-

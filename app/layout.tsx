@@ -20,13 +20,26 @@ export const metadata: Metadata = {
   },
 };
 
+const THEME_INIT_SCRIPT = `
+  (function initTheme() {
+    try {
+      var savedTheme = localStorage.getItem('portfolio-theme');
+      var themeClass = savedTheme === 'dark' ? 'theme-dark' : 'theme-light';
+      document.documentElement.classList.add(themeClass);
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className={`${notoSans.className} min-h-screen flex flex-col`}>
         <ThemeLanguageProvider>
           <LayoutContent>{children}</LayoutContent>

@@ -82,16 +82,6 @@ export default function EducationWorkPage() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
-        .timeline-icon {
-          left: -37.5px !important;
-        }
-        @media (min-width: 640px) {
-          .timeline-icon {
-            left: -47.16px !important;
-          }
-        }
-      `}} />
       <MetadataUpdater pageKey="journey" />
       <div className="flex min-h-screen items-center justify-center p-2 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
