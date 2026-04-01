@@ -34,16 +34,12 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
       src: withBasePath("/Musics/Encore dance - MIMI.mp3")
     },
     {
-      title: "To The Endless Sky - Stella Sora",
-      src: withBasePath("/Musics/To The Endless Sky.mp3")
+      title: "Nanatsukaze - Connect the World",
+      src: withBasePath("/Musics/Nanatsukaze - Connect the World.mp3")
     },
     {
       title: "木もれび青春譜 (Komorebi Seishunfu)",
       src: withBasePath("/Musics/Sunlight through the trees.mp3")
-    },
-    {
-      title: "Blue Archive Ost 298 - You're My Princess.mp3",
-      src: withBasePath("/Musics/Blue Archive Ost 298 - You're My Princess.mp3")
     },
   ];
 
