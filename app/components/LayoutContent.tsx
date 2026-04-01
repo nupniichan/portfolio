@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { useThemeLanguage } from "./ThemeLanguageProvider";
 import ParticlesBackground from "./ParticlesBackground";
 import Header from "./Header";
@@ -15,6 +16,12 @@ interface LayoutContentProps {
 
 export default function LayoutContent({ children }: LayoutContentProps) {
   const { theme, mounted, isLoading } = useThemeLanguage();
+  const baseVideoSrc = useMemo(
+    () => withBasePath("/Images/Background/background.webm"),
+    []
+  );
+  const [videoSrc, setVideoSrc] = useState(baseVideoSrc);
+  const [hasRetriedVideo, setHasRetriedVideo] = useState(false);
 
   return (
     <div className="relative flex-1 overflow-hidden">
@@ -22,14 +29,25 @@ export default function LayoutContent({ children }: LayoutContentProps) {
       <LoadingOverlay isVisible={isLoading} />
       
       {mounted && theme === "light" && (
-        <video
-          className="background-video absolute inset-0 h-full w-full object-cover z-0"
-          src={withBasePath("/Images/Background/background.webm")}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <>
+          <video
+            className="background-video absolute inset-0 h-full w-full object-cover z-0"
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => {
+              if (!hasRetriedVideo) {
+                setHasRetriedVideo(true);
+                setVideoSrc(`${baseVideoSrc}?cb=${Date.now()}`);
+              }
+            }}
+          />
+          {hasRetriedVideo && videoSrc.includes("?cb=") && (
+            <div className="absolute inset-0 z-[-1] bg-slate-100" />
+          )}
+        </>
       )}
 
       {mounted && theme === "dark" && (
