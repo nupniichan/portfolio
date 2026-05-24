@@ -58,7 +58,7 @@ export default function ContactPage() {
             <div className="absolute top-1/2 right-0 w-1 h-32 bg-linear-to-b from-transparent via-[#CCCCFF]/20 to-transparent translate-x-4 z-10"></div>
 
             <div className="p-2 md:p-4 lg:p-6 relative z-10">
-              <div 
+              <div
                 className="mb-6 relative border-b border-white/10 pb-4"
                 data-aos="fade-down"
               >
@@ -67,12 +67,12 @@ export default function ContactPage() {
                     <Mail size={20} className="inline mr-2 text-[#CCCCFF]" />
                     {t('pages.contact.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.contact.headerEmoji')}</span>
                   </h1>
-                  
+
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
                     <div className="flex gap-1.5">
                       {[...Array(3)].map((_, i) => (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           className="w-1 h-1 bg-[#CCCCFF]/30 rotate-45"
                           style={{ animation: `pulse 2s infinite ${i * 0.2}s` }}
                         ></div>
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className="mb-8"
                 data-aos="fade-up"
                 data-aos-delay="100"
@@ -92,8 +92,9 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
-                <div 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6">
+                {/* Telegram Card */}
+                <div
                   className="relative bg-white/5 rounded-none p-5 border border-white/10 group"
                   data-aos="fade-up"
                   data-aos-delay="100"
@@ -102,42 +103,7 @@ export default function ContactPage() {
                   <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#CCCCFF]/40"></div>
                   <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#CCCCFF]/40"></div>
                   <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#CCCCFF]/40"></div>
-                  
-                  <div className="absolute top-6 left-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <div className="absolute top-1/2 left-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
-                  <div className="absolute top-1/2 right-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
 
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 flex items-center justify-center mb-4 group-hover:bg-[#CCCCFF]/20 transition-colors">
-                      <Mail size={24} className="text-[#CCCCFF]" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-bold text-white mb-2">
-                      {t('pages.contact.email.title')}
-                    </h3>
-                    <p className="text-xs md:text-sm text-gray-300 mb-4">
-                      {t('pages.contact.email.address')}
-                    </p>
-                    <a 
-                      href={`mailto:${t('pages.contact.email.address')}`}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs md:text-sm text-gray-200 group-hover:text-white"
-                    >
-                      {t('pages.contact.email.action')}
-                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-
-                <div 
-                  className="relative bg-white/5 rounded-none p-5 border border-white/10 group"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
-                >
-                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#CCCCFF]/40"></div>
-                  <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#CCCCFF]/40"></div>
-                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#CCCCFF]/40"></div>
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#CCCCFF]/40"></div>
-                  
                   <div className="absolute top-6 left-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse"></div>
                   <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
                   <div className="absolute top-1/2 left-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
@@ -153,37 +119,64 @@ export default function ContactPage() {
                     <p className="text-xs md:text-sm text-gray-300 mb-4">
                       {t('pages.contact.telegram.description')}
                     </p>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => openQrModal('telegram')}
-                        className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs text-gray-200 group-hover:text-white"
-                      >
-                        <MessageCircle size={14} />
-                        {t('pages.contact.telegram.telegramButton')}
-                      </button>
-                      <button
-                        onClick={() => openQrModal('zalo')}
-                        className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs text-gray-200 group-hover:text-white"
-                      >
-                        <MessageCircle size={14} />
-                        {t('pages.contact.telegram.zaloButton')}
-                      </button>
+                    <button
+                      onClick={() => openQrModal('telegram')}
+                      className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs text-gray-200 group-hover:text-white"
+                    >
+                      <MessageCircle size={14} />
+                      {t('pages.contact.telegram.telegramButton')}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Zalo Card */}
+                <div
+                  className="relative bg-white/5 rounded-none p-5 border border-white/10 group"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#CCCCFF]/40"></div>
+                  <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#CCCCFF]/40"></div>
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#CCCCFF]/40"></div>
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#CCCCFF]/40"></div>
+
+                  <div className="absolute top-6 left-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <div className="absolute top-1/2 left-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
+                  <div className="absolute top-1/2 right-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
+
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 flex items-center justify-center mb-4 group-hover:bg-[#CCCCFF]/20 transition-colors">
+                      <MessageCircle size={24} className="text-[#CCCCFF]" />
                     </div>
+                    <h3 className="text-base md:text-lg font-bold text-white mb-2">
+                      {t('pages.contact.zalo.title')}
+                    </h3>
+                    <p className="text-xs md:text-sm text-gray-300 mb-4">
+                      {t('pages.contact.zalo.description')}
+                    </p>
+                    <button
+                      onClick={() => openQrModal('zalo')}
+                      className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs text-gray-200 group-hover:text-white"
+                    >
+                      <MessageCircle size={14} />
+                      {t('pages.contact.zalo.zaloButton')}
+                    </button>
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:gap-6">
-                <div 
+                <div
                   className="relative bg-white/5 rounded-none p-5 border border-white/10 group"
-        data-aos="fade-up"
+                  data-aos="fade-up"
                   data-aos-delay="300"
                 >
                   <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#CCCCFF]/40"></div>
                   <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#CCCCFF]/40"></div>
                   <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#CCCCFF]/40"></div>
                   <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#CCCCFF]/40"></div>
-                  
+
                   <div className="absolute top-6 left-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse"></div>
                   <div className="absolute bottom-6 right-6 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
                   <div className="absolute top-1/2 left-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
@@ -199,7 +192,7 @@ export default function ContactPage() {
                     <p className="text-xs md:text-sm text-gray-300 mb-4">
                       {t('pages.contact.home.description')}
                     </p>
-                    <Link 
+                    <Link
                       href="/"
                       className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-[#CCCCFF]/30 hover:bg-white/10 transition-all text-xs md:text-sm text-gray-200 group-hover:text-white"
                     >
@@ -219,11 +212,11 @@ export default function ContactPage() {
       </div>
 
       {qrModal.open && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
           onClick={closeQrModal}
         >
-          <div 
+          <div
             className="relative bg-white/10 border border-white/20 p-6 max-w-md w-full mx-4"
             onClick={(e) => e.stopPropagation()}
           >
@@ -231,29 +224,29 @@ export default function ContactPage() {
             <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#CCCCFF]/40"></div>
             <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#CCCCFF]/40"></div>
             <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#CCCCFF]/40"></div>
-            
+
             <button
               onClick={closeQrModal}
               className="absolute top-4 right-4 text-white hover:text-[#CCCCFF] transition-colors"
             >
               <X size={20} />
             </button>
-            
+
             <h3 className="text-lg font-bold text-white mb-4 text-center">
-              {qrModal.platform === 'telegram' ? t('pages.contact.telegram.telegramQrTitle') : t('pages.contact.telegram.zaloQrTitle')}
+              {qrModal.platform === 'telegram' ? t('pages.contact.telegram.telegramQrTitle') : t('pages.contact.zalo.zaloQrTitle')}
             </h3>
-            
+
             <div className="flex justify-center">
               <div className="relative w-80 h-80 md:w-96 md:h-96 bg-white/5 border border-white/10 p-4">
-                <img 
-                  src={qrModal.image} 
+                <img
+                  src={qrModal.image}
                   alt={`${qrModal.platform} QR Code`}
                   className="w-full h-full object-contain"
                 />
               </div>
             </div>
-      </div>
-    </div>
+          </div>
+        </div>
       )}
     </>
   );

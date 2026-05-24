@@ -252,17 +252,16 @@
       "header": "Contact",
       "headerEmoji": "(b ᵔ▽ᵔ)b",
       "welcomeText": "Thank you for visiting my website. If you want to contact me, please use the information below!",
-      "email": {
-        "title": "Email",
-        "address": "bao96065@gmail.com",
-        "action": "Send me an email"
-      },
       "telegram": {
-        "title": "Telegram / Zalo",
-        "description": "Connect with me via QR code",
-        "telegramButton": "Telegram",
-        "zaloButton": "Zalo",
-        "telegramQrTitle": "Telegram QR Code",
+        "title": "Telegram",
+        "description": "Connect with me via Telegram",
+        "telegramButton": "Scan Telegram QR",
+        "telegramQrTitle": "Telegram QR Code"
+      },
+      "zalo": {
+        "title": "Zalo",
+        "description": "Connect with me via Zalo",
+        "zaloButton": "Scan Zalo QR",
         "zaloQrTitle": "Zalo QR Code"
       },
       "home": {

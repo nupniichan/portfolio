@@ -67,23 +67,56 @@
         "database": "Cơ sở dữ liệu",
         "programming": {
           "title": "Ngôn ngữ lập trình",
-          "items": ["C#", "JavaScript", "TypeScript", "Python", "HTML", "CSS", "SQL"]
+          "items": [
+            "C#",
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "HTML",
+            "CSS",
+            "SQL"
+          ]
         },
         "frameworks": {
           "title": "Frameworks & Libraries",
-          "items": [".NET", "ASP.NET MVC", "Next.js", "React", "Node.js", "Entity Framework"]
+          "items": [
+            ".NET",
+            "ASP.NET MVC",
+            "Next.js",
+            "React",
+            "Node.js",
+            "Entity Framework"
+          ]
         },
         "tools": {
           "title": "Công cụ & Công nghệ",
-          "items": ["Git", "Docker", "Visual Studio", "VS Code", "Postman", "Jira"]
+          "items": [
+            "Git",
+            "Docker",
+            "Visual Studio",
+            "VS Code",
+            "Postman",
+            "Jira"
+          ]
         },
         "cloud": {
           "title": "Cloud & Services",
-          "items": ["Azure", "AWS", "RESTful API", "SSO", "Email Services"]
+          "items": [
+            "Azure",
+            "AWS",
+            "RESTful API",
+            "SSO",
+            "Email Services"
+          ]
         },
         "devops": {
           "title": "DevOps",
-          "items": ["Kubernetes", "CI/CD", "Linux", "Shell Scripting"]
+          "items": [
+            "Kubernetes",
+            "CI/CD",
+            "Linux",
+            "Shell Scripting"
+          ]
         }
       },
       "toolDetails": {
@@ -112,9 +145,18 @@
       "futureLearning": {
         "title": "Dự định học tập",
         "items": [
-          { "title": "AI & Machine Learning", "description": "Học và khám phá cách tạo ra AI" },
-          { "title": "Cloud Architecture", "description": "Thuộc hệ sinh thái AWS / Azure" },
-          { "title": "DevOps", "description": "DevOps Tools & CI/CD" }
+          {
+            "title": "AI & Machine Learning",
+            "description": "Học và khám phá cách tạo ra AI"
+          },
+          {
+            "title": "Cloud Architecture",
+            "description": "Thuộc hệ sinh thái AWS / Azure"
+          },
+          {
+            "title": "DevOps",
+            "description": "DevOps Tools & CI/CD"
+          }
         ]
       }
     },
@@ -128,32 +170,62 @@
         "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
           "description": "Nhân viên dễ thương tại server discord CafeDeNup của mình được phát triển bằng C# và Python.",
-          "tags": ["C#", "Python", "Discord", ".NET"]
+          "tags": [
+            "C#",
+            "Python",
+            "Discord",
+            ".NET"
+          ]
         },
         "website-ban-linh-kien": {
           "title": "Website bán linh kiện",
           "description": "Một trang web bán linh kiện được phát triển bằng C# cùng với các framework hiện đại với nhiều tính năng hay ho.",
-          "tags": ["C#", "HTML", "JavaScript", ".NET"]
+          "tags": [
+            "C#",
+            "HTML",
+            "JavaScript",
+            ".NET"
+          ]
         },
         "cs-anilist": {
           "title": "CS-AniList API",
           "description": "Một wrapper C# cho API AniList, giúp bạn lấy thông tin anime và manga từ Anilist và sử dụng trong các ứng dụng .NET.",
-          "tags": ["C#", "API", ".NET", "Library"]
+          "tags": [
+            "C#",
+            "API",
+            ".NET",
+            "Library"
+          ]
         },
         "chinokafuu": {
           "title": "Chino Kafuu",
           "description": "Dự án mình muốn làm từ rất lâu, lấy cảm hứng từ Neuro-sama. Bạn có thể trò chuyện real-time với Chino Kafuu, và mình muốn để Chino có thể tương tác với mình thông qua Discord, API, VTuber,...",
-          "tags": ["Python", "AI", "LLM", "STT/TTS", "RVC" ]
+          "tags": [
+            "Python",
+            "AI",
+            "LLM",
+            "STT/TTS",
+            "RVC"
+          ]
         },
         "csteam-works": {
           "title": "CSteam-Works",
           "description": "Một wrapper C# cho API Steam, cho phép bạn lấy các data đơn giản từ steam về và sử dụng trong các ứng dụng .NET.",
-          "tags": ["C#", "Steam", "API", "Gaming"]
+          "tags": [
+            "C#",
+            "Steam",
+            "API",
+            "Gaming"
+          ]
         },
         "portfolio": {
           "title": "Trang web cá nhân",
           "description": "Trang web cá nhân được của mình được nâng cấp và phát triển bằng Next.js và Tailwind CSS",
-          "tags": ["Next.js", "Tailwind CSS", "Portfolio"]
+          "tags": [
+            "Next.js",
+            "Tailwind CSS",
+            "Portfolio"
+          ]
         }
       },
       "moreProjects": "Và các dự án khác tại",
@@ -253,17 +325,16 @@
       "header": "Liên Hệ",
       "headerEmoji": "(b ᵔ▽ᵔ)b",
       "welcomeText": "Cảm ơn bạn đã ghé thăm trang web của mình. Nếu bạn muốn liên hệ, hãy sử dụng các thông tin bên dưới nhé!",
-      "email": {
-        "title": "Email",
-        "address": "bao96065@gmail.com",
-        "action": "Gửi email cho mình"
-      },
       "telegram": {
-        "title": "Telegram / Zalo",
-        "description": "Kết nối với mình qua mã QR",
-        "telegramButton": "Telegram",
-        "zaloButton": "Zalo",
-        "telegramQrTitle": "Mã QR Telegram",
+        "title": "Telegram",
+        "description": "Liên hệ mình qua Telegram",
+        "telegramButton": "Quét QR Telegram",
+        "telegramQrTitle": "Mã QR Telegram"
+      },
+      "zalo": {
+        "title": "Zalo",
+        "description": "Liên hệ mình qua Zalo",
+        "zaloButton": "Quét QR Zalo",
         "zaloQrTitle": "Mã QR Zalo"
       },
       "home": {
