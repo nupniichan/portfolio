@@ -3,13 +3,13 @@
 import { useTranslations } from "../hooks/useTranslations";
 import MetadataUpdater from "../components/MetadataUpdater";
 import CardParticles from "../components/CardParticles";
-import { 
-  Server, 
-  Database, 
-  Wrench, 
-  Globe, 
-  Terminal, 
-  Layout, 
+import {
+  Server,
+  Database,
+  Wrench,
+  Globe,
+  Terminal,
+  Layout,
   GitBranch,
   Cloud,
   BookOpen
@@ -43,7 +43,7 @@ export default function SkillsPage() {
       Icon: Server,
       skills: [
         { name: "C#", level: 92 },
-        { name: "Node.js", level: 55 },
+        { name: "Node.js", level: 45 },
         { name: "Python", level: 70 },
       ]
     },
@@ -52,9 +52,9 @@ export default function SkillsPage() {
       title: t('pages.skills.categories.database'),
       Icon: Database,
       skills: [
-        { name: "MySQL", level: 70 },
+        { name: "MySQL", level: 75 },
         { name: "SQL Server", level: 80 },
-        { name: "PostgreSQL", level: 40 },
+        { name: "PostgreSQL", level: 20 },
         { name: "MongoDB", level: 50 },
       ]
     }
@@ -68,19 +68,19 @@ export default function SkillsPage() {
   ];
 
   const languages = [
-    { 
-      name: t('pages.skills.languages.vietnamese.name'), 
-      level: 99.9, 
-      description: t('pages.skills.languages.vietnamese.description'), 
+    {
+      name: t('pages.skills.languages.vietnamese.name'),
+      level: 99.9,
+      description: t('pages.skills.languages.vietnamese.description'),
       badges: [t('pages.skills.languages.vietnamese.badge1'), t('pages.skills.languages.vietnamese.badge2')],
-      flag: withBasePath("/Images/CountryFlag/Flag_of_VietNam.png") 
+      flag: withBasePath("/Images/CountryFlag/Flag_of_VietNam.png")
     },
-    { 
-      name: t('pages.skills.languages.english.name'), 
-      level: 75, 
-      description: t('pages.skills.languages.english.description'), 
+    {
+      name: t('pages.skills.languages.english.name'),
+      level: 75,
+      description: t('pages.skills.languages.english.description'),
       badges: [t('pages.skills.languages.english.badge1'), t('pages.skills.languages.english.badge2')],
-      flag: withBasePath("/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.png") 
+      flag: withBasePath("/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.png")
     },
   ];
 
@@ -111,7 +111,7 @@ export default function SkillsPage() {
             <div className="absolute top-1/2 right-0 w-1 h-20 bg-linear-to-b from-transparent via-[#CCCCFF]/20 to-transparent translate-x-4 z-10"></div>
 
             <div className="skills-section p-2 md:p-6 lg:p-8 relative z-10">
-              <div 
+              <div
                 className="skills-header mb-8 relative border-b border-white/10 pb-4"
                 data-aos="fade-down"
               >
@@ -122,8 +122,8 @@ export default function SkillsPage() {
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
                     <div className="flex gap-1.5">
                       {[...Array(5)].map((_, i) => (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           className="w-1.5 h-1.5 bg-[#CCCCFF]/40 rounded-full"
                           style={{ animation: `pulse 1.5s infinite ${i * 0.1}s` }}
                         ></div>
@@ -137,8 +137,8 @@ export default function SkillsPage() {
                 <div className="lg:col-span-8 flex flex-col gap-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {skillCategories.map((category, idx) => (
-                      <div 
-                        key={category.id} 
+                      <div
+                        key={category.id}
                         className={`bg-white/5 border border-white/10 p-5 relative overflow-hidden group ${category.id === 'database' ? 'md:col-span-2' : ''}`}
                         data-aos="fade-up"
                         data-aos-delay={100 * (idx + 1)}
@@ -146,11 +146,11 @@ export default function SkillsPage() {
                         <div className="absolute top-2 left-2 w-2 h-2 bg-[#CCCCFF]/30 rounded-full animate-pulse" style={{ animationDelay: `${idx * 0.2}s` }}></div>
                         <div className="absolute bottom-2 right-2 w-1.5 h-1.5 bg-[#CCCCFF]/40 rounded-full"></div>
                         <div className="absolute top-1/2 left-0 w-0.5 h-8 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
-                        
+
                         <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
                           <category.Icon size={64} className="text-[#CCCCFF]" />
                         </div>
-                        
+
                         <div className="flex items-center gap-3 mb-4">
                           <div className="p-2 bg-[#CCCCFF]/10 rounded-lg text-[#CCCCFF]">
                             <category.Icon size={20} />
@@ -166,7 +166,7 @@ export default function SkillsPage() {
                                 <span className="text-[#CCCCFF]">{skill.level}%</span>
                               </div>
                               <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div 
+                                <div
                                   className="h-full bg-linear-to-r from-[#CCCCFF]/60 to-[#CCCCFF] rounded-full relative"
                                   style={{ width: mounted ? `${skill.level}%` : '0%', transition: 'width 1s ease-out 0.2s' }}
                                 >
@@ -184,15 +184,15 @@ export default function SkillsPage() {
                     <div className="absolute top-4 right-4 w-16 h-16 border border-[#CCCCFF]/10 rounded-full"></div>
                     <div className="absolute bottom-4 left-4 w-12 h-12 border border-[#CCCCFF]/10 rotate-45"></div>
                     <div className="absolute top-1/2 right-8 w-1 h-12 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
-                    
+
                     <div className="flex items-center gap-3 mb-6">
                       <Wrench className="text-[#CCCCFF]" size={20} />
                       <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.toolDetails.title')}</h3>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {tools.map((tool, idx) => (
-                        <div 
+                        <div
                           key={idx}
                           className="group relative bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#CCCCFF]/30 p-4 transition-all duration-300 flex flex-col items-center text-center gap-3"
                         >
@@ -213,7 +213,7 @@ export default function SkillsPage() {
                 </div>
 
                 <div className="lg:col-span-4 flex flex-col gap-6">
-                   <div 
+                  <div
                     className="bg-white/5 border border-white/10 p-5 md:p-6 relative"
                     data-aos="fade-left"
                     data-aos-delay="200"
@@ -222,7 +222,7 @@ export default function SkillsPage() {
                     <div className="absolute top-6 left-6 w-3 h-3 border border-[#CCCCFF]/20 rotate-45"></div>
                     <div className="absolute bottom-6 right-6 w-2 h-2 bg-[#CCCCFF]/30 rounded-full animate-pulse"></div>
                     <div className="absolute top-1/4 left-0 w-0.5 h-16 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
-                    
+
                     <div className="flex items-center gap-3 mb-8">
                       <Globe className="text-[#CCCCFF]" size={20} />
                       <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.languages.title')}</h3>
@@ -233,8 +233,8 @@ export default function SkillsPage() {
                         <div key={idx} className="relative group">
                           <div className="flex items-center gap-4 mb-3">
                             <div className="relative w-8 h-6 filter transition-all duration-300 transform group-hover:scale-110">
-                              <Image 
-                                src={lang.flag} 
+                              <Image
+                                src={lang.flag}
                                 alt={`${lang.name} flag`}
                                 fill
                                 className="object-cover rounded-sm"
@@ -246,23 +246,23 @@ export default function SkillsPage() {
                               <p className="text-xs text-[#CCCCFF]">{lang.description}</p>
                             </div>
                           </div>
-                          
+
                           <div className="relative pt-1">
                             <div className="flex justify-between mb-1">
                               <span className="text-[10px] uppercase tracking-wider text-gray-400">{t('pages.skills.languages.proficiency')}</span>
                               <span className="text-[10px] font-bold text-white">{lang.level}%</span>
                             </div>
                             <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                              <div 
+                              <div
                                 className="h-full bg-linear-to-r from-[#CCCCFF] to-[#a3a3ff]"
                                 style={{ width: mounted ? `${lang.level}%` : '0%', transition: 'width 1s ease-out 0.5s' }}
                               ></div>
                             </div>
-                            
+
                             <div className="flex gap-2 mt-3">
                               {lang.badges.map((badge, bIdx) => (
-                                <span 
-                                  key={bIdx} 
+                                <span
+                                  key={bIdx}
                                   className="text-[10px] px-2 py-0.5 border border-[#CCCCFF]/30 text-[#CCCCFF] rounded-sm bg-[#CCCCFF]/5"
                                 >
                                   {badge}
@@ -275,7 +275,7 @@ export default function SkillsPage() {
                     </div>
                   </div>
 
-                  <div 
+                  <div
                     className="bg-white/5 border border-white/10 p-5 md:p-6 relative"
                     data-aos="fade-left"
                     data-aos-delay="300"
@@ -283,7 +283,7 @@ export default function SkillsPage() {
                     <div className="absolute top-0 left-0 w-20 h-20 border border-[#CCCCFF]/10 rounded-full -translate-x-8 -translate-y-8"></div>
                     <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#CCCCFF]/20 rotate-45"></div>
                     <div className="absolute top-1/2 left-4 w-8 h-0.5 bg-linear-to-r from-[#CCCCFF]/20 to-transparent"></div>
-                    
+
                     <div className="flex items-center gap-3 mb-6">
                       <BookOpen className="text-[#CCCCFF]" size={20} />
                       <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.futureLearning.title')}</h3>
@@ -291,7 +291,7 @@ export default function SkillsPage() {
 
                     <div className="space-y-4">
                       {Array.isArray(futurePlans) && futurePlans.map((plan, idx) => (
-                        <div 
+                        <div
                           key={idx}
                           className="group p-3 bg-white/5 border border-white/5 hover:border-[#CCCCFF]/30 transition-all duration-300"
                         >
