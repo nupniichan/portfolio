@@ -1,7 +1,6 @@
 {
   "home": {
     "greeting": "Hi, I'm Nguyen Phi Quoc Bao",
-    "connect": "Connect with me ⸜(｡˃ ᵕ ˂ )⸝♡",
     "status": "Active"
   },
   "navigation": {
@@ -66,23 +65,56 @@
         "database": "Database",
         "programming": {
           "title": "Programming Languages",
-          "items": ["C#", "JavaScript", "TypeScript", "Python", "HTML", "CSS", "SQL"]
+          "items": [
+            "C#",
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "HTML",
+            "CSS",
+            "SQL"
+          ]
         },
         "frameworks": {
           "title": "Frameworks & Libraries",
-          "items": [".NET", "ASP.NET MVC", "Next.js", "React", "Node.js", "Entity Framework"]
+          "items": [
+            ".NET",
+            "ASP.NET MVC",
+            "Next.js",
+            "React",
+            "Node.js",
+            "Entity Framework"
+          ]
         },
         "tools": {
           "title": "Tools & Technologies",
-          "items": ["Git", "Docker", "Visual Studio", "VS Code", "Postman", "Jira"]
+          "items": [
+            "Git",
+            "Docker",
+            "Visual Studio",
+            "VS Code",
+            "Postman",
+            "Jira"
+          ]
         },
         "cloud": {
           "title": "Cloud & Services",
-          "items": ["Azure", "AWS", "RESTful API", "SSO", "Email Services"]
+          "items": [
+            "Azure",
+            "AWS",
+            "RESTful API",
+            "SSO",
+            "Email Services"
+          ]
         },
         "devops": {
           "title": "DevOps",
-          "items": ["Kubernetes", "CI/CD", "Linux", "Shell Scripting"]
+          "items": [
+            "Kubernetes",
+            "CI/CD",
+            "Linux",
+            "Shell Scripting"
+          ]
         }
       },
       "toolDetails": {
@@ -111,9 +143,18 @@
       "futureLearning": {
         "title": "Study Plans",
         "items": [
-          { "title": "AI & Machine Learning", "description": "Learning and exploring how to create AI " },
-          { "title": "Cloud Architecture", "description": "AWS / Azure Ecosystem" },
-          { "title": "DevOps", "description": "DevOps Tools & CI/CD" }
+          {
+            "title": "AI & Machine Learning",
+            "description": "Learning and exploring how to create AI "
+          },
+          {
+            "title": "Cloud Architecture",
+            "description": "AWS / Azure Ecosystem"
+          },
+          {
+            "title": "DevOps",
+            "description": "DevOps Tools & CI/CD"
+          }
         ]
       }
     },
@@ -127,32 +168,62 @@
         "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
           "description": "A cute employee at CafeDeNup discord server developed by using C# and Python",
-          "tags": ["C#", "Python", "Discord", ".NET"]
+          "tags": [
+            "C#",
+            "Python",
+            "Discord",
+            ".NET"
+          ]
         },
         "website-ban-linh-kien": {
           "title": "Parts Sales Website",
           "description": "A parts sales website developed with C# along with modern frameworks with a lots of features",
-          "tags": ["C#", "HTML", "JavaScript", ".NET"]
+          "tags": [
+            "C#",
+            "HTML",
+            "JavaScript",
+            ".NET"
+          ]
         },
         "cs-anilist": {
           "title": "CS-AniList API",
           "description": "A C# wrapper for the AniList API, helping you get anime and manga information from Anilist for use in .NET applications.",
-          "tags": ["C#", "API", ".NET", "Library"]
+          "tags": [
+            "C#",
+            "API",
+            ".NET",
+            "Library"
+          ]
         },
         "chinokafuu": {
           "title": "Chino Kafuu",
           "description": "An LLM-powered real-time AI character system inspired by Neuro-sama, focused on personality consistency, emotion, voice, and VTuber-style interaction using local/OpenRouter LLMs.",
-          "tags": ["Python", "AI", "LLM", "STT/TTS","RVC"]
+          "tags": [
+            "Python",
+            "AI",
+            "LLM",
+            "STT/TTS",
+            "RVC"
+          ]
         },
         "csteam-works": {
           "title": "CSteam-Works",
           "description": "A C# wrapper for the Steam API, allowing you to fetch simple steam data for use in .NET applications.",
-          "tags": ["C#", "Steam", "API", "Gaming"]
+          "tags": [
+            "C#",
+            "Steam",
+            "API",
+            "Gaming"
+          ]
         },
         "portfolio": {
           "title": "Portfolio",
           "description": "My personal website upgraded and developed by using Next.js and Tailwind CSS",
-          "tags": ["Next.js", "Tailwind CSS", "Portfolio"]
+          "tags": [
+            "Next.js",
+            "Tailwind CSS",
+            "Portfolio"
+          ]
         }
       },
       "moreProjects": "And other projects at",
