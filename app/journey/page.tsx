@@ -83,7 +83,7 @@ export default function EducationWorkPage() {
   return (
     <>
       <MetadataUpdater pageKey="journey" />
-      <div className="flex min-h-screen items-center justify-center p-2 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden">
+      <div className="flex min-h-screen items-center justify-center p-2 sm:p-3 md:p-4 lg:p-6 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-20 left-16 w-32 h-32 bg-[#CCCCFF]/5 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0s', animationDuration: '5s' }}></div>
           <div className="absolute bottom-32 right-20 w-28 h-28 bg-[#CCCCFF]/6 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s', animationDuration: '6s' }}></div>
@@ -94,7 +94,7 @@ export default function EducationWorkPage() {
           <div className="absolute bottom-1/3 right-1/3 w-30 h-30 bg-linear-to-tl from-[#CCCCFF]/6 to-transparent rounded-full blur-lg" style={{ animation: 'floating 8s ease-in-out infinite', animationDelay: '1.5s' }}></div>
         </div>
 
-        <div className="w-full max-w-[95%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] xl:max-w-[70%] 2xl:max-w-[1100px] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
@@ -106,24 +106,22 @@ export default function EducationWorkPage() {
             
             <div className="p-3 sm:p-5 md:p-6 lg:p-8 relative z-10">
               <div 
-                className="mb-8 relative border-b border-white/10 pb-6"
+                className="mb-8 relative border-b border-white/10 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4"
                 data-aos="fade-down"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke flex items-center gap-1 sm:gap-3 whitespace-nowrap">
-                    <GraduationCap className="text-[#CCCCFF] animate-pulse w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke flex items-center gap-1 sm:gap-3 whitespace-nowrap">
+                    <GraduationCap className="text-[#CCCCFF] animate-pulse w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
                     {t('pages.journey.header')} 
                     <span className="animate-kaomoji ml-1 sm:ml-2 inline-block text-[#CCCCFF]">{t('pages.journey.headerEmoji')}</span>
-                  </h1>
-                </div>
+                  </h2>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-8 space-y-6 md:space-y-8">
-                  <h2 className="text-base sm:text-lg font-bold text-white mb-4 md:mb-6 flex items-center gap-2 sm:gap-4" data-aos="fade-right">
+                  <h3 className="text-sm sm:text-base font-bold text-white mb-4 md:mb-6 flex items-center gap-2 sm:gap-4" data-aos="fade-right">
                     <span className="w-6 sm:w-8 h-px bg-[#CCCCFF]"></span>
                     {t('pages.journey.timelineTitle')}
-                  </h2>
+                  </h3>
 
                   <div 
                     ref={timelineRef}
@@ -173,7 +171,7 @@ export default function EducationWorkPage() {
                             </span>
                           </div>
 
-                          <h3 className="text-lg font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors">
+                          <h3 className="text-sm sm:text-base font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors">
                             {t(`pages.journey.items.${item.key}.title`)}
                           </h3>
                           

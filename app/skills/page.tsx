@@ -100,7 +100,7 @@ export default function SkillsPage() {
           <div className="absolute bottom-1/3 right-1/3 w-28 h-28 bg-linear-to-tl from-[#CCCCFF]/8 to-transparent rounded-full blur-lg" style={{ animation: 'floating 8s ease-in-out infinite', animationDelay: '1.5s' }}></div>
         </div>
 
-        <div className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-[1200px] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
@@ -112,13 +112,12 @@ export default function SkillsPage() {
 
             <div className="skills-section p-2 md:p-6 lg:p-8 relative z-10">
               <div
-                className="skills-header mb-8 relative border-b border-white/10 pb-4"
+                className="skills-header mb-8 relative border-b border-white/10 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4"
                 data-aos="fade-down"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white text-stroke">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
                     {t('pages.skills.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.skills.headerEmoji')}</span>
-                  </h1>
+                  </h2>
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
                     <div className="flex gap-1.5">
                       {[...Array(5)].map((_, i) => (
@@ -130,7 +129,6 @@ export default function SkillsPage() {
                       ))}
                     </div>
                   </div>
-                </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
@@ -155,7 +153,7 @@ export default function SkillsPage() {
                           <div className="p-2 bg-[#CCCCFF]/10 rounded-lg text-[#CCCCFF]">
                             <category.Icon size={20} />
                           </div>
-                          <h3 className="text-lg font-bold text-white">{category.title}</h3>
+                          <h3 className="text-sm sm:text-base font-bold text-white">{category.title}</h3>
                         </div>
 
                         <div className="space-y-4">
@@ -187,7 +185,7 @@ export default function SkillsPage() {
 
                     <div className="flex items-center gap-3 mb-6">
                       <Wrench className="text-[#CCCCFF]" size={20} />
-                      <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.toolDetails.title')}</h3>
+                      <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider">{t('pages.skills.toolDetails.title')}</h3>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -225,7 +223,7 @@ export default function SkillsPage() {
 
                     <div className="flex items-center gap-3 mb-8">
                       <Globe className="text-[#CCCCFF]" size={20} />
-                      <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.languages.title')}</h3>
+                      <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider">{t('pages.skills.languages.title')}</h3>
                     </div>
 
                     <div className="space-y-8">
@@ -242,7 +240,7 @@ export default function SkillsPage() {
                               />
                             </div>
                             <div>
-                              <h4 className="font-bold text-white">{lang.name}</h4>
+                              <h4 className="text-xs sm:text-sm font-bold text-white">{lang.name}</h4>
                               <p className="text-xs text-[#CCCCFF]">{lang.description}</p>
                             </div>
                           </div>
@@ -286,7 +284,7 @@ export default function SkillsPage() {
 
                     <div className="flex items-center gap-3 mb-6">
                       <BookOpen className="text-[#CCCCFF]" size={20} />
-                      <h3 className="text-lg font-bold text-white uppercase tracking-wider">{t('pages.skills.futureLearning.title')}</h3>
+                      <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider">{t('pages.skills.futureLearning.title')}</h3>
                     </div>
 
                     <div className="space-y-4">
@@ -295,7 +293,7 @@ export default function SkillsPage() {
                           key={idx}
                           className="group p-3 bg-white/5 border border-white/5 hover:border-[#CCCCFF]/30 transition-all duration-300"
                         >
-                          <h4 className="font-bold text-white text-sm mb-1 group-hover:text-[#CCCCFF] transition-colors">
+                          <h4 className="font-bold text-white text-xs sm:text-sm mb-1 group-hover:text-[#CCCCFF] transition-colors">
                             {plan.title}
                           </h4>
                           <p className="text-xs text-gray-400">

@@ -31,7 +31,7 @@ export default function AboutMePage() {
           <div className="absolute bottom-1/4 left-1/3 w-34 h-34 bg-linear-to-tl from-[#CCCCFF]/6 to-transparent rounded-full blur-lg" style={{ animation: 'floating 9s ease-in-out infinite', animationDelay: '2s' }}></div>
         </div>
 
-        <div className="w-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] xl:max-w-[70%] 2xl:max-w-[1100px] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
@@ -43,13 +43,12 @@ export default function AboutMePage() {
 
             <div className="about-section p-2 md:p-4 lg:p-6 relative z-10">
               <div 
-                className="about-header mb-6 relative border-b border-white/10 pb-4"
+                className="about-header mb-6 relative border-b border-white/10 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4"
                 data-aos="fade-down"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white text-stroke">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
                     {t('pages.about.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.about.headerEmoji')}</span>
-                  </h1>
+                  </h2>
                   
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
                     <div className="flex gap-1.5">
@@ -62,7 +61,6 @@ export default function AboutMePage() {
                       ))}
                     </div>
                   </div>
-                </div>
               </div>
 
               <div className="about-content grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
@@ -111,7 +109,7 @@ export default function AboutMePage() {
                       </div>
                     </div>
                     
-                    <h2 className="text-lg md:text-xl font-bold text-white mb-1">
+                    <h2 className="text-base md:text-lg font-bold text-white mb-1">
                       {t('pages.about.profileName')}
                     </h2>
                     <p className="text-xs md:text-sm font-medium tracking-widest text-[#CCCCFF]/80 italic">
@@ -168,7 +166,7 @@ export default function AboutMePage() {
                     <div className="absolute top-1/4 left-0 w-0.5 h-12 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
                     <div className="absolute bottom-1/4 right-0 w-0.5 h-12 bg-linear-to-b from-transparent via-[#CCCCFF]/10 to-transparent"></div>
 
-                    <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-4">
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-6 flex items-center gap-4">
                       <span className="w-8 h-px bg-[#CCCCFF]"></span>
                       {t('pages.about.introTitle')}
                     </h3>

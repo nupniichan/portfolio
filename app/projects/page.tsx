@@ -143,7 +143,7 @@ export default function ProjectsPage() {
           <div className="absolute bottom-1/4 left-1/2 w-32 h-32 bg-linear-to-tl from-[#CCCCFF]/6 to-transparent rounded-full blur-lg" style={{ animation: 'floating 7s ease-in-out infinite', animationDelay: '2s' }}></div>
         </div>
 
-        <div className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-[1100px] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
@@ -155,17 +155,15 @@ export default function ProjectsPage() {
 
             <div className="about-section p-2 md:p-4 lg:p-5 relative z-10">
               <div 
-                className="about-header mb-4 relative border-b border-white/10 pb-3"
+                className="about-header mb-4 relative border-b border-white/10 pb-3 flex flex-col sm:flex-row items-center justify-between gap-3"
                 data-aos="fade-down"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white text-stroke">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
                     {t('pages.projects.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.projects.headerEmoji')}</span>
-                  </h1>
+                  </h2>
                   <p className="text-[11px] md:text-xs text-gray-400 max-w-md text-center sm:text-right italic">
                     {t('pages.projects.description')}
                   </p>
-                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">

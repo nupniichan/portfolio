@@ -47,7 +47,7 @@ export default function ContactPage() {
           <div className="absolute bottom-1/4 left-1/3 w-34 h-34 bg-linear-to-tl from-[#CCCCFF]/6 to-transparent rounded-full blur-lg" style={{ animation: 'floating 9s ease-in-out infinite', animationDelay: '2s' }}></div>
         </div>
 
-        <div className="w-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] xl:max-w-[70%] 2xl:max-w-[1100px] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
@@ -59,25 +59,23 @@ export default function ContactPage() {
 
             <div className="p-2 md:p-4 lg:p-6 relative z-10">
               <div
-                className="mb-6 relative border-b border-white/10 pb-4"
+                className="mb-6 relative border-b border-white/10 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4"
                 data-aos="fade-down"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white text-stroke">
-                    <Mail size={20} className="inline mr-2 text-[#CCCCFF]" />
-                    {t('pages.contact.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.contact.headerEmoji')}</span>
-                  </h1>
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
+                  <Mail size={20} className="inline mr-2 text-[#CCCCFF]" />
+                  {t('pages.contact.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.contact.headerEmoji')}</span>
+                </h2>
 
-                  <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
-                    <div className="flex gap-1.5">
-                      {[...Array(3)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-1 h-1 bg-[#CCCCFF]/30 rotate-45"
-                          style={{ animation: `pulse 2s infinite ${i * 0.2}s` }}
-                        ></div>
-                      ))}
-                    </div>
+                <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
+                  <div className="flex gap-1.5">
+                    {[...Array(3)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-1 h-1 bg-[#CCCCFF]/30 rotate-45"
+                        style={{ animation: `pulse 2s infinite ${i * 0.2}s` }}
+                      ></div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -113,7 +111,7 @@ export default function ContactPage() {
                     <div className="w-16 h-16 rounded-full bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 flex items-center justify-center mb-4 group-hover:bg-[#CCCCFF]/20 transition-colors">
                       <MessageCircle size={24} className="text-[#CCCCFF]" />
                     </div>
-                    <h3 className="text-base md:text-lg font-bold text-white mb-2">
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-2">
                       {t('pages.contact.telegram.title')}
                     </h3>
                     <p className="text-xs md:text-sm text-gray-300 mb-4">
@@ -149,7 +147,7 @@ export default function ContactPage() {
                     <div className="w-16 h-16 rounded-full bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 flex items-center justify-center mb-4 group-hover:bg-[#CCCCFF]/20 transition-colors">
                       <MessageCircle size={24} className="text-[#CCCCFF]" />
                     </div>
-                    <h3 className="text-base md:text-lg font-bold text-white mb-2">
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-2">
                       {t('pages.contact.zalo.title')}
                     </h3>
                     <p className="text-xs md:text-sm text-gray-300 mb-4">
@@ -186,7 +184,7 @@ export default function ContactPage() {
                     <div className="w-16 h-16 rounded-full bg-[#CCCCFF]/10 border border-[#CCCCFF]/30 flex items-center justify-center mb-4 group-hover:bg-[#CCCCFF]/20 transition-colors">
                       <Home size={24} className="text-[#CCCCFF]" />
                     </div>
-                    <h3 className="text-base md:text-lg font-bold text-white mb-2">
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-2">
                       {t('pages.contact.home.title')}
                     </h3>
                     <p className="text-xs md:text-sm text-gray-300 mb-4">
@@ -232,7 +230,7 @@ export default function ContactPage() {
               <X size={20} />
             </button>
 
-            <h3 className="text-lg font-bold text-white mb-4 text-center">
+            <h3 className="text-sm sm:text-base font-bold text-white mb-4 text-center">
               {qrModal.platform === 'telegram' ? t('pages.contact.telegram.telegramQrTitle') : t('pages.contact.zalo.zaloQrTitle')}
             </h3>
 
