@@ -57,7 +57,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="w-full md:w-1/2 flex flex-col justify-start items-center md:items-start space-y-1 md:space-y-2 order-2 md:order-1 mt-2">
+          <div className="w-full md:w-1/2 flex flex-col justify-start items-center md:items-start space-y-2 md:space-y-3 order-2 md:order-1 mt-2">
             <div 
               className="text-center md:text-left text-sm md:text-base lg:text-lg font-bold text-white text-stroke flex items-center gap-2"
               data-aos="fade-up"
@@ -72,19 +72,8 @@ export default function Home() {
               <Typewriter />
             </div>
             <div 
-              className="mt-1.5 md:mt-2"
               data-aos="fade-up"
               data-aos-delay="300"
-            >
-              <p className="text-center md:text-left text-xs md:text-sm lg:text-base font-semibold">
-                <span className="bg-linear-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  {t('home.connect')}
-                </span>
-              </p>
-            </div>
-            <div 
-              data-aos="fade-up"
-              data-aos-delay="400"
             >
               <SocialLinks />
             </div>
