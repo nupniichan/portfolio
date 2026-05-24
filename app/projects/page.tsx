@@ -222,6 +222,7 @@ export default function ProjectsPage() {
                 className="mt-6 pt-5 border-t border-white/10 flex justify-center sm:justify-end items-center gap-2 relative"
                 data-aos="fade-up"
                 data-aos-delay={100 * (projects.length + 1)}
+                data-aos-offset="0"
               >
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-0.5 bg-linear-to-r from-[#CCCCFF]/20 to-transparent"></div>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-0.5 bg-linear-to-l from-[#CCCCFF]/20 to-transparent"></div>
