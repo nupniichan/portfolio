@@ -31,7 +31,7 @@ export default function AboutMePage() {
           <div className="absolute bottom-1/4 left-1/3 w-34 h-34 bg-linear-to-tl from-[#CCCCFF]/6 to-transparent rounded-full blur-lg" style={{ animation: 'floating 9s ease-in-out infinite', animationDelay: '2s' }}></div>
         </div>
 
-        <div className="w-full max-w-[95%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[60%] relative py-8 z-10">
+        <div className="w-full max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] xl:max-w-[75%] relative py-8 z-10">
           <div className="floating-container animate-fade-in-up relative overflow-hidden">
             <CardParticles />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#CCCCFF]/30 -translate-x-2 -translate-y-2 z-10"></div>
