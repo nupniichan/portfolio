@@ -49,7 +49,7 @@
       "interestsTitle": "Interests",
       "interests": {
         "programming": "Programming",
-        "music": "Listening to music",
+        "music": "Listen music",
         "anime": "Watching anime",
         "gaming": "Gaming"
       }
@@ -252,10 +252,10 @@
           "role": "Full-stack Developer"
         },
         "university": {
-          "date": "2022 - March 2026",
+          "date": "2022 - April 2026",
           "title": "Software Engineering",
           "subtitle": "HCMC University of Foreign Languages and Information Technology",
-          "description": "I am currently majoring in Software Engineering with a focus on Software Engineering / Development as well as other skills. I will graduate in March 2026.",
+          "description": "I am currently majoring in Software Engineering with a focus on Software Engineering / Development as well as other skills. I graduated in April 2026.",
           "achievement1": "Excellent Student with GPA 3.7/4.0"
         },
         "highschool": {
