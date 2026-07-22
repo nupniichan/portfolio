@@ -45,14 +45,14 @@
 }
 
 .preloader-stars {
-  opacity: 0;
+  opacity: 0.4;
 }
 
 .preloader-rays {
-  opacity: 0.15;
+  opacity: 0.25;
 }
 
-.preloader-clouds {
+.preloader-light-elements {
   opacity: 1;
 }
 
@@ -83,9 +83,9 @@
 }
 
 .preloader-text {
-  color: #4b4b7c;
+  color: #ffffff;
   font-weight: 600;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 html.theme-dark .preloader-bg-light {
@@ -104,7 +104,7 @@ html.theme-dark .preloader-rays {
   opacity: 0;
 }
 
-html.theme-dark .preloader-clouds {
+html.theme-dark .preloader-light-elements {
   opacity: 0;
 }
 
@@ -145,7 +145,7 @@ html[data-transitions-ready] .preloader-bg-light,
 html[data-transitions-ready] .preloader-bg-dark,
 html[data-transitions-ready] .preloader-stars,
 html[data-transitions-ready] .preloader-rays,
-html[data-transitions-ready] .preloader-clouds {
+html[data-transitions-ready] .preloader-light-elements {
   transition: opacity 500ms ease-in-out;
 }
 
