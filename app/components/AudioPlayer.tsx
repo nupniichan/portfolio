@@ -27,12 +27,12 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
 
   const tracks = useMemo(() => [
     {
-      title: "Encore Dance - MIMI",
-      src: withBasePath("/Musics/Encore dance - MIMI.mp3")
+      title: "Kami no manimani／Rerulili - まるもち部 cover",
+      src: withBasePath("/Musics/Kami no manimani／Rerulili - まるもち部 cover.mp3")
     },
     {
-      title: "Nanatsukaze - Connect the World",
-      src: withBasePath("/Musics/Nanatsukaze - Connect the World.mp3")
+      title: "Encore Dance - MIMI",
+      src: withBasePath("/Musics/Encore dance - MIMI.mp3")
     },
     {
       title: "木もれび青春譜 (Komorebi Seishunfu)",
