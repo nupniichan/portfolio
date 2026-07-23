@@ -116,7 +116,7 @@ export default function SkillsPage() {
                 data-aos="fade-down"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
-                    {t('pages.skills.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.skills.headerEmoji')}</span>
+                    {t('pages.skills.header')}
                   </h2>
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">
                     <div className="flex gap-1.5">

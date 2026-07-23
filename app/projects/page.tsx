@@ -159,7 +159,7 @@ export default function ProjectsPage() {
                 data-aos="fade-down"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
-                    {t('pages.projects.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.projects.headerEmoji')}</span>
+                    {t('pages.projects.header')}
                   </h2>
                   <p className="text-[11px] md:text-xs text-gray-400 max-w-md text-center sm:text-right italic">
                     {t('pages.projects.description')}

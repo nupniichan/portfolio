@@ -47,7 +47,7 @@ export default function AboutMePage() {
                 data-aos="fade-down"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white text-stroke">
-                    {t('pages.about.header')} <span className="animate-kaomoji ml-2 inline-block text-[#CCCCFF]">{t('pages.about.headerEmoji')}</span>
+                    {t('pages.about.header')}
                   </h2>
                   
                   <div className="hidden md:flex items-center gap-4 select-none pointer-events-none">

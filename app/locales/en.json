@@ -37,7 +37,7 @@
       "title": "About me",
       "metaTitle": "About me - nupniichan",
       "header": "A little about me",
-      "headerEmoji": "ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧",
+      "headerEmoji": "",
       "profileName": "Nguyen Phi Quoc Bao",
       "profileTitle": "nupniichan",
       "introTitle": "Introduction",
@@ -58,7 +58,7 @@
       "title": "Skills",
       "metaTitle": "Skills - nupniichan",
       "header": "My Skills",
-      "headerEmoji": "( •̀ ω •́ )✧",
+      "headerEmoji": "",
       "categories": {
         "frontend": "Frontend",
         "backend": "Backend",
@@ -163,7 +163,7 @@
       "metaTitle": "Projects - nupniichan",
       "description": "One of the highlight projects developed and posted on github",
       "header": "My Projects",
-      "headerEmoji": "(っ ᵔ◡ᵔ)っ",
+      "headerEmoji": "",
       "items": {
         "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
@@ -239,7 +239,7 @@
       "title": "Education & Work",
       "metaTitle": "My Journey - nupniichan",
       "header": "My Journey",
-      "headerEmoji": "(๑•̀ㅂ•́)و✧",
+      "headerEmoji": "",
       "timelineTitle": "Timeline",
       "achievementsTitle": "Achievements / Certifications",
       "description": "Details about my educational background and work experience",
@@ -321,7 +321,7 @@
       "metaTitle": "Contact - nupniichan",
       "description": "This is the Contact page. You can put your contact information or a contact form here.",
       "header": "Contact",
-      "headerEmoji": "(b ᵔ▽ᵔ)b",
+      "headerEmoji": "",
       "welcomeText": "Thank you for visiting my website. If you want to contact me, please use the information below!",
       "telegram": {
         "title": "Telegram",

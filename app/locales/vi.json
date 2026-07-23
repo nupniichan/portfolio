@@ -37,7 +37,7 @@
       "title": "Giới thiệu",
       "metaTitle": "Giới thiệu - nupniichan",
       "header": "Một chút về mình",
-      "headerEmoji": "ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧",
+      "headerEmoji": "",
       "profileName": "Nguyễn Phi Quốc Bảo",
       "profileTitle": "nupniichan",
       "introTitle": "Giới thiệu",
@@ -59,7 +59,7 @@
       "metaTitle": "Kỹ năng - nupniichan",
       "description": "Đây là trang Kỹ năng. Bạn có thể thể hiện các kỹ năng kỹ thuật và năng lực của mình ở đây.",
       "header": "Kỹ năng của mình",
-      "headerEmoji": "( •̀ ω •́ )✧",
+      "headerEmoji": "",
       "categories": {
         "frontend": "Frontend",
         "backend": "Backend",
@@ -164,7 +164,7 @@
       "metaTitle": "Dự án - nupniichan",
       "description": "Một số dự án nổi bật được mình làm và đăng tải lên github",
       "header": "Dự án của mình",
-      "headerEmoji": "(っ ᵔ◡ᵔ)っ",
+      "headerEmoji": "",
       "items": {
         "chinokafuu-discord-bot": {
           "title": "Chino Kafuu Discord Bot",
@@ -240,7 +240,7 @@
       "title": "Hành trình",
       "metaTitle": "Hành trình - nupniichan",
       "header": "Hành trình của mình",
-      "headerEmoji": "(๑•̀ㅂ•́)و✧",
+      "headerEmoji": "",
       "timelineTitle": "Timeline",
       "achievementsTitle": "Thành tựu / Chứng chỉ",
       "description": "Thông tin chi tiết về quá trình học tập và làm việc của mình",
@@ -322,7 +322,7 @@
       "metaTitle": "Liên hệ - nupniichan",
       "description": "Cảm ơn bạn đã ghé thăm trang web của mình. Nếu bạn muốn liên hệ, hãy sử dụng các thông tin bên dưới nhé!",
       "header": "Liên Hệ",
-      "headerEmoji": "(b ᵔ▽ᵔ)b",
+      "headerEmoji": "",
       "welcomeText": "Cảm ơn bạn đã ghé thăm trang web của mình. Nếu bạn muốn liên hệ, hãy sử dụng các thông tin bên dưới nhé!",
       "telegram": {
         "title": "Telegram",
