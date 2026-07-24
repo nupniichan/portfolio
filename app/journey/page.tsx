@@ -4,6 +4,7 @@ import { useTranslations } from "../hooks/useTranslations";
 import MetadataUpdater from "../components/MetadataUpdater";
 import { useEffect, useRef, useState } from "react";
 import CardParticles from "../components/CardParticles";
+import { withBasePath } from "../utils/paths";
 import {
   GraduationCap,
   Briefcase,
@@ -53,7 +54,7 @@ export default function EducationWorkPage() {
       key: "work",
       icon: <Briefcase className="text-[#CCCCFF]" size={20} />,
       type: "work",
-      logo: "/Images/Logos/SchneiderElectric.png",
+      logo: withBasePath("/Images/Logos/SchneiderElectric.png"),
       logoFallback: "SE",
       skills: ["ASP.NET MVC", "C#", "SQL Server", "JavaScript", "HTML", "CSS", "REST API"]
     },
@@ -61,14 +62,14 @@ export default function EducationWorkPage() {
       key: "university",
       icon: <GraduationCap className="text-[#CCCCFF]" size={20} />,
       type: "education",
-      logo: "/Images/Logos/Huflit.png",
+      logo: withBasePath("/Images/Logos/Huflit.png"),
       logoFallback: "HUFLIT"
     },
     {
       key: "highschool",
       icon: <School className="text-[#CCCCFF]" size={20} />,
       type: "education",
-      logo: "/Images/Logos/NTT.png",
+      logo: withBasePath("/Images/Logos/NTT.png"),
       logoFallback: "NTT"
     }
   ];
