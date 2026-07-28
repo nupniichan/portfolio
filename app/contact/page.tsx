@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "../hooks/useTranslations";
 import MetadataUpdater from "../components/MetadataUpdater";
 import { Mail, MessageCircle, Home, ArrowRight, X } from "lucide-react";
@@ -17,8 +18,8 @@ export default function ContactPage() {
   });
 
   const qrCodes = {
-    telegram: withBasePath("/Images/QR/telegram-qr.jpg"),
-    zalo: withBasePath("/Images/QR/zalo-qr.jpg")
+    telegram: withBasePath("/Images/QR/telegram-qr.webp"),
+    zalo: withBasePath("/Images/QR/zalo-qr.webp")
   };
 
   const openQrModal = (platform: string) => {
@@ -236,9 +237,11 @@ export default function ContactPage() {
 
             <div className="flex justify-center">
               <div className="relative w-80 h-80 md:w-96 md:h-96 bg-white/5 border border-white/10 p-4">
-                <img
+                <Image
                   src={qrModal.image}
                   alt={`${qrModal.platform} QR Code`}
+                  width={384}
+                  height={384}
                   className="w-full h-full object-contain"
                 />
               </div>

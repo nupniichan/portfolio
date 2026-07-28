@@ -90,7 +90,7 @@ export default function AboutMePage() {
                         
                         <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden p-1 border border-white/10 bg-[#CCCCFF] z-10 flex items-center justify-center">
                         <Image
-                          src={withBasePath("/Images/Avatar/avatar2.png")}
+                          src={withBasePath("/Images/Avatar/avatar2.webp")}
                           alt="Profile Picture"
                           fill
                           sizes="(max-width: 768px) 96px, 112px"

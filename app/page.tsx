@@ -12,7 +12,7 @@ import CardParticles from "./components/CardParticles";
 
 export default function Home() {
   const { t } = useTranslations();
-  const avatarPath = withBasePath("/Images/Avatar/ChinoKafuu.png");
+  const avatarPath = withBasePath("/Images/Avatar/ChinoKafuu.webp");
 
   useEffect(() => {
     const link = document.createElement("link");

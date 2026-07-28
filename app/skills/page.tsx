@@ -23,7 +23,8 @@ export default function SkillsPage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const skillCategories = [
@@ -73,14 +74,14 @@ export default function SkillsPage() {
       level: 99.9,
       description: t('pages.skills.languages.vietnamese.description'),
       badges: [t('pages.skills.languages.vietnamese.badge1'), t('pages.skills.languages.vietnamese.badge2')],
-      flag: withBasePath("/Images/CountryFlag/Flag_of_VietNam.png")
+      flag: withBasePath("/Images/CountryFlag/Flag_of_VietNam.webp")
     },
     {
       name: t('pages.skills.languages.english.name'),
       level: 75,
       description: t('pages.skills.languages.english.description'),
       badges: [t('pages.skills.languages.english.badge1'), t('pages.skills.languages.english.badge2')],
-      flag: withBasePath("/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.png")
+      flag: withBasePath("/Images/CountryFlag/Flag_of_the_United_States_and_United_Kingdom.webp")
     },
   ];
 

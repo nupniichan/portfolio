@@ -5,13 +5,13 @@ import MetadataUpdater from "../components/MetadataUpdater";
 import { useEffect, useRef, useState } from "react";
 import CardParticles from "../components/CardParticles";
 import { withBasePath } from "../utils/paths";
+import Image from "next/image";
 import {
   GraduationCap,
   Briefcase,
   School,
   Trophy,
   Award,
-  Medal,
   Calendar,
   Building2,
   Cpu,
@@ -26,25 +26,27 @@ export default function EducationWorkPage() {
   const [lineProgress, setLineProgress] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (!timelineRef.current) return;
-
-      const rect = timelineRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const startPoint = windowHeight * 0.8;
-      const endPoint = windowHeight * 0.2;
-
-      const totalDist = startPoint - endPoint;
-      const currentPos = startPoint - rect.top;
-
-      let progress = currentPos / rect.height;
-      progress = Math.min(1, Math.max(0, progress));
-
-      setLineProgress(progress);
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          if (timelineRef.current) {
+            const rect = timelineRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const startPoint = windowHeight * 0.8;
+            const currentPos = startPoint - rect.top;
+            let progress = currentPos / rect.height;
+            progress = Math.min(1, Math.max(0, progress));
+            setLineProgress(progress);
+          }
+          ticking = false;
+        });
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -54,7 +56,7 @@ export default function EducationWorkPage() {
       key: "work",
       icon: <Briefcase className="text-[#CCCCFF]" size={20} />,
       type: "work",
-      logo: withBasePath("/Images/Logos/SchneiderElectric.png"),
+      logo: withBasePath("/Images/Logos/SchneiderElectric.webp"),
       logoFallback: "SE",
       skills: ["ASP.NET MVC", "C#", "SQL Server", "JavaScript", "HTML", "CSS", "REST API"]
     },
@@ -62,14 +64,14 @@ export default function EducationWorkPage() {
       key: "university",
       icon: <GraduationCap className="text-[#CCCCFF]" size={20} />,
       type: "education",
-      logo: withBasePath("/Images/Logos/Huflit.png"),
+      logo: withBasePath("/Images/Logos/Huflit.webp"),
       logoFallback: "HUFLIT"
     },
     {
       key: "highschool",
       icon: <School className="text-[#CCCCFF]" size={20} />,
       type: "education",
-      logo: withBasePath("/Images/Logos/NTT.png"),
+      logo: withBasePath("/Images/Logos/NTT.webp"),
       logoFallback: "NTT"
     }
   ];
@@ -193,16 +195,18 @@ export default function EducationWorkPage() {
 
                             {/* Top-Right Logo */}
                             {item.logo && (
-                              <div className="shrink-0 relative group/logo flex items-center justify-center">
-                                <img
+                              <div className="shrink-0 relative group/logo flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14">
+                                <Image
                                   src={item.logo}
                                   alt={t(`pages.journey.items.${item.key}.subtitle`)}
+                                  width={56}
+                                  height={56}
                                   className="w-11 h-11 sm:w-14 sm:h-14 object-contain rounded-xl filter drop-shadow-md transition-transform duration-300 group-hover/logo:scale-110"
                                   onError={(e) => {
                                     const target = e.currentTarget;
-                                    target.style.display = 'none';
+                                    target.style.display = "none";
                                     if (target.nextElementSibling) {
-                                      (target.nextElementSibling as HTMLElement).style.display = 'flex';
+                                      (target.nextElementSibling as HTMLElement).style.display = "flex";
                                     }
                                   }}
                                 />
