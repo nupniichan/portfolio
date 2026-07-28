@@ -7,9 +7,16 @@ export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrolled = window.scrollY > 200;
-      setIsVisible(scrolled);
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          setIsVisible(window.scrollY > 200);
+          ticking = false;
+        });
+      }
     };
 
     handleScroll();
@@ -41,4 +48,5 @@ export default function ScrollToTop() {
     </button>
   );
 }
+
 

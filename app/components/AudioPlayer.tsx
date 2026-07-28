@@ -23,7 +23,7 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
-  const lastDataRef = useRef<Uint8Array | null>(null);
+  const lastDataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
 
   const tracks = useMemo(() => [
     {
@@ -78,14 +78,28 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
     };
   }, []);
 
+  const frequencyBufferRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
+
   useEffect(() => {
     if (!isExpanded) return;
 
     let animationFrameId: number;
-    const renderCanvas = () => {
+    let lastRenderTime = performance.now();
+    const frameInterval = 1000 / 30;
+
+    const renderCanvas = (currentTime: number) => {
+      if (isPlaying) {
+        animationFrameId = requestAnimationFrame(renderCanvas);
+      }
+
+      const elapsed = currentTime - lastRenderTime;
+      if (elapsed < frameInterval) return;
+
+      lastRenderTime = currentTime - (elapsed % frameInterval);
+
       const canvas = canvasRef.current;
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       const width = canvas.width;
@@ -94,11 +108,18 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
 
       const analyser = analyserRef.current;
       const bufferLength = analyser ? analyser.frequencyBinCount : 16;
-      const dataArray = new Uint8Array(bufferLength);
+
+      if (!frequencyBufferRef.current || frequencyBufferRef.current.length !== bufferLength) {
+        frequencyBufferRef.current = new Uint8Array(new ArrayBuffer(bufferLength));
+      }
+      const dataArray = frequencyBufferRef.current;
 
       if (analyser && isPlaying) {
         analyser.getByteFrequencyData(dataArray);
-        lastDataRef.current = new Uint8Array(dataArray);
+        if (!lastDataRef.current || lastDataRef.current.length !== bufferLength) {
+          lastDataRef.current = new Uint8Array(new ArrayBuffer(bufferLength));
+        }
+        lastDataRef.current.set(dataArray);
       } else if (lastDataRef.current) {
         dataArray.set(lastDataRef.current);
       }
@@ -107,7 +128,7 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
       const gap = 3;
       const totalGaps = gap * (barCount - 1);
       const barWidth = Math.max(2, (width - totalGaps) / barCount);
-      const hasRoundRect = typeof ctx.roundRect === 'function';
+      const hasRoundRect = typeof ctx.roundRect === "function";
 
       for (let i = 0; i < barCount; i++) {
         let val = 0;
@@ -116,7 +137,6 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
           const sampleIdx = Math.floor((i / barCount) * (bufferLength * 0.7));
           val = dataArray[sampleIdx] / 255;
         } else {
-          // Idle waveform before playing
           val = 0.08 + 0.07 * Math.sin(i * 0.6);
         }
 
@@ -124,11 +144,10 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
         const x = i * (barWidth + gap);
         const y = height - barHeight;
 
-        // Gradient for visualizer bars matching #CCCCFF
         const gradient = ctx.createLinearGradient(0, y, 0, height);
-        gradient.addColorStop(0, '#FFFFFF');
-        gradient.addColorStop(0.4, '#CCCCFF');
-        gradient.addColorStop(1, isPlaying ? 'rgba(204, 204, 255, 0.3)' : 'rgba(204, 204, 255, 0.18)');
+        gradient.addColorStop(0, "#FFFFFF");
+        gradient.addColorStop(0.4, "#CCCCFF");
+        gradient.addColorStop(1, isPlaying ? "rgba(204, 204, 255, 0.3)" : "rgba(204, 204, 255, 0.18)");
 
         ctx.fillStyle = gradient;
 
@@ -141,13 +160,9 @@ const AudioPlayer = ({ className = '' }: AudioPlayerProps) => {
         }
         ctx.fill();
       }
-
-      if (isPlaying) {
-        animationFrameId = requestAnimationFrame(renderCanvas);
-      }
     };
 
-    renderCanvas();
+    animationFrameId = requestAnimationFrame(renderCanvas);
 
     return () => {
       if (animationFrameId) {

@@ -9,23 +9,23 @@ const translations = {
 };
 
 export function useTranslations() {
-  const { language, mounted } = useThemeLanguage();
+  const { language } = useThemeLanguage();
 
-  const t = useCallback((key: string) => {
-    const currentLang = mounted ? language : "vi";
+  const t = useCallback((key: string): any => {
+    const currentLang = language;
     const keys = key.split('.');
-    let value: any = translations[currentLang];
+    let value: unknown = translations[currentLang];
 
     for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k];
+      if (value && typeof value === 'object' && k in (value as Record<string, unknown>)) {
+        value = (value as Record<string, unknown>)[k];
       } else {
         return key;
       }
     }
 
     return value;
-  }, [language, mounted]);
+  }, [language]);
 
   return { t };
 }

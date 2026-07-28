@@ -13,10 +13,12 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
   const { mounted } = useThemeLanguage();
   const [shouldRender, setShouldRender] = useState(isVisible);
 
+  if (isVisible && !shouldRender) {
+    setShouldRender(true);
+  }
+
   useEffect(() => {
-    if (isVisible) {
-      setShouldRender(true);
-    } else {
+    if (!isVisible) {
       const timer = setTimeout(() => setShouldRender(false), 500);
       return () => clearTimeout(timer);
     }
@@ -148,9 +150,7 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
           </div>
         </div>
 
-        <p className="preloader-text text-lg tracking-wider animate-pulse">
-          {t("loading")}
-        </p>
+        <p className="preloader-text text-lg tracking-wider animate-pulse" />
       </div>
     </div>
   );

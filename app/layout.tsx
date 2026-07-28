@@ -7,7 +7,8 @@ import { withBasePath } from "./utils/paths";
 
 const notoSans = Noto_Sans({
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,12 +21,19 @@ export const metadata: Metadata = {
   },
 };
 
-const THEME_INIT_SCRIPT = `
-  (function initTheme() {
+const INIT_SCRIPT = `
+  (function init() {
     try {
       var savedTheme = localStorage.getItem('portfolio-theme');
       var themeClass = savedTheme === 'dark' ? 'theme-dark' : 'theme-light';
+      document.documentElement.classList.remove('theme-light', 'theme-dark');
       document.documentElement.classList.add(themeClass);
+
+      var savedLang = localStorage.getItem('portfolio-language');
+      if (savedLang === 'en' || savedLang === 'vi') {
+        document.documentElement.setAttribute('lang', savedLang);
+        document.documentElement.setAttribute('data-lang', savedLang);
+      }
     } catch (e) {}
   })();
 `;
@@ -38,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: INIT_SCRIPT }} />
       </head>
       <body className={`${notoSans.className} min-h-screen flex flex-col`}>
         <ThemeLanguageProvider>

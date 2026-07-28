@@ -2,54 +2,24 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AOSInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const loadAOS = () => {
-      return new Promise<void>((resolve) => {
-        if ((window as any).AOS) {
-          resolve();
-          return;
-        }
-
-        const script = document.createElement("script");
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js";
-        script.async = true;
-        script.onload = () => resolve();
-        document.head.appendChild(script);
-      });
-    };
-
-    const initAOS = async () => {
-      if (!document.getElementById("aos-css")) {
-        const link = document.createElement("link");
-        link.id = "aos-css";
-        link.rel = "stylesheet";
-        link.href = "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css";
-        document.head.appendChild(link);
-      }
-
-      await loadAOS();
-      if ((window as any).AOS) {
-        (window as any).AOS.init({
-          duration: 800,
-          easing: "ease-in-out",
-          once: true,
-        });
-      }
-    };
-
-    initAOS();
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: true,
+      disable: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
   }, []);
 
   useEffect(() => {
-    if ((window as any).AOS) {
-      (window as any).AOS.refresh();
-    }
+    AOS.refresh();
   }, [pathname]);
 
   return null;
 }
-

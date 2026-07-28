@@ -88,9 +88,13 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
+    let lastFrameTimestamp = performance.now();
+    const frameInterval = 1000 / 30;
+
     const startAnimation = () => {
       if (isIntersecting && !isRunning && !isLoadingRef.current) {
         isRunning = true;
+        lastFrameTimestamp = performance.now();
         animationFrameId = requestAnimationFrame(tick);
       }
     };
@@ -176,7 +180,6 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
       const speed = Math.random() * 8 + 12;
       const length = Math.random() * 180 + 140;
-
       const startX = Math.random() * width;
       const startY = Math.random() * (height * 0.5);
 
@@ -227,17 +230,9 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     };
 
     let darkSkyGradient: CanvasGradient;
-
-    const updateDarkSkyGradient = (height: number) => {
-      darkSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
-      darkSkyGradient.addColorStop(0.0, "#3b2e7e");
-      darkSkyGradient.addColorStop(0.25, "#3d50b8");
-      darkSkyGradient.addColorStop(0.55, "#4786ea");
-      darkSkyGradient.addColorStop(0.80, "#4589e5");
-      darkSkyGradient.addColorStop(1.0, "#2c3f96");
-    };
-
     let lightSkyGradient: CanvasGradient;
+    let centerVignetteGradient: CanvasGradient;
+
     let leafParticles: LeafParticle[] = [];
     let ghibliFarHills: { x: number; y: number }[] = [];
     let ghibliMidHills: { x: number; y: number }[] = [];
@@ -275,7 +270,14 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       ctx.restore();
     };
 
-    const initLightAssets = (width: number, height: number) => {
+    const buildGradients = (width: number, height: number) => {
+      darkSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
+      darkSkyGradient.addColorStop(0.0, "#3b2e7e");
+      darkSkyGradient.addColorStop(0.25, "#3d50b8");
+      darkSkyGradient.addColorStop(0.55, "#4786ea");
+      darkSkyGradient.addColorStop(0.80, "#4589e5");
+      darkSkyGradient.addColorStop(1.0, "#2c3f96");
+
       lightSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
       lightSkyGradient.addColorStop(0.0, "#D8CCA8");
       lightSkyGradient.addColorStop(0.28, "#E6DAC4");
@@ -283,6 +285,20 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       lightSkyGradient.addColorStop(0.85, "#DDD0B2");
       lightSkyGradient.addColorStop(1.0, "#7C8353");
 
+      centerVignetteGradient = ctx.createRadialGradient(
+        width * 0.5,
+        height * 0.5,
+        width * 0.12,
+        width * 0.5,
+        height * 0.5,
+        width * 0.55
+      );
+      centerVignetteGradient.addColorStop(0, "rgba(220, 205, 180, 0.12)");
+      centerVignetteGradient.addColorStop(0.6, "rgba(200, 185, 160, 0.05)");
+      centerVignetteGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    };
+
+    const initLightAssets = (width: number, height: number) => {
       const leafCount = Math.floor((width * height) / 32000);
       leafParticles = [];
       for (let i = 0; i < leafCount; i++) {
@@ -319,7 +335,7 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       canvas.style.height = `${canvasHeight}px`;
 
       ctx.scale(dpr, dpr);
-      updateDarkSkyGradient(canvasHeight);
+      buildGradients(canvasWidth, canvasHeight);
       initStars(canvasWidth, canvasHeight);
       initMountains(canvasWidth, canvasHeight);
       initLightAssets(canvasWidth, canvasHeight);
@@ -361,21 +377,9 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       ctx.restore();
 
       ctx.save();
-      const centerVignette = ctx.createRadialGradient(
-        canvasWidth * 0.5,
-        canvasHeight * 0.5,
-        canvasWidth * 0.12,
-        canvasWidth * 0.5,
-        canvasHeight * 0.5,
-        canvasWidth * 0.55
-      );
-      centerVignette.addColorStop(0, "rgba(220, 205, 180, 0.12)");
-      centerVignette.addColorStop(0.6, "rgba(200, 185, 160, 0.05)");
-      centerVignette.addColorStop(1, "rgba(0, 0, 0, 0)");
-      ctx.fillStyle = centerVignette;
+      ctx.fillStyle = centerVignetteGradient;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       ctx.restore();
-
 
       const drawHillLayer = (
         points: { x: number; y: number }[],
@@ -409,24 +413,24 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
       ctx.save();
       for (let i = 0; i < leafParticles.length; i++) {
-        const p = leafParticles[i];
-        p.x += p.vx + Math.sin(elapsedTime * p.swaySpeed + p.phase) * p.swayAmp * 0.3;
-        p.y += p.vy + Math.cos(elapsedTime * p.swaySpeed * 0.7) * 0.15;
-        p.rotation += p.rotationSpeed;
+        const particle = leafParticles[i];
+        particle.x += particle.vx + Math.sin(elapsedTime * particle.swaySpeed + particle.phase) * particle.swayAmp * 0.3;
+        particle.y += particle.vy + Math.cos(elapsedTime * particle.swaySpeed * 0.7) * 0.15;
+        particle.rotation += particle.rotationSpeed;
 
-        if (p.x > canvasWidth + 20) p.x = -20;
-        if (p.x < -20) p.x = canvasWidth + 20;
-        if (p.y > canvasHeight + 20) p.y = -20;
-        if (p.y < -20) p.y = canvasHeight + 20;
+        if (particle.x > canvasWidth + 20) particle.x = -20;
+        if (particle.x < -20) particle.x = canvasWidth + 20;
+        if (particle.y > canvasHeight + 20) particle.y = -20;
+        if (particle.y < -20) particle.y = canvasHeight + 20;
 
-        const pulse = Math.sin(elapsedTime * 2 + p.phase) * 0.15;
-        const currentOpacity = Math.max(0.1, Math.min(0.95, p.opacity + pulse));
+        const pulse = Math.sin(elapsedTime * 2 + particle.phase) * 0.15;
+        const currentOpacity = Math.max(0.1, Math.min(0.95, particle.opacity + pulse));
 
-        const pX = p.x + mouseX * 4;
-        const pY = p.y + mouseY * 3;
+        const positionX = particle.x + mouseX * 4;
+        const positionY = particle.y + mouseY * 3;
 
         ctx.globalAlpha = currentOpacity;
-        drawLeaf(ctx, pX, pY, p.size, p.rotation, p.color);
+        drawLeaf(ctx, positionX, positionY, particle.size, particle.rotation, particle.color);
       }
       ctx.restore();
     };
@@ -619,7 +623,7 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     };
 
     const render = () => {
-      elapsedTime += 0.016;
+      elapsedTime += 0.015;
 
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
@@ -661,3 +665,4 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     />
   );
 }
+
