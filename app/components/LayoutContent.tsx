@@ -1,7 +1,6 @@
 "use client";
 
 import { useThemeLanguage } from "./ThemeLanguageProvider";
-import ParticlesBackground from "./ParticlesBackground";
 import Background from "./Background";
 import Header from "./Header";
 import ClientAudioPlayer from "./ClientAudioPlayer";
@@ -14,19 +13,15 @@ interface LayoutContentProps {
 }
 
 export default function LayoutContent({ children }: LayoutContentProps) {
-  const { theme, mounted, isLoading } = useThemeLanguage();
+  const { mounted, isLoading } = useThemeLanguage();
 
   return (
     <div className="relative flex-1 overflow-hidden">
       <AOSInit />
       <LoadingOverlay isVisible={isLoading} />
 
-      {mounted && theme === "light" && (
+      {mounted && (
         <Background isLoading={isLoading} />
-      )}
-
-      {mounted && theme === "dark" && (
-        <ParticlesBackground theme={theme} />
       )}
 
       <Header />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useThemeLanguage } from "./ThemeLanguageProvider";
 
 interface Star {
   x: number;
@@ -25,14 +26,41 @@ interface ShootingStar {
   maxLife: number;
 }
 
+interface PollenParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  opacity: number;
+  swaySpeed: number;
+  swayAmp: number;
+  phase: number;
+  color: string;
+}
+
+interface Cloud {
+  x: number;
+  y: number;
+  scale: number;
+  speed: number;
+  opacity: number;
+}
+
 interface BackgroundProps {
   isLoading?: boolean;
 }
 
 export default function Background({ isLoading = false }: BackgroundProps) {
+  const { theme } = useThemeLanguage();
+  const themeRef = useRef(theme);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const isLoadingRef = useRef(isLoading);
   const startAnimationRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   useEffect(() => {
     isLoadingRef.current = isLoading;
@@ -204,15 +232,63 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       mountainFrontPoints = generateMountainPoints(width, height * 0.88, height * 0.04, 20, 8.9);
     };
 
-    let skyGradient: CanvasGradient;
+    let darkSkyGradient: CanvasGradient;
 
-    const updateSkyGradient = (height: number) => {
-      skyGradient = ctx.createLinearGradient(0, 0, 0, height);
-      skyGradient.addColorStop(0.0, "#3b2e7e");
-      skyGradient.addColorStop(0.25, "#3d50b8");
-      skyGradient.addColorStop(0.55, "#4786ea");
-      skyGradient.addColorStop(0.80, "#4589e5");
-      skyGradient.addColorStop(1.0, "#2c3f96");
+    const updateDarkSkyGradient = (height: number) => {
+      darkSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
+      darkSkyGradient.addColorStop(0.0, "#3b2e7e");
+      darkSkyGradient.addColorStop(0.25, "#3d50b8");
+      darkSkyGradient.addColorStop(0.55, "#4786ea");
+      darkSkyGradient.addColorStop(0.80, "#4589e5");
+      darkSkyGradient.addColorStop(1.0, "#2c3f96");
+    };
+
+    let lightSkyGradient: CanvasGradient;
+    let pollenParticles: PollenParticle[] = [];
+    let clouds: Cloud[] = [];
+    let ghibliFarHills: { x: number; y: number }[] = [];
+    let ghibliMidHills: { x: number; y: number }[] = [];
+    let ghibliNearHills: { x: number; y: number }[] = [];
+    let ghibliForegroundMeadow: { x: number; y: number }[] = [];
+
+    const pollenColors = ["#FFD166", "#FF9933", "#E85D04", "#FFBA08", "#F48C06"];
+
+    const initLightAssets = (width: number, height: number) => {
+      lightSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
+      lightSkyGradient.addColorStop(0.0, "#1E1F38");
+      lightSkyGradient.addColorStop(0.22, "#5A3250");
+      lightSkyGradient.addColorStop(0.45, "#BA523E");
+      lightSkyGradient.addColorStop(0.68, "#E87A3E");
+      lightSkyGradient.addColorStop(0.85, "#F7A859");
+      lightSkyGradient.addColorStop(1.0, "#261C2C");
+
+      const pollenCount = Math.floor((width * height) / 28000);
+      pollenParticles = [];
+      for (let i = 0; i < pollenCount; i++) {
+        pollenParticles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.random() * 0.3 + 0.1,
+          vy: -(Math.random() * 0.2 + 0.08),
+          size: Math.random() * 1.8 + 0.6,
+          opacity: Math.random() * 0.35 + 0.15,
+          swaySpeed: Math.random() * 0.015 + 0.008,
+          swayAmp: Math.random() * 1.2 + 0.4,
+          phase: Math.random() * Math.PI * 2,
+          color: pollenColors[Math.floor(Math.random() * pollenColors.length)],
+        });
+      }
+
+      clouds = [
+        { x: width * 0.05, y: height * 0.18, scale: 0.9, speed: 0.12, opacity: 0.8 },
+        { x: width * 0.42, y: height * 0.10, scale: 1.2, speed: 0.08, opacity: 0.85 },
+        { x: width * 0.78, y: height * 0.24, scale: 0.75, speed: 0.15, opacity: 0.7 },
+      ];
+
+      ghibliFarHills = generateMountainPoints(width, height * 0.58, height * 0.09, 50, 2.7);
+      ghibliMidHills = generateMountainPoints(width, height * 0.68, height * 0.07, 35, 6.1);
+      ghibliNearHills = generateMountainPoints(width, height * 0.79, height * 0.05, 25, 9.4);
+      ghibliForegroundMeadow = generateMountainPoints(width, height * 0.89, height * 0.03, 18, 12.8);
     };
 
     const resize = () => {
@@ -226,9 +302,10 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       canvas.style.height = `${canvasHeight}px`;
 
       ctx.scale(dpr, dpr);
-      updateSkyGradient(canvasHeight);
+      updateDarkSkyGradient(canvasHeight);
       initStars(canvasWidth, canvasHeight);
       initMountains(canvasWidth, canvasHeight);
+      initLightAssets(canvasWidth, canvasHeight);
     };
 
     resize();
@@ -236,13 +313,133 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
     let elapsedTime = 0;
 
-    const render = () => {
-      elapsedTime += 0.016;
+    const renderCloud = (cloud: Cloud, elapsedTime: number) => {
+      ctx.save();
+      const currentX = (cloud.x + elapsedTime * cloud.speed * 20) % (canvasWidth + 300) - 150;
+      const currentY = cloud.y;
+      ctx.globalAlpha = cloud.opacity;
 
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      ctx.fillStyle = "rgba(255, 200, 150, 0.8)";
+      ctx.beginPath();
+      ctx.arc(currentX, currentY, 45 * cloud.scale, 0, Math.PI * 2);
+      ctx.arc(currentX + 35 * cloud.scale, currentY - 15 * cloud.scale, 35 * cloud.scale, 0, Math.PI * 2);
+      ctx.arc(currentX + 70 * cloud.scale, currentY, 38 * cloud.scale, 0, Math.PI * 2);
+      ctx.arc(currentX + 30 * cloud.scale, currentY + 15 * cloud.scale, 40 * cloud.scale, 0, Math.PI * 2);
+      ctx.fill();
 
-      ctx.fillStyle = skyGradient;
+      ctx.fillStyle = "rgba(90, 45, 75, 0.55)";
+      ctx.beginPath();
+      ctx.arc(currentX + 25 * cloud.scale, currentY + 12 * cloud.scale, 36 * cloud.scale, 0, Math.PI * 2);
+      ctx.arc(currentX + 60 * cloud.scale, currentY + 10 * cloud.scale, 30 * cloud.scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    };
+
+    const renderLightMode = () => {
+      ctx.fillStyle = lightSkyGradient;
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      const sunX = canvasWidth * 0.78 + mouseX * 8;
+      const sunY = canvasHeight * 0.51 + mouseY * 5;
+
+      ctx.save();
+      ctx.globalCompositeOperation = "screen";
+
+      const sunGlowGrad = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, canvasWidth * 0.35);
+      sunGlowGrad.addColorStop(0, "rgba(232, 122, 62, 0.55)");
+      sunGlowGrad.addColorStop(0.35, "rgba(247, 168, 89, 0.30)");
+      sunGlowGrad.addColorStop(0.75, "rgba(90, 50, 80, 0.12)");
+      sunGlowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = sunGlowGrad;
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      const sunDiscGrad = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 48);
+      sunDiscGrad.addColorStop(0, "#FFF2D1");
+      sunDiscGrad.addColorStop(0.4, "#FF9933");
+      sunDiscGrad.addColorStop(0.8, "#D94E34");
+      sunDiscGrad.addColorStop(1, "rgba(217, 78, 52, 0)");
+      ctx.fillStyle = sunDiscGrad;
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, 48, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      ctx.save();
+      const centerVignette = ctx.createRadialGradient(
+        canvasWidth * 0.5,
+        canvasHeight * 0.5,
+        canvasWidth * 0.12,
+        canvasWidth * 0.5,
+        canvasHeight * 0.5,
+        canvasWidth * 0.55
+      );
+      centerVignette.addColorStop(0, "rgba(15, 12, 24, 0.35)");
+      centerVignette.addColorStop(0.6, "rgba(20, 16, 30, 0.18)");
+      centerVignette.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = centerVignette;
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      ctx.restore();
+
+      clouds.forEach((cloud) => renderCloud(cloud, elapsedTime));
+
+      const drawHillLayer = (
+        points: { x: number; y: number }[],
+        fillColor: string,
+        parallaxOffsetX: number,
+        parallaxOffsetY: number
+      ) => {
+        ctx.fillStyle = fillColor;
+        ctx.beginPath();
+        ctx.moveTo(0, canvasHeight);
+
+        if (points.length > 0) {
+          ctx.lineTo(points[0].x + parallaxOffsetX, points[0].y + parallaxOffsetY);
+          for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(
+              points[i].x + parallaxOffsetX,
+              points[i].y + parallaxOffsetY
+            );
+          }
+        }
+
+        ctx.lineTo(canvasWidth, canvasHeight);
+        ctx.closePath();
+        ctx.fill();
+      };
+
+      drawHillLayer(ghibliFarHills, "#4A2E43", mouseX * 4, mouseY * 3);
+      drawHillLayer(ghibliMidHills, "#362134", mouseX * 8, mouseY * 5);
+      drawHillLayer(ghibliNearHills, "#261729", mouseX * 14, mouseY * 8);
+      drawHillLayer(ghibliForegroundMeadow, "#1A101D", mouseX * 22, mouseY * 12);
+
+      ctx.save();
+      for (let i = 0; i < pollenParticles.length; i++) {
+        const p = pollenParticles[i];
+        p.x += p.vx + Math.sin(elapsedTime * p.swaySpeed + p.phase) * p.swayAmp * 0.2;
+        p.y += p.vy;
+
+        if (p.x > canvasWidth) p.x = 0;
+        if (p.y < 0) p.y = canvasHeight;
+
+        const pulse = Math.sin(elapsedTime * 2 + p.phase) * 0.2;
+        const currentOpacity = Math.max(0.1, Math.min(0.95, p.opacity + pulse));
+
+        const pX = p.x + mouseX * (p.size * 2);
+        const pY = p.y + mouseY * (p.size * 2);
+
+        ctx.globalAlpha = currentOpacity;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(pX, pY, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+
+    const renderDarkMode = () => {
+      ctx.fillStyle = darkSkyGradient;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
       ctx.save();
@@ -426,6 +623,19 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       drawMountainLayer(mountainBackPoints, "#324bb0", mouseX * 6, mouseY * 4);
       drawMountainLayer(mountainMidPoints, "#24368c", mouseX * 12, mouseY * 8);
       drawMountainLayer(mountainFrontPoints, "#192468", mouseX * 20, mouseY * 12);
+    };
+
+    const render = () => {
+      elapsedTime += 0.016;
+
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      if (themeRef.current === "light") {
+        renderLightMode();
+      } else {
+        renderDarkMode();
+      }
     };
 
     const tick = () => {

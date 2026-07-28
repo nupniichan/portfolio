@@ -36,18 +36,18 @@ export default function CardParticles() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particleCount = 30;
+    const particleCount = 14;
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-        color: `rgba(204, 204, 255, ${Math.random() * 0.3 + 0.1})`,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 1.5 + 1,
+        opacity: Math.random() * 0.35 + 0.15,
+        color: `rgba(204, 204, 255, ${Math.random() * 0.25 + 0.08})`,
       });
     }
 
@@ -113,4 +113,3 @@ export default function CardParticles() {
     />
   );
 }
-
