@@ -26,19 +26,20 @@ interface ShootingStar {
   maxLife: number;
 }
 
-interface PollenParticle {
+interface LeafParticle {
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
+  rotation: number;
+  rotationSpeed: number;
   opacity: number;
   swaySpeed: number;
   swayAmp: number;
   phase: number;
   color: string;
 }
-
 
 interface BackgroundProps {
   isLoading?: boolean;
@@ -237,40 +238,69 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     };
 
     let lightSkyGradient: CanvasGradient;
-    let pollenParticles: PollenParticle[] = [];
+    let leafParticles: LeafParticle[] = [];
     let ghibliFarHills: { x: number; y: number }[] = [];
     let ghibliMidHills: { x: number; y: number }[] = [];
     let ghibliNearHills: { x: number; y: number }[] = [];
     let ghibliForegroundMeadow: { x: number; y: number }[] = [];
 
-    const pollenColors = ["#FFD166", "#FF9933", "#E85D04", "#FFBA08", "#F48C06"];
+    const leafColors = ["#7C8353", "#9EA853", "#C2B55E", "#D9A752", "#5E6534", "#B8A34E"];
+
+    const drawLeaf = (
+      ctx: CanvasRenderingContext2D,
+      x: number,
+      y: number,
+      size: number,
+      rotation: number,
+      color: string
+    ) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      ctx.fillStyle = color;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -size * 2);
+      ctx.bezierCurveTo(size * 1.3, -size * 0.8, size * 1.3, size * 0.8, 0, size * 2);
+      ctx.bezierCurveTo(-size * 1.3, size * 0.8, -size * 1.3, -size * 0.8, 0, -size * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(0, -size * 1.4);
+      ctx.lineTo(0, size * 1.4);
+      ctx.stroke();
+
+      ctx.restore();
+    };
 
     const initLightAssets = (width: number, height: number) => {
       lightSkyGradient = ctx.createLinearGradient(0, 0, 0, height);
-      lightSkyGradient.addColorStop(0.0, "#1E1F38");
-      lightSkyGradient.addColorStop(0.22, "#5A3250");
-      lightSkyGradient.addColorStop(0.45, "#BA523E");
-      lightSkyGradient.addColorStop(0.68, "#E87A3E");
-      lightSkyGradient.addColorStop(0.85, "#F7A859");
-      lightSkyGradient.addColorStop(1.0, "#261C2C");
+      lightSkyGradient.addColorStop(0.0, "#D8CCA8");
+      lightSkyGradient.addColorStop(0.28, "#E6DAC4");
+      lightSkyGradient.addColorStop(0.58, "#ECE1CC");
+      lightSkyGradient.addColorStop(0.85, "#DDD0B2");
+      lightSkyGradient.addColorStop(1.0, "#7C8353");
 
-      const pollenCount = Math.floor((width * height) / 28000);
-      pollenParticles = [];
-      for (let i = 0; i < pollenCount; i++) {
-        pollenParticles.push({
+      const leafCount = Math.floor((width * height) / 32000);
+      leafParticles = [];
+      for (let i = 0; i < leafCount; i++) {
+        leafParticles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: Math.random() * 0.3 + 0.1,
-          vy: -(Math.random() * 0.2 + 0.08),
-          size: Math.random() * 1.8 + 0.6,
-          opacity: Math.random() * 0.35 + 0.15,
+          vx: Math.random() * 0.35 + 0.12,
+          vy: Math.random() * 0.22 + 0.06,
+          size: Math.random() * 2.5 + 1.6,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.03,
+          opacity: Math.random() * 0.4 + 0.4,
           swaySpeed: Math.random() * 0.015 + 0.008,
-          swayAmp: Math.random() * 1.2 + 0.4,
+          swayAmp: Math.random() * 1.5 + 0.5,
           phase: Math.random() * Math.PI * 2,
-          color: pollenColors[Math.floor(Math.random() * pollenColors.length)],
+          color: leafColors[Math.floor(Math.random() * leafColors.length)],
         });
       }
-
 
       ghibliFarHills = generateMountainPoints(width, height * 0.58, height * 0.09, 50, 2.7);
       ghibliMidHills = generateMountainPoints(width, height * 0.68, height * 0.07, 35, 6.1);
@@ -300,30 +330,29 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
     let elapsedTime = 0;
 
-
     const renderLightMode = () => {
       ctx.fillStyle = lightSkyGradient;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      const sunX = canvasWidth * 0.78 + mouseX * 8;
-      const sunY = canvasHeight * 0.51 + mouseY * 5;
+      const sunX = canvasWidth * 0.28 + mouseX * 8;
+      const sunY = canvasHeight * 0.24 + mouseY * 5;
 
       ctx.save();
       ctx.globalCompositeOperation = "screen";
 
       const sunGlowGrad = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, canvasWidth * 0.35);
-      sunGlowGrad.addColorStop(0, "rgba(232, 122, 62, 0.55)");
-      sunGlowGrad.addColorStop(0.35, "rgba(247, 168, 89, 0.30)");
-      sunGlowGrad.addColorStop(0.75, "rgba(90, 50, 80, 0.12)");
+      sunGlowGrad.addColorStop(0, "rgba(255, 245, 215, 0.55)");
+      sunGlowGrad.addColorStop(0.35, "rgba(240, 220, 170, 0.30)");
+      sunGlowGrad.addColorStop(0.75, "rgba(215, 195, 150, 0.12)");
       sunGlowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = sunGlowGrad;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
       const sunDiscGrad = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 48);
-      sunDiscGrad.addColorStop(0, "#FFF2D1");
-      sunDiscGrad.addColorStop(0.4, "#FF9933");
-      sunDiscGrad.addColorStop(0.8, "#D94E34");
-      sunDiscGrad.addColorStop(1, "rgba(217, 78, 52, 0)");
+      sunDiscGrad.addColorStop(0, "#FFFFFF");
+      sunDiscGrad.addColorStop(0.4, "#FFFBF0");
+      sunDiscGrad.addColorStop(0.85, "rgba(245, 230, 190, 0.7)");
+      sunDiscGrad.addColorStop(1, "rgba(245, 230, 190, 0)");
       ctx.fillStyle = sunDiscGrad;
       ctx.beginPath();
       ctx.arc(sunX, sunY, 48, 0, Math.PI * 2);
@@ -340,8 +369,8 @@ export default function Background({ isLoading = false }: BackgroundProps) {
         canvasHeight * 0.5,
         canvasWidth * 0.55
       );
-      centerVignette.addColorStop(0, "rgba(15, 12, 24, 0.35)");
-      centerVignette.addColorStop(0.6, "rgba(20, 16, 30, 0.18)");
+      centerVignette.addColorStop(0, "rgba(220, 205, 180, 0.12)");
+      centerVignette.addColorStop(0.6, "rgba(200, 185, 160, 0.05)");
       centerVignette.addColorStop(1, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = centerVignette;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -373,31 +402,31 @@ export default function Background({ isLoading = false }: BackgroundProps) {
         ctx.fill();
       };
 
-      drawHillLayer(ghibliFarHills, "#4A2E43", mouseX * 4, mouseY * 3);
-      drawHillLayer(ghibliMidHills, "#362134", mouseX * 8, mouseY * 5);
-      drawHillLayer(ghibliNearHills, "#261729", mouseX * 14, mouseY * 8);
-      drawHillLayer(ghibliForegroundMeadow, "#1A101D", mouseX * 22, mouseY * 12);
+      drawHillLayer(ghibliFarHills, "#7C8353", mouseX * 4, mouseY * 3);
+      drawHillLayer(ghibliMidHills, "#60673A", mouseX * 8, mouseY * 5);
+      drawHillLayer(ghibliNearHills, "#474E29", mouseX * 14, mouseY * 8);
+      drawHillLayer(ghibliForegroundMeadow, "#33381B", mouseX * 22, mouseY * 12);
 
       ctx.save();
-      for (let i = 0; i < pollenParticles.length; i++) {
-        const p = pollenParticles[i];
-        p.x += p.vx + Math.sin(elapsedTime * p.swaySpeed + p.phase) * p.swayAmp * 0.2;
-        p.y += p.vy;
+      for (let i = 0; i < leafParticles.length; i++) {
+        const p = leafParticles[i];
+        p.x += p.vx + Math.sin(elapsedTime * p.swaySpeed + p.phase) * p.swayAmp * 0.3;
+        p.y += p.vy + Math.cos(elapsedTime * p.swaySpeed * 0.7) * 0.15;
+        p.rotation += p.rotationSpeed;
 
-        if (p.x > canvasWidth) p.x = 0;
-        if (p.y < 0) p.y = canvasHeight;
+        if (p.x > canvasWidth + 20) p.x = -20;
+        if (p.x < -20) p.x = canvasWidth + 20;
+        if (p.y > canvasHeight + 20) p.y = -20;
+        if (p.y < -20) p.y = canvasHeight + 20;
 
-        const pulse = Math.sin(elapsedTime * 2 + p.phase) * 0.2;
+        const pulse = Math.sin(elapsedTime * 2 + p.phase) * 0.15;
         const currentOpacity = Math.max(0.1, Math.min(0.95, p.opacity + pulse));
 
-        const pX = p.x + mouseX * (p.size * 2);
-        const pY = p.y + mouseY * (p.size * 2);
+        const pX = p.x + mouseX * 4;
+        const pY = p.y + mouseY * 3;
 
         ctx.globalAlpha = currentOpacity;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(pX, pY, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        drawLeaf(ctx, pX, pY, p.size, p.rotation, p.color);
       }
       ctx.restore();
     };

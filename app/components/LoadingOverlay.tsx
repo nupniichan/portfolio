@@ -87,32 +87,51 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
         </div>
       </div>
 
-      <div className="preloader-clouds absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[10%] left-[10%] w-48 h-12 bg-[#FFEAD8]/85 rounded-full blur-[1px] animate-[floating_8s_ease-in-out_infinite] shadow-[0_4px_20px_rgba(255,160,110,0.25)]">
-          <div className="absolute -top-6 left-8 w-20 h-20 bg-[#FFEAD8]/90 rounded-full"></div>
-          <div className="absolute -top-8 left-20 w-24 h-24 bg-[#FFF0E0]/95 rounded-full"></div>
-        </div>
-        
-        <div className="absolute top-[20%] right-[15%] w-40 h-10 bg-[#FFDCC4]/85 rounded-full blur-[1px] animate-[floating_6s_ease-in-out_infinite_1s] shadow-[0_4px_20px_rgba(255,160,110,0.25)]">
-          <div className="absolute -top-5 left-6 w-16 h-16 bg-[#FFDCC4]/90 rounded-full"></div>
-          <div className="absolute -top-10 left-16 w-20 h-20 bg-[#FFEAD8]/95 rounded-full"></div>
-          <div className="absolute -top-3 left-32 w-12 h-12 bg-[#FFDCC4]/85 rounded-full"></div>
+      <div className="preloader-decorations absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-[26vh] pointer-events-none">
+          <svg viewBox="0 0 1200 240" preserveAspectRatio="none" className="w-full h-full">
+            <defs>
+              <linearGradient id="horizonGlowGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#E87A3E" stopOpacity="0.45" />
+                <stop offset="60%" stopColor="#F7A859" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#F7A859" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="farHillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#7C8353" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#474E29" stopOpacity="0.95" />
+              </linearGradient>
+              <linearGradient id="nearHillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#60673A" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#33381B" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+
+            <rect x="0" y="0" width="1200" height="240" fill="url(#horizonGlowGrad)" />
+
+            <path
+              d="M 0 240 L 0 140 Q 150 110 320 150 Q 500 190 680 130 Q 860 80 1020 120 Q 1120 140 1200 130 L 1200 240 Z"
+              fill="url(#farHillGrad)"
+            />
+
+            <path
+              d="M 0 240 L 0 180 Q 200 140 400 175 Q 650 210 850 160 Q 1050 120 1200 165 L 1200 240 Z"
+              fill="url(#nearHillGrad)"
+            />
+          </svg>
         </div>
 
-        <div className="absolute top-[65%] left-[5%] w-60 h-14 bg-[#F2C2D4]/80 rounded-full blur-[1px] animate-[floating_9s_ease-in-out_infinite_2s] shadow-[0_4px_20px_rgba(200,120,160,0.2)] scale-90">
-          <div className="absolute -top-6 left-8 w-16 h-16 bg-[#F2C2D4]/85 rounded-full"></div>
-          <div className="absolute -top-12 left-20 w-28 h-28 bg-[#FFEAD8]/90 rounded-full"></div>
-          <div className="absolute -top-8 left-40 w-20 h-20 bg-[#F2C2D4]/80 rounded-full"></div>
-        </div>
+        <div className="absolute top-[18%] left-[15%] w-3 h-3 bg-[#FFF5D6] rounded-full blur-[1px] animate-[floating_6s_ease-in-out_infinite] opacity-90 shadow-[0_0_10px_rgba(255,245,214,0.8)]" />
+        <div className="absolute top-[28%] right-[18%] w-3.5 h-3.5 bg-[#FFE8B5] rounded-full blur-[1px] animate-[floating_8s_ease-in-out_infinite_1s] opacity-85 shadow-[0_0_12px_rgba(255,232,181,0.8)]" />
+        <div className="absolute top-[45%] left-[22%] w-2.5 h-2.5 bg-[#FFF9E6] rounded-full animate-[floating_7s_ease-in-out_infinite_2s] opacity-95" />
+        <div className="absolute top-[58%] right-[25%] w-4 h-4 bg-[#F7D69E] rounded-full blur-[1px] animate-[floating_9s_ease-in-out_infinite_0.5s] opacity-80 shadow-[0_0_14px_rgba(247,214,158,0.8)]" />
+        <div className="absolute top-[22%] left-[48%] w-2 h-2 bg-[#FFFFFF] rounded-full animate-pulse opacity-90" />
+        <div className="absolute top-[65%] left-[18%] w-3 h-3 bg-[#D8CCA8] rounded-full blur-[1px] animate-[floating_10s_ease-in-out_infinite_3s] opacity-85" />
+        <div className="absolute top-[38%] right-[10%] w-2.5 h-2.5 bg-[#FFE8B5] rounded-full blur-[1px] animate-[floating_7.5s_ease-in-out_infinite_1.8s] opacity-85" />
+        <div className="absolute top-[15%] left-[32%] w-2 h-2 bg-[#FFF5D6] rounded-full animate-[floating_8.5s_ease-in-out_infinite_2.5s] opacity-90" />
 
-        <div className="absolute top-[50%] right-[5%] w-32 h-10 bg-[#FFD8C0]/80 rounded-full blur-[1px] animate-[floating_7s_ease-in-out_infinite_3s] shadow-[0_4px_20px_rgba(255,160,110,0.2)]">
-          <div className="absolute -top-5 left-4 w-16 h-16 bg-[#FFD8C0]/85 rounded-full"></div>
-          <div className="absolute -top-4 left-16 w-12 h-12 bg-[#FFD8C0]/80 rounded-full"></div>
-        </div>
-
-        <div className="absolute inset-0 pointer-events-none flex justify-between items-end pb-[10%]">
-          <div className="w-64 h-24 bg-[#FFA870]/30 rounded-full blur-[40px] shadow-[0_0_50px_rgba(255,168,112,0.3)] -translate-x-12 mb-10"></div>
-          <div className="w-80 h-32 bg-[#E87A3E]/30 rounded-full blur-[50px] shadow-[0_0_60px_rgba(232,122,62,0.3)] translate-x-20"></div>
+        <div className="absolute inset-0 pointer-events-none flex justify-between items-end pb-[5%]">
+          <div className="w-80 h-32 bg-[#D8CCA8]/25 rounded-full blur-[60px] -translate-x-16" />
+          <div className="w-96 h-40 bg-[#7C8353]/20 rounded-full blur-[70px] translate-x-20" />
         </div>
       </div>
 
