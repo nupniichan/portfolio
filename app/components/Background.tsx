@@ -39,13 +39,6 @@ interface PollenParticle {
   color: string;
 }
 
-interface Cloud {
-  x: number;
-  y: number;
-  scale: number;
-  speed: number;
-  opacity: number;
-}
 
 interface BackgroundProps {
   isLoading?: boolean;
@@ -245,7 +238,6 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
     let lightSkyGradient: CanvasGradient;
     let pollenParticles: PollenParticle[] = [];
-    let clouds: Cloud[] = [];
     let ghibliFarHills: { x: number; y: number }[] = [];
     let ghibliMidHills: { x: number; y: number }[] = [];
     let ghibliNearHills: { x: number; y: number }[] = [];
@@ -279,11 +271,6 @@ export default function Background({ isLoading = false }: BackgroundProps) {
         });
       }
 
-      clouds = [
-        { x: width * 0.05, y: height * 0.18, scale: 0.9, speed: 0.12, opacity: 0.8 },
-        { x: width * 0.42, y: height * 0.10, scale: 1.2, speed: 0.08, opacity: 0.85 },
-        { x: width * 0.78, y: height * 0.24, scale: 0.75, speed: 0.15, opacity: 0.7 },
-      ];
 
       ghibliFarHills = generateMountainPoints(width, height * 0.58, height * 0.09, 50, 2.7);
       ghibliMidHills = generateMountainPoints(width, height * 0.68, height * 0.07, 35, 6.1);
@@ -313,28 +300,6 @@ export default function Background({ isLoading = false }: BackgroundProps) {
 
     let elapsedTime = 0;
 
-    const renderCloud = (cloud: Cloud, elapsedTime: number) => {
-      ctx.save();
-      const currentX = (cloud.x + elapsedTime * cloud.speed * 20) % (canvasWidth + 300) - 150;
-      const currentY = cloud.y;
-      ctx.globalAlpha = cloud.opacity;
-
-      ctx.fillStyle = "rgba(255, 200, 150, 0.8)";
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, 45 * cloud.scale, 0, Math.PI * 2);
-      ctx.arc(currentX + 35 * cloud.scale, currentY - 15 * cloud.scale, 35 * cloud.scale, 0, Math.PI * 2);
-      ctx.arc(currentX + 70 * cloud.scale, currentY, 38 * cloud.scale, 0, Math.PI * 2);
-      ctx.arc(currentX + 30 * cloud.scale, currentY + 15 * cloud.scale, 40 * cloud.scale, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "rgba(90, 45, 75, 0.55)";
-      ctx.beginPath();
-      ctx.arc(currentX + 25 * cloud.scale, currentY + 12 * cloud.scale, 36 * cloud.scale, 0, Math.PI * 2);
-      ctx.arc(currentX + 60 * cloud.scale, currentY + 10 * cloud.scale, 30 * cloud.scale, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    };
 
     const renderLightMode = () => {
       ctx.fillStyle = lightSkyGradient;
@@ -382,7 +347,6 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       ctx.restore();
 
-      clouds.forEach((cloud) => renderCloud(cloud, elapsedTime));
 
       const drawHillLayer = (
         points: { x: number; y: number }[],
