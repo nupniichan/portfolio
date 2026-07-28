@@ -22,6 +22,43 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+type ProjectKey = "chinokafuu-discord-bot" | "website-ban-linh-kien" | "cs-anilist" | "chinokafuu" | "csteam-works" | "portfolio";
+
+const projects: { key: ProjectKey; icon: React.JSX.Element; github: string; nuget?: string }[] = [
+  {
+    key: "chinokafuu-discord-bot",
+    icon: <MessageSquare size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/ChinoKafuu-Discord"
+  },
+  {
+    key: "chinokafuu",
+    icon: <Sparkles size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/Chino-Kafuu"
+  },
+  {
+    key: "website-ban-linh-kien",
+    icon: <ShoppingCart size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/Website-ban-linh-kien"
+  },
+  {
+    key: "cs-anilist",
+    icon: <Tv size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/cs-anilist",
+    nuget: "https://www.nuget.org/packages/cs-anilist"
+  },
+  {
+    key: "csteam-works",
+    icon: <Gamepad2 size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/csteam-works",
+    nuget: "https://www.nuget.org/packages/csteam-works"
+  },
+  {
+    key: "portfolio",
+    icon: <IdCard size={18} className="text-[#CCCCFF]" />,
+    github: "https://github.com/nupniichan/portfolio"
+  }
+];
+
 export default function ProjectsPage() {
   const { t } = useTranslations();
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -39,43 +76,6 @@ export default function ProjectsPage() {
       setReadmeError(null);
     }, 300);
   };
-
-  type ProjectKey = "chinokafuu-discord-bot" | "website-ban-linh-kien" | "cs-anilist" | "chinokafuu" | "csteam-works" | "portfolio";
-
-  const projects: { key: ProjectKey; icon: React.JSX.Element; github: string; nuget?: string }[] = [
-    {
-      key: "chinokafuu-discord-bot",
-      icon: <MessageSquare size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/ChinoKafuu-Discord"
-    },
-    {
-      key: "chinokafuu",
-      icon: <Sparkles size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/Chino-Kafuu"
-    },
-    {
-      key: "website-ban-linh-kien",
-      icon: <ShoppingCart size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/Website-ban-linh-kien"
-    },
-    {
-      key: "cs-anilist",
-      icon: <Tv size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/cs-anilist",
-      nuget: "https://www.nuget.org/packages/cs-anilist"
-    },
-    {
-      key: "csteam-works",
-      icon: <Gamepad2 size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/csteam-works",
-      nuget: "https://www.nuget.org/packages/csteam-works"
-    },
-    {
-      key: "portfolio",
-      icon: <IdCard size={18} className="text-[#CCCCFF]" />,
-      github: "https://github.com/nupniichan/portfolio"
-    }
-  ];
 
   const fetchReadme = async (githubUrl: string) => {
     setIsLoadingReadme(true);
@@ -102,7 +102,7 @@ export default function ProjectsPage() {
         const text = await response.text();
         setReadmeContent(text);
       }
-    } catch (error) {
+    } catch {
       setReadmeError("Unable to load README from GitHub");
       setReadmeContent("");
     } finally {
@@ -298,30 +298,30 @@ export default function ProjectsPage() {
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeRaw, rehypeSanitize]}
                         components={{
-                          h1: ({node, ...props}) => <h1 className="text-xl font-bold text-white mb-4 mt-6 first:mt-0" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-white mb-3 mt-5" {...props} />,
-                          h3: ({node, ...props}) => <h3 className="text-base font-bold text-white mb-2 mt-4" {...props} />,
-                          p: ({node, ...props}) => <p className="text-gray-300 mb-3 leading-relaxed" {...props} />,
-                          ul: ({node, ...props}) => <ul className="list-disc list-inside mb-3 text-gray-300 space-y-1" {...props} />,
-                          ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-3 text-gray-300 space-y-1" {...props} />,
-                          li: ({node, ...props}) => <li className="ml-4" {...props} />,
-                          code: ({node, inline, className, children, ...props}: any) => {
-                            if (inline) {
+                          h1: (props: React.ComponentPropsWithoutRef<"h1">) => <h1 className="text-xl font-bold text-white mb-4 mt-6 first:mt-0" {...props} />,
+                          h2: (props: React.ComponentPropsWithoutRef<"h2">) => <h2 className="text-lg font-bold text-white mb-3 mt-5" {...props} />,
+                          h3: (props: React.ComponentPropsWithoutRef<"h3">) => <h3 className="text-base font-bold text-white mb-2 mt-4" {...props} />,
+                          p: (props: React.ComponentPropsWithoutRef<"p">) => <p className="text-gray-300 mb-3 leading-relaxed" {...props} />,
+                          ul: (props: React.ComponentPropsWithoutRef<"ul">) => <ul className="list-disc list-inside mb-3 text-gray-300 space-y-1" {...props} />,
+                          ol: (props: React.ComponentPropsWithoutRef<"ol">) => <ol className="list-decimal list-inside mb-3 text-gray-300 space-y-1" {...props} />,
+                          li: (props: React.ComponentPropsWithoutRef<"li">) => <li className="ml-4" {...props} />,
+                          code: ({ children, ...props }: React.ComponentPropsWithoutRef<"code"> & { inline?: boolean }) => {
+                            if (props.inline) {
                               return <code className="bg-white/10 px-1.5 py-0.5 rounded text-[#CCCCFF] text-xs" {...props}>{children}</code>;
                             }
                             return <code className="text-xs text-gray-300 font-mono" {...props}>{children}</code>;
                           },
-                          pre: ({node, children, ...props}: any) => {
+                          pre: ({ children, ...props }: React.ComponentPropsWithoutRef<"pre">) => {
                             return (
                               <pre className="bg-white/5 p-3 rounded mb-3 overflow-x-auto border border-white/10" {...props}>
                                 {children}
                               </pre>
                             );
                           },
-                          a: ({node, ...props}: any) => <a className="text-[#CCCCFF] hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
-                          blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-[#CCCCFF]/30 pl-4 italic text-gray-400 mb-3" {...props} />,
-                          strong: ({node, ...props}) => <strong className="font-bold text-white" {...props} />,
-                          em: ({node, ...props}) => <em className="italic" {...props} />,
+                          a: (props: React.ComponentPropsWithoutRef<"a">) => <a className="text-[#CCCCFF] hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                          blockquote: (props: React.ComponentPropsWithoutRef<"blockquote">) => <blockquote className="border-l-4 border-[#CCCCFF]/30 pl-4 italic text-gray-400 mb-3" {...props} />,
+                          strong: (props: React.ComponentPropsWithoutRef<"strong">) => <strong className="font-bold text-white" {...props} />,
+                          em: (props: React.ComponentPropsWithoutRef<"em">) => <em className="italic" {...props} />,
                         }}
                       >
                         {readmeContent}
@@ -375,4 +375,4 @@ export default function ProjectsPage() {
       )}
     </>
   );
-}
+}

@@ -24,26 +24,41 @@ export default function Header() {
   const navLabels = useMemo(() => getNavLabels(language), [language]);
 
   const normalizePath = useCallback((path: string) => {
-    const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+    const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
     if (basePath && path.startsWith(basePath)) {
-      return path.slice(basePath.length) || '/';
+      return path.slice(basePath.length) || "/";
     }
-    return path || '/';
+    return path || "/";
   }, []);
 
   const normalizedPathname = useMemo(() => normalizePath(pathname), [pathname, normalizePath]);
 
-  const handleNav = useCallback((href: string) => (e: React.MouseEvent) => {
-    const normalizedHref = normalizePath(href);
-    
-    const isActive = normalizedHref === "/" 
-      ? normalizedPathname === "/" || normalizedPathname === ""
-      : normalizedPathname.startsWith(normalizedHref);
-    
-    if (isActive) {
-      e.preventDefault();
-    }
+  const activeNavIndex = useMemo(() => {
+    return NAV_ITEMS.findIndex((item) => {
+      const normalizedHref = normalizePath(item.href);
+      return normalizedHref === "/"
+        ? normalizedPathname === "/" || normalizedPathname === ""
+        : normalizedPathname.startsWith(normalizedHref);
+    });
   }, [normalizedPathname, normalizePath]);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      const href = e.currentTarget.getAttribute("href");
+      if (!href) return;
+
+      const normalizedHref = normalizePath(href);
+      const isActive =
+        normalizedHref === "/"
+          ? normalizedPathname === "/" || normalizedPathname === ""
+          : normalizedPathname.startsWith(normalizedHref);
+
+      if (isActive) {
+        e.preventDefault();
+      }
+    },
+    [normalizedPathname, normalizePath]
+  );
 
   return (
     <>
@@ -51,18 +66,15 @@ export default function Header() {
         <header className="pointer-events-auto ml-3 rounded-full border px-2 py-2 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.45)] transition-all duration-300 animate-header-slide">
           <div className="flex flex-col items-center gap-2">
             <nav className="flex flex-col items-center gap-1.5 relative">
-              {NAV_ITEMS.map((item) => {
-                const normalizedHref = normalizePath(item.href);
-                const isActive = normalizedHref === "/" 
-                  ? normalizedPathname === "/" || normalizedPathname === ""
-                  : normalizedPathname.startsWith(normalizedHref);
+              {NAV_ITEMS.map((item, index) => {
+                const isActive = index === activeNavIndex;
                 const Icon = navIcons[item.key as keyof typeof navIcons];
 
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={handleNav(item.href)}
+                    onClick={handleNavClick}
                     className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 z-10 ${
                       isActive
                         ? "text-white scale-105"
@@ -77,19 +89,9 @@ export default function Header() {
               <div
                 className="absolute inset-x-0 rounded-full bg-linear-to-br from-orange-400/10 to-[#CCCCFF]/10 border border-[#CCCCFF]/20 shadow-[0_0_10px_rgba(251,146,60,0.1)] transition-all duration-300 ease-out -z-10"
                 style={{
-                  height: '2.5rem',
-                  top: `${NAV_ITEMS.findIndex(item => {
-                    const normalizedHref = normalizePath(item.href);
-                    return normalizedHref === "/" 
-                      ? normalizedPathname === "/" || normalizedPathname === ""
-                      : normalizedPathname.startsWith(normalizedHref);
-                  }) * 2.875}rem`,
-                  opacity: NAV_ITEMS.findIndex(item => {
-                    const normalizedHref = normalizePath(item.href);
-                    return normalizedHref === "/" 
-                      ? normalizedPathname === "/" || normalizedPathname === ""
-                      : normalizedPathname.startsWith(normalizedHref);
-                  }) !== -1 ? 1 : 0
+                  height: "2.5rem",
+                  top: `${activeNavIndex * 2.875}rem`,
+                  opacity: activeNavIndex !== -1 ? 1 : 0,
                 }}
               />
             </nav>
@@ -123,18 +125,15 @@ export default function Header() {
       <div className="pointer-events-none w-full flex justify-center px-2 pt-4 md:hidden">
         <header className="pointer-events-auto flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 animate-header-slide z-40">
           <nav className="flex items-center gap-1 relative">
-            {NAV_ITEMS.map((item) => {
-              const normalizedHref = normalizePath(item.href);
-              const isActive = normalizedHref === "/" 
-                ? normalizedPathname === "/" || normalizedPathname === ""
-                : normalizedPathname.startsWith(normalizedHref);
+            {NAV_ITEMS.map((item, index) => {
+              const isActive = index === activeNavIndex;
               const Icon = navIcons[item.key as keyof typeof navIcons];
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={handleNav(item.href)}
+                  onClick={handleNavClick}
                   className={`relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 z-10 active:scale-90 ${
                     isActive
                       ? "text-white scale-105"
@@ -146,22 +145,12 @@ export default function Header() {
                 </Link>
               );
             })}
-             <div
+            <div
               className="absolute inset-y-0 rounded-full bg-linear-to-r from-orange-400/10 to-[#CCCCFF]/10 border border-[#CCCCFF]/20 shadow-[0_0_10px_rgba(251,146,60,0.1)] transition-all duration-300 ease-out -z-10"
               style={{
-                width: '2rem',
-                left: `${NAV_ITEMS.findIndex(item => {
-                  const normalizedHref = normalizePath(item.href);
-                  return normalizedHref === "/" 
-                    ? normalizedPathname === "/" || normalizedPathname === ""
-                    : normalizedPathname.startsWith(normalizedHref);
-                }) * 2.25}rem`,
-                opacity: NAV_ITEMS.findIndex(item => {
-                  const normalizedHref = normalizePath(item.href);
-                  return normalizedHref === "/" 
-                    ? normalizedPathname === "/" || normalizedPathname === ""
-                    : normalizedPathname.startsWith(normalizedHref);
-                }) !== -1 ? 1 : 0
+                width: "2rem",
+                left: `${activeNavIndex * 2.25}rem`,
+                opacity: activeNavIndex !== -1 ? 1 : 0,
               }}
             />
           </nav>
@@ -194,4 +183,4 @@ export default function Header() {
       </div>
     </>
   );
-}
+}

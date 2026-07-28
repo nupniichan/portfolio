@@ -22,24 +22,43 @@ const ThemeLanguageContext = createContext<ThemeLanguageContextValue | undefined
 const THEME_STORAGE_KEY = "portfolio-theme";
 const LANGUAGE_STORAGE_KEY = "portfolio-language";
 
-function getPreferredTheme(): ThemeMode {
-  if (typeof window === "undefined") return "light";
+function getCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+  return null;
+}
+
+function setCookie(name: string, value: string) {
+  if (typeof document === "undefined") return;
+  document.cookie = `${name}=${value}; path=/; max-age=31536000; SameSite=Lax`;
+}
+
+function getPreferredTheme(fallback: ThemeMode = "light"): ThemeMode {
+  if (typeof window === "undefined") return fallback;
 
   const stored = window.localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
   if (stored === "light" || stored === "dark") return stored;
 
-  return "light";
+  const cookieTheme = getCookie(THEME_STORAGE_KEY) as ThemeMode | null;
+  if (cookieTheme === "light" || cookieTheme === "dark") return cookieTheme;
+
+  return fallback;
 }
 
-function getPreferredLanguage(): LanguageCode {
-  if (typeof window === "undefined") return "vi";
+function getPreferredLanguage(fallback: LanguageCode = "vi"): LanguageCode {
+  if (typeof window === "undefined") return fallback;
 
   const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY) as
     | LanguageCode
     | null;
   if (stored === "en" || stored === "vi") return stored;
 
-  return "vi";
+  const cookieLang = getCookie(LANGUAGE_STORAGE_KEY) as LanguageCode | null;
+  if (cookieLang === "en" || cookieLang === "vi") return cookieLang;
+
+  return fallback;
 }
 
 function applyThemeClass(theme: ThemeMode) {
@@ -50,30 +69,51 @@ function applyThemeClass(theme: ThemeMode) {
   root.classList.add(theme === "light" ? "theme-light" : "theme-dark");
 }
 
-export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
+function applyLanguageAttribute(lang: LanguageCode) {
+  if (typeof document === "undefined") return;
+  document.documentElement.setAttribute("lang", lang);
+  document.documentElement.setAttribute("data-lang", lang);
+}
+
+interface ThemeLanguageProviderProps {
+  children: ReactNode;
+  initialTheme?: ThemeMode;
+  initialLanguage?: LanguageCode;
+}
+
+export function ThemeLanguageProvider({
+  children,
+  initialTheme = "light",
+  initialLanguage = "vi",
+}: ThemeLanguageProviderProps) {
   const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState<ThemeMode>("light");
-  const [language, setLanguage] = useState<LanguageCode>("vi");
+  const [theme, setTheme] = useState<ThemeMode>(initialTheme);
+  const [language, setLanguage] = useState<LanguageCode>(initialLanguage);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
-    const preferredTheme = getPreferredTheme();
-    const preferredLanguage = getPreferredLanguage();
+    const preferredTheme = getPreferredTheme(initialTheme);
+    const preferredLanguage = getPreferredLanguage(initialLanguage);
     setTheme(preferredTheme);
     setLanguage(preferredLanguage);
+
+    setCookie(THEME_STORAGE_KEY, preferredTheme);
+    setCookie(LANGUAGE_STORAGE_KEY, preferredLanguage);
+    applyLanguageAttribute(preferredLanguage);
 
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [initialTheme, initialLanguage]);
 
   useEffect(() => {
     if (!mounted) return;
     if (typeof window === "undefined") return;
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    setCookie(THEME_STORAGE_KEY, theme);
     applyThemeClass(theme);
   }, [theme, mounted]);
 
@@ -81,12 +121,21 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
     if (!mounted) return;
     if (typeof window === "undefined") return;
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    setCookie(LANGUAGE_STORAGE_KEY, language);
+    applyLanguageAttribute(language);
   }, [language, mounted]);
 
   const toggleTheme = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+      setTheme((prev) => {
+        const next = prev === "dark" ? "light" : "dark";
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(THEME_STORAGE_KEY, next);
+          setCookie(THEME_STORAGE_KEY, next);
+        }
+        return next;
+      });
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
@@ -94,7 +143,14 @@ export function ThemeLanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "vi" : "en"));
+    setLanguage((prev) => {
+      const next = prev === "en" ? "vi" : "en";
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(LANGUAGE_STORAGE_KEY, next);
+        setCookie(LANGUAGE_STORAGE_KEY, next);
+      }
+      return next;
+    });
   };
 
   const value: ThemeLanguageContextValue = {
