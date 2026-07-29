@@ -268,10 +268,10 @@ export default function EducationWorkPage() {
 
                 <div className="lg:col-span-4 flex flex-col gap-4 md:gap-6">
                   <div
-                    className="bg-white/5 border border-white/10 p-4 sm:p-6 relative group overflow-hidden"
+                    className="bg-white/5 border border-white/10 p-4 sm:p-6 relative group/card overflow-hidden"
                     data-aos="fade-left"
                   >
-                    <div className="absolute top-[-20px] right-[-20px] w-24 h-24 bg-[#CCCCFF]/5 rounded-full blur-2xl group-hover:bg-[#CCCCFF]/10 transition-all duration-700"></div>
+                    <div className="absolute top-[-20px] right-[-20px] w-24 h-24 bg-[#CCCCFF]/5 rounded-full blur-2xl group-hover/card:bg-[#CCCCFF]/10 transition-all duration-700"></div>
 
                     <div className="absolute top-4 left-4 w-2 h-2 border border-[#CCCCFF]/20 rotate-45"></div>
                     <div className="absolute bottom-4 right-4 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full"></div>
@@ -294,20 +294,20 @@ export default function EducationWorkPage() {
                         return (
                           <Wrapper
                             key={cert.key}
-                            className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group"
+                            className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group/item"
                             data-aos="fade-up"
                             data-aos-delay={index * 100}
                             href={hasUrl ? certUrl : undefined}
                             target={hasUrl ? "_blank" : undefined}
                             rel={hasUrl ? "noopener noreferrer" : undefined}
                           >
-                            <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover:scale-110 transition-transform duration-300">
+                            <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover/item:scale-110 transition-transform duration-300">
                               <div className="scale-75 sm:scale-100">
                                 {cert.icon}
                               </div>
                             </div>
                             <div>
-                              <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors leading-tight">
+                              <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover/item:text-[#CCCCFF] transition-colors leading-tight">
                                 {t(`pages.journey.certifications.${cert.key}.title`)}
                               </h4>
                               <div className="flex flex-col gap-0.5">
@@ -330,10 +330,10 @@ export default function EducationWorkPage() {
                   </div>
 
                   <div
-                    className="bg-white/5 border border-white/10 p-4 sm:p-6 relative group overflow-hidden"
+                    className="bg-white/5 border border-white/10 p-4 sm:p-6 relative group/card overflow-hidden"
                     data-aos="fade-up"
                   >
-                    <div className="absolute top-[-20px] left-[-20px] w-24 h-24 bg-[#CCCCFF]/5 rounded-full blur-2xl group-hover:bg-[#CCCCFF]/10 transition-all duration-700"></div>
+                    <div className="absolute top-[-20px] left-[-20px] w-24 h-24 bg-[#CCCCFF]/5 rounded-full blur-2xl group-hover/card:bg-[#CCCCFF]/10 transition-all duration-700"></div>
 
                     <div className="absolute top-4 right-4 w-2 h-2 border border-[#CCCCFF]/20 rotate-45"></div>
                     <div className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-[#CCCCFF]/30 rounded-full"></div>
@@ -351,17 +351,17 @@ export default function EducationWorkPage() {
                       {futureLearning.map((item, index) => (
                         <div
                           key={item.key}
-                          className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group"
+                          className="flex gap-3 sm:gap-4 p-2.5 sm:p-3 bg-white/5 border border-white/5 transition-all duration-300 hover:border-[#CCCCFF]/30 hover:bg-white/10 group/item"
                           data-aos="fade-up"
                           data-aos-delay={index * 100}
                         >
-                          <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover:scale-110 transition-transform duration-300">
+                          <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[#05050a] border border-white/10 flex items-center justify-center text-[#CCCCFF] group-hover/item:scale-110 transition-transform duration-300">
                             <div className="scale-75 sm:scale-100">
                               {item.icon}
                             </div>
                           </div>
                           <div>
-                            <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover:text-[#CCCCFF] transition-colors leading-tight">
+                            <h4 className="text-[11px] md:text-xs font-bold text-white mb-1 group-hover/item:text-[#CCCCFF] transition-colors leading-tight">
                               {t(`pages.journey.futureLearning.items.${item.key}.title`)}
                             </h4>
                             <span className="text-[9px] text-gray-400 uppercase tracking-wider">
