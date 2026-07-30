@@ -36,18 +36,20 @@ export default function CardParticles() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particleCount = 14;
+    const isMobile = window.innerWidth < 768;
+    const area = canvas.width * canvas.height;
+    const particleCount = Math.max(isMobile ? 18 : 14, Math.floor(area / 6500));
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 1.5 + 1,
-        opacity: Math.random() * 0.35 + 0.15,
-        color: `rgba(204, 204, 255, ${Math.random() * 0.25 + 0.08})`,
+        vx: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
+        vy: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
+        size: Math.random() * (isMobile ? 1.8 : 1.5) + (isMobile ? 1.2 : 1),
+        opacity: Math.random() * (isMobile ? 0.45 : 0.35) + (isMobile ? 0.2 : 0.15),
+        color: `rgba(204, 204, 255, ${Math.random() * 0.3 + 0.1})`,
       });
     }
 
@@ -73,19 +75,21 @@ export default function CardParticles() {
         ctx.fill();
       });
 
+      const maxDistance = isMobile ? 115 : 100;
       particles.forEach((particle, i) => {
         particles.slice(i + 1).forEach((otherParticle) => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (distance < maxDistance) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(204, 204, 255, ${(1 - distance / 100) * 0.1})`;
-            ctx.globalAlpha = (1 - distance / 100) * 0.1;
-            ctx.lineWidth = 0.5;
+            const opacityFactor = (1 - distance / maxDistance);
+            ctx.strokeStyle = `rgba(204, 204, 255, ${opacityFactor * 0.12})`;
+            ctx.globalAlpha = opacityFactor * 0.12;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         });

@@ -86,7 +86,17 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       targetMouseY = (event.clientY / window.innerHeight - 0.5) * 2;
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      if (event.touches && event.touches.length > 0) {
+        const touch = event.touches[0];
+        targetMouseX = (touch.clientX / window.innerWidth - 0.5) * 2;
+        targetMouseY = (touch.clientY / window.innerHeight - 0.5) * 2;
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     let lastFrameTimestamp = performance.now();
     const frameInterval = 1000 / 30;
@@ -136,22 +146,25 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     });
 
     const initStars = (width: number, height: number) => {
-      const starCount = Math.floor((width * height) / 6000);
+      const isMobile = width < 768;
+      const divisor = isMobile ? 2400 : 5500;
+      const minStars = isMobile ? 120 : 150;
+      const starCount = Math.max(minStars, Math.floor((width * height) / divisor));
       stars = [];
       for (let i = 0; i < starCount; i++) {
         const randomValue = Math.random();
         let size: number;
         if (randomValue < 0.7) {
-          size = Math.random() * 0.5 + 0.3;
+          size = Math.random() * (isMobile ? 0.7 : 0.5) + 0.35;
         } else if (randomValue < 0.95) {
-          size = Math.random() * 0.6 + 0.8;
+          size = Math.random() * (isMobile ? 0.7 : 0.6) + 0.85;
         } else {
-          size = Math.random() * 0.8 + 1.4;
+          size = Math.random() * (isMobile ? 0.9 : 0.8) + 1.4;
         }
 
         stars.push({
           x: Math.random() * width,
-          y: Math.random() * (height * 0.78),
+          y: Math.random() * (height * (isMobile ? 0.85 : 0.78)),
           size,
           baseOpacity: Math.random() * 0.6 + 0.35,
           twinkleSpeed: Math.random() * 0.025 + 0.008,
@@ -299,7 +312,10 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     };
 
     const initLightAssets = (width: number, height: number) => {
-      const leafCount = Math.floor((width * height) / 32000);
+      const isMobile = width < 768;
+      const divisor = isMobile ? 9000 : 25000;
+      const minLeaves = isMobile ? 30 : 45;
+      const leafCount = Math.max(minLeaves, Math.floor((width * height) / divisor));
       leafParticles = [];
       for (let i = 0; i < leafCount; i++) {
         leafParticles.push({
@@ -307,7 +323,7 @@ export default function Background({ isLoading = false }: BackgroundProps) {
           y: Math.random() * height,
           vx: Math.random() * 0.35 + 0.12,
           vy: Math.random() * 0.22 + 0.06,
-          size: Math.random() * 2.5 + 1.6,
+          size: Math.random() * (isMobile ? 2.8 : 2.5) + (isMobile ? 1.8 : 1.6),
           rotation: Math.random() * Math.PI * 2,
           rotationSpeed: (Math.random() - 0.5) * 0.03,
           opacity: Math.random() * 0.4 + 0.4,
@@ -625,8 +641,12 @@ export default function Background({ isLoading = false }: BackgroundProps) {
     const render = () => {
       elapsedTime += 0.015;
 
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      const isMobile = canvasWidth < 768;
+      const autoX = isMobile ? Math.sin(elapsedTime * 0.4) * 0.25 : 0;
+      const autoY = isMobile ? Math.cos(elapsedTime * 0.3) * 0.15 : 0;
+
+      mouseX += ((targetMouseX + autoX) - mouseX) * 0.05;
+      mouseY += ((targetMouseY + autoY) - mouseY) * 0.05;
 
       if (themeRef.current === "light") {
         renderLightMode();
@@ -651,6 +671,8 @@ export default function Background({ isLoading = false }: BackgroundProps) {
       startAnimationRef.current = null;
       observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", resize);
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
