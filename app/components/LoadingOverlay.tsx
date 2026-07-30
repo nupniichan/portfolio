@@ -138,15 +138,19 @@ export default function LoadingOverlay({ isVisible }: LoadingOverlayProps) {
       </div>
 
       <div className="relative z-10 flex flex-col items-center gap-8">
-        <div className="relative w-16 h-16 flex items-center justify-center">
-          <div className="preloader-sun absolute">
+        <div className="relative w-24 h-24 flex items-center justify-center">
+          <div className="preloader-sun absolute flex items-center justify-center">
+            <div className="preloader-sun-rays absolute inset-0" />
             <div className="preloader-sun-core w-12 h-12 bg-white rounded-full shadow-[0_0_30px_rgba(255,255,255,1)] animate-[bounce_3s_ease-in-out_infinite]">
               <div className="preloader-sun-aura absolute inset-0 rounded-full bg-[#fff5b8]/50 blur-[2px]"></div>
             </div>
           </div>
 
-          <div className="preloader-moon absolute">
-            <div className="w-14 h-14 rounded-full shadow-[inset_-6px_-6px_0_0_rgba(255,255,255,0.9)]"></div>
+          <div className="preloader-moon absolute flex items-center justify-center">
+            <div className="preloader-moon-inner">
+              <div className="preloader-moon-glow absolute" />
+              <div className="w-14 h-14 rounded-full shadow-[inset_-6px_-6px_0_0_rgba(255,255,255,0.9)]"></div>
+            </div>
           </div>
         </div>
 
